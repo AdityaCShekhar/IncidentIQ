@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "incident_id": "3ffe2449-86ff-5153-8d58-a82f6cff45e8",
+  "window": {
+    "service": "checkout",
+    "related_services": [
+      "audit",
+      "inventory"
+    ],
+    "started_at": "2026-01-01T00:20:00Z",
+    "ended_at": "2026-01-01T00:21:00Z"
+  },
+  "status": "partial",
+  "limits": {
+    "max_files": 16,
+    "max_scan_bytes": 33554432,
+    "max_line_bytes": 1048576,
+    "max_lines": 100000,
+    "max_observations": 25000,
+    "max_records": 1000,
+    "deadline_seconds": 5.0
+  },
+  "records": [
+    {
+      "id": "ee3b1533-4b72-51af-8e1f-44728af888ab",
+      "incident_id": "3ffe2449-86ff-5153-8d58-a82f6cff45e8",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-01-01T00:20:20.800000Z",
+      "severity": "error",
+      "summary": "POST /checkout completed in 800.000 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "f02cd62d35d1507696bcf5b617fc0618",
+        "span_id": "0000000000000064",
+        "parent_span_id": null,
+        "name": "POST /checkout",
+        "kind": 2,
+        "attributes": {
+          "http.response.status_code": 503
+        },
+        "timestamp_unix_nano": "1767226820800000000",
+        "started_at_unix_nano": "1767226820000000000",
+        "duration_ms": 800.0
+      },
+      "source_uri": "otel://checkout/traces/f02cd62d35d1507696bcf5b617fc0618/spans/0000000000000064",
+      "raw_locator": "authored://iq-010/observations/0",
+      "content_hash": "3d868107133d8154df99bb519f78f7ed93aaf8e6513b4c6aa20f954490f61691"
+    },
+    {
+      "id": "7841e5ff-c8e2-51fe-84ff-d4ba5925124e",
+      "incident_id": "3ffe2449-86ff-5153-8d58-a82f6cff45e8",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-01-01T00:20:23.800000Z",
+      "severity": "error",
+      "summary": "POST /checkout completed in 800.000 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "0af5390ebc6b577b9793c41aa6a25c9e",
+        "span_id": "00000000000000c8",
+        "parent_span_id": null,
+        "name": "POST /checkout",
+        "kind": 2,
+        "attributes": {
+          "http.response.status_code": 503
+        },
+        "timestamp_unix_nano": "1767226823800000000",
+        "started_at_unix_nano": "1767226823000000000",
+        "duration_ms": 800.0
+      },
+      "source_uri": "otel://checkout/traces/0af5390ebc6b577b9793c41aa6a25c9e/spans/00000000000000c8",
+      "raw_locator": "authored://iq-010/observations/1",
+      "content_hash": "fc9434af6e34fe7d4c5e03cf5b13153f361fcb04551789ce1e5b1fb639f5bdd8"
+    }
+  ],
+  "coverage": {
+    "trace": {
+      "files_scanned": 0,
+      "bytes_scanned": 0,
+      "lines_scanned": 0,
+      "observations_scanned": 0,
+      "records_collected": 2,
+      "duplicates": 0
+    },
+    "log": {
+      "files_scanned": 0,
+      "bytes_scanned": 0,
+      "lines_scanned": 0,
+      "observations_scanned": 0,
+      "records_collected": 0,
+      "duplicates": 0
+    },
+    "metric": {
+      "files_scanned": 0,
+      "bytes_scanned": 0,
+      "lines_scanned": 0,
+      "observations_scanned": 0,
+      "records_collected": 0,
+      "duplicates": 0
+    }
+  },
+  "issues": [
+    {
+      "code": "authored_missing_diagnostic_evidence",
+      "source_type": null,
+      "count": 1
+    }
+  ]
+}

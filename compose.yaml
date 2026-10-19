@@ -1,0 +1,170 @@
+name: incidentiq
+
+x-app: &app
+  image: incidentiq:local
+  build: .
+  environment:
+    DATABASE_HOST: db
+    DATABASE_PORT: "5432"
+    POSTGRES_DB: ${POSTGRES_DB:-incidentiq}
+    POSTGRES_USER: ${POSTGRES_USER:-incidentiq}
+    POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-incidentiq_local_only}
+    LOG_LEVEL: ${LOG_LEVEL:-INFO}
+
+x-simulator: &simulator
+  image: incidentiq:local
+  build: .
+  command: ["uvicorn", "incidentiq.simulator.service:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log"]
+  healthcheck:
+    test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/live', timeout=2)"]
+    interval: 3s
+    timeout: 3s
+    retries: 20
+    start_period: 5s
+
+services:
+  evidence:
+    image: incidentiq:local
+    build: .
+    profiles: [tools]
+    entrypoint: ["python", "-m", "incidentiq.ingestion.cli"]
+    # This job shares the Collector UID and has no writable mounts or network.
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    network_mode: none
+    volumes:
+      - telemetry_data:/telemetry:ro
+      - type: bind
+        source: ./docs/demos
+        target: /scenarios
+        read_only: true
+        bind:
+          create_host_path: false
+
+  db:
+    image: postgres:17-bookworm
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-incidentiq}
+      POSTGRES_USER: ${POSTGRES_USER:-incidentiq}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-incidentiq_local_only}
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+
+  migrate:
+    <<: *app
+    command: ["alembic", "upgrade", "head"]
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  api:
+    <<: *app
+    ports:
+      - "127.0.0.1:${APP_PORT:-8000}:8000"
+    volumes:
+      - telemetry_data:/telemetry:ro
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+      telemetry-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/ready', timeout=4)"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 5s
+
+  inventory:
+    <<: *simulator
+    environment:
+      SIMULATOR_ROLE: inventory
+      SIMULATOR_OTLP_ENDPOINT: http://otel-collector:4318
+    depends_on:
+      otel-collector:
+        condition: service_started
+
+  checkout:
+    <<: *simulator
+    environment:
+      SIMULATOR_ROLE: checkout
+      SIMULATOR_INVENTORY_URL: http://inventory:8000
+      SIMULATOR_OTLP_ENDPOINT: http://otel-collector:4318
+    ports:
+      - "127.0.0.1:${SIMULATOR_PORT:-8001}:8000"
+    depends_on:
+      inventory:
+        condition: service_healthy
+      otel-collector:
+        condition: service_started
+
+  telemetry-init:
+    image: incidentiq:local
+    build: .
+    user: "0:0"
+    command: ["python", "-m", "incidentiq.ingestion.prepare_volume"]
+    read_only: true
+    cap_drop: [ALL]
+    cap_add: [CHOWN]
+    security_opt: [no-new-privileges:true]
+    network_mode: none
+    restart: "no"
+    volumes:
+      - telemetry_data:/telemetry
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.148.0
+    command: ["--config=/etc/otelcol-contrib/config.yaml"]
+    user: "10001:10001"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    volumes:
+      - ./telemetry/collector.yaml:/etc/otelcol-contrib/config.yaml:ro
+      - telemetry_data:/telemetry
+    ports:
+      - "127.0.0.1:${OTLP_PORT:-4318}:4318"
+      - "127.0.0.1:${COLLECTOR_HEALTH_PORT:-13133}:13133"
+    depends_on:
+      jaeger:
+        condition: service_started
+      telemetry-init:
+        condition: service_completed_successfully
+
+  jaeger:
+    image: cr.jaegertracing.io/jaegertracing/jaeger:2.22.0
+    ports:
+      - "127.0.0.1:${JAEGER_PORT:-16686}:16686"
+
+  prometheus:
+    image: prom/prometheus:v3.13.4
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=24h
+      - --storage.tsdb.retention.size=256MB
+    volumes:
+      - ./telemetry/prometheus.yaml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "127.0.0.1:${PROMETHEUS_PORT:-9090}:9090"
+    depends_on:
+      otel-collector:
+        condition: service_started
+
+volumes:
+  postgres_data:
+  telemetry_data:
+  prometheus_data:

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "scenario_id": "deployment_regression",
+  "label_source": "developer-authored; independent of model outputs",
+  "seed": 0,
+  "configuration": {
+    "baseline_revision": "checkout-v1",
+    "fault_revision": "checkout-v2",
+    "recovery_revision": "checkout-v1",
+    "inventory_delay_ms": 20,
+    "default_requests_per_phase": 5
+  },
+  "primary_root_cause": "deployment_regression",
+  "acceptable_aliases": ["checkout deployment regression", "checkout response contract regression"],
+  "mechanism": "The checkout-v2 response formatter reads reservation_id, which is absent from inventory's current Reservation contract. Inventory succeeds; checkout fails after the dependency call.",
+  "affected_services": ["checkout"],
+  "dependency_chain": ["checkout", "inventory"],
+  "expected_evidence_predicates": [
+    "checkout deployment event changes checkout-v1 to checkout-v2 before fault request errors",
+    "checkout server spans have status 500, deployment.revision checkout-v2 and error.type response_contract_error",
+    "inventory server spans and checkout inventory-client spans have status 200 on the same traces",
+    "baseline checkout-v1 and recovery checkout-v1 server spans have status 200"
+  ],
+  "plausible_alternative_causes": ["inventory response schema change", "inventory outage", "database pool exhaustion"],
+  "recommended_next_diagnostic_step": "Compare checkout-v1 and checkout-v2 response formatter changes against the inventory Reservation schema; inspect correlated successful inventory spans.",
+  "severity": "high",
+  "expected_abstention": "Report insufficient evidence for a deployment cause if both deployment events and revision attributes are absent. Healthy inventory alone does not establish a deployment cause.",
+  "window_source": "The scenario runner writes actual phase windows and request/trace/deployment IDs; labels are never ingested as telemetry."
+}

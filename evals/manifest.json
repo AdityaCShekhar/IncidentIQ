@@ -1,0 +1,37 @@
+{
+  "dataset_version": "fixture-v1",
+  "provenance": "authored_synthetic_fixture",
+  "case_count": 24,
+  "split_counts": {
+    "dev": 16,
+    "held_out": 8
+  },
+  "files": {
+    "cases.jsonl": "4ad7eca868d8872cb21da3c3d69553a7da49a5579fd52da1e4eed9358d697e55",
+    "expected_evidence.jsonl": "54bd9b5630faad09f1d425d7e779144d58d5abf0f34d02c028be4e10aa451e21",
+    "fixtures/iq-001.json": "3608d9eec29348824271d9dd0247979d47959e48ffba18f6608c2ac66cac66a0",
+    "fixtures/iq-002.json": "cafd5ddc52c5237ab3968bae790d6577a691f085940cd8baf2f27159d9391e29",
+    "fixtures/iq-003.json": "cdd8a0d0d5780c7e432207bb1c5ca31e0cd7c33ccfbcc0dd84e96911c2db92b4",
+    "fixtures/iq-004.json": "0ce3b12780eac95c42e28de51139965d983af34f62fe466dfb074a29c7669462",
+    "fixtures/iq-005.json": "6a442a827fb9e9c3b9ccf034d7e7d8df621cc0210766e2eb4d4efb8361d67ad2",
+    "fixtures/iq-006.json": "3f59b9a76a69c6d11f21f1836a184e6405afc055674d60ceea2f753cebe296b0",
+    "fixtures/iq-007.json": "8e0501874144262ddf271e0af73774d49ee6361d675874409f6d21f914100e0e",
+    "fixtures/iq-008.json": "26afbbdb3fbf1c97f4ef8975ed3edeeadeefc686f1eaf6a7091daf22ba9bb6b3",
+    "fixtures/iq-009.json": "6f7e66901e8c73203effb02078fe27854fe70915ba2a55a46ef9d4edb765f5e1",
+    "fixtures/iq-010.json": "da2816dfb3a3b756eaf44c4c9f442195fe114ae236a6ffc51cf26e8c8a9adc3a",
+    "fixtures/iq-011.json": "a8db8fe63d193dd086134597a44602f284fca218317ad1e040469530cc609797",
+    "fixtures/iq-012.json": "3b92b7c6e3d445e30dcad0d4225160522620c56265ac32e8a131cffc1274205a",
+    "fixtures/iq-013.json": "75fd4ca53fdf6cc551af0a88d5c8e3c628e2e2cb9c49d56b0de908316201a94a",
+    "fixtures/iq-014.json": "83476a8c4ef933b018d743acea24d85967005385c19b0002db8390105a2f538b",
+    "fixtures/iq-015.json": "3b559c77522a3007f43a022b494b7a34bf28551c475a9feac93337206b683fe7",
+    "fixtures/iq-016.json": "1d77716b92f0c60e8a5dfd144b49a9e1e5efc2bd0faca67fb2d0ee81f6ac42f8",
+    "fixtures/iq-017.json": "d58c1325133aa40ac4b68c674ba1cdddc76d7402fc91cb0c516a46b82a8d27ba",
+    "fixtures/iq-018.json": "9de9dfb778143cc65a7b4d39bd7a01a6b13bd29b1009b8c58c1851b20bd3bc28",
+    "fixtures/iq-019.json": "700f161d18397a5371ebf762a194c854e23218e2429d8e633f2067d14af44e2a",
+    "fixtures/iq-020.json": "f5835edc2b9d22a6ec753dfd801efd2849799e240bbba0f20bd565f099384d88",
+    "fixtures/iq-021.json": "b32b99b4b68d780458b360eed89d8ccb675e496a1b3572a262eed87a8577c787",
+    "fixtures/iq-022.json": "8ca4ceae5782528f73305b07f41cfafb673e2101beee876685e1647f57c4e544",
+    "fixtures/iq-023.json": "7acb0f47e7dcd3b62273b60b4e9a361b36da8c3ec3ff169ff8c7dbfea23b118e",
+    "fixtures/iq-024.json": "89229b82f0ec3c97e810c7f7dc2afdef11bc7bab6e7a42e96adb32994897f51e"
+  }
+}

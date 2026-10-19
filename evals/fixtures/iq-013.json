@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "incident_id": "de2b8d1b-2e4f-5b5e-8f1a-3b854f691e8b",
+  "window": {
+    "service": "checkout",
+    "related_services": [
+      "audit",
+      "inventory"
+    ],
+    "started_at": "2026-01-01T00:26:00Z",
+    "ended_at": "2026-01-01T00:27:00Z"
+  },
+  "status": "collected",
+  "limits": {
+    "max_files": 16,
+    "max_scan_bytes": 33554432,
+    "max_line_bytes": 1048576,
+    "max_lines": 100000,
+    "max_observations": 25000,
+    "max_records": 1000,
+    "deadline_seconds": 5.0
+  },
+  "records": [
+    {
+      "id": "c5aa95d3-15cb-5f93-bdd5-5b5ed7f883cd",
+      "incident_id": "de2b8d1b-2e4f-5b5e-8f1a-3b854f691e8b",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-01-01T00:26:05.030000Z",
+      "severity": "info",
+      "summary": "POST /checkout completed in 30.000 ms (HTTP 200)",
+      "payload": {
+        "trace_id": "7a511f610ebc5a3cb16089f1f8744f02",
+        "span_id": "0000000000000384",
+        "parent_span_id": null,
+        "name": "POST /checkout",
+        "kind": 2,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "http.response.status_code": 200
+        },
+        "timestamp_unix_nano": "1767227165030000000",
+        "started_at_unix_nano": "1767227165000000000",
+        "duration_ms": 30.0
+      },
+      "source_uri": "otel://checkout/traces/7a511f610ebc5a3cb16089f1f8744f02/spans/0000000000000384",
+      "raw_locator": "authored://iq-013/observations/1",
+      "content_hash": "a6eb2238b8a6f9044f091c7b731f277e5f822a19a57d53ab9aa715afa4c6396a"
+    },
+    {
+      "id": "054d6547-9ee9-5518-9aef-76e9decf9e9b",
+      "incident_id": "de2b8d1b-2e4f-5b5e-8f1a-3b854f691e8b",
+      "source_type": "deployment",
+      "service": "checkout",
+      "timestamp": "2026-01-01T00:26:10Z",
+      "severity": "info",
+      "summary": "Deployment changed checkout-v1 to checkout-v2",
+      "payload": {
+        "message": "deployment_changed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "deployment.id": "ba260076-ffb4-58e5-94d4-f8af8bf2b426",
+          "deployment.previous_revision": "checkout-v1",
+          "deployment.revision": "checkout-v2",
+          "deployment.state": "succeeded",
+          "event.name": "deployment"
+        },
+        "timestamp_unix_nano": "1767227170000000000",
+        "trace_id": null,
+        "span_id": null,
+        "deployment_id": "ba260076-ffb4-58e5-94d4-f8af8bf2b426",
+        "revision": "checkout-v2",
+        "previous_revision": "checkout-v1",
+        "state": "succeeded"
+      },
+      "source_uri": "otel://checkout/deployments/ba260076-ffb4-58e5-94d4-f8af8bf2b426",
+      "raw_locator": "authored://iq-013/observations/0",
+      "content_hash": "978ea7ec3534b864924a456d094efee0b96bca5de5a4c67897cf7c4850560dcf"
+    },
+    {
+      "id": "04ef6f4a-9862-5146-bb97-b96677947484",
+      "incident_id": "de2b8d1b-2e4f-5b5e-8f1a-3b854f691e8b",
+      "source_type": "trace",
+      "service": "inventory",
+      "timestamp": "2026-01-01T00:26:20.024000Z",
+      "severity": "info",
+      "summary": "POST /reserve completed in 18.000 ms (HTTP 200)",
+      "payload": {
+        "trace_id": "660b0689854b5b1fb1b27e1902bc07b1",
+        "span_id": "0000000000000066",
+        "parent_span_id": "0000000000000065",
+        "name": "POST /reserve",
+        "kind": 2,
+        "attributes": {
+          "http.response.status_code": 200
+        },
+        "timestamp_unix_nano": "1767227180024000000",
+        "started_at_unix_nano": "1767227180006000000",
+        "duration_ms": 18.0
+      },
+      "source_uri": "otel://inventory/traces/660b0689854b5b1fb1b27e1902bc07b1/spans/0000000000000066",
+      "raw_locator": "authored://iq-013/observations/4",
+      "content_hash": "925b42acf2d5eb2b345919b08a8ba0d6bbf1a7a047b64f3b13f5dcd058a44dad"
+    },
+    {
+      "id": "9b84b876-b9a9-567c-ae76-a79b6ff58676",
+      "incident_id": "de2b8d1b-2e4f-5b5e-8f1a-3b854f691e8b",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-01-01T00:26:20.025000Z",
+      "severity": "info",
+      "summary": "POST /reserve completed in 20.000 ms (HTTP 200)",
+      "payload": {
+        "trace_id": "660b0689854b5b1fb1b27e1902bc07b1",
+        "span_id": "0000000000000065",
+        "parent_span_id": "0000000000000064",
+        "name": "POST /reserve",
+        "kind": 3,
+        "attributes": {
+          "http.response.status_code": 200,
+          "peer.service": "inventory"
+        },
+        "timestamp_unix_nano": "1767227180025000000",
+        "started_at_unix_nano": "1767227180005000000",
+        "duration_ms": 20.0
+      },
+      "source_uri": "otel://checkout/traces/660b0689854b5b1fb1b27e1902bc07b1/spans/0000000000000065",
+      "raw_locator": "authored://iq-013/observations/3",
+      "content_hash": "3a233fac56ac7f9132cc9046473e71117494de86aab998a4543a7addae1dddca"
+    },
+    {
+      "id": "1bd8fef6-a356-540d-8811-b8ff5f07e71f",
+      "incident_id": "de2b8d1b-2e4f-5b5e-8f1a-3b854f691e8b",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-01-01T00:26:20.040000Z",
+      "severity": "error",
+      "summary": "POST /checkout completed in 40.000 ms (HTTP 500)",
+      "payload": {
+        "trace_id": "660b0689854b5b1fb1b27e1902bc07b1",
+        "span_id": "0000000000000064",
+        "parent_span_id": null,
+        "name": "POST /checkout",
+        "kind": 2,
+        "attributes": {
+          "deployment.revision": "checkout-v2",
+          "error.type": "response_contract_error",
+          "http.response.status_code": 500
+        },
+        "timestamp_unix_nano": "1767227180040000000",
+        "started_at_unix_nano": "1767227180000000000",
+        "duration_ms": 40.0
+      },
+      "source_uri": "otel://checkout/traces/660b0689854b5b1fb1b27e1902bc07b1/spans/0000000000000064",
+      "raw_locator": "authored://iq-013/observations/2",
+      "content_hash": "6b3cd2470326bb7ca8cb67264caf6a8d539248ce405c8b364b0e2b0ab9f6b3d0"
+    },
+    {
+      "id": "ffedfb91-00bd-585d-b9f5-88d6fef55a08",
+      "incident_id": "de2b8d1b-2e4f-5b5e-8f1a-3b854f691e8b",
+      "source_type": "trace",
+      "service": "inventory",
+      "timestamp": "2026-01-01T00:26:23.024000Z",
+      "severity": "info",
+      "summary": "POST /reserve completed in 18.000 ms (HTTP 200)",
+      "payload": {
+        "trace_id": "3781d0278dee51598fb7e7189988ac85",
+        "span_id": "00000000000000ca",
+        "parent_span_id": "00000000000000c9",
+        "name": "POST /reserve",
+        "kind": 2,
+        "attributes": {
+          "http.response.status_code": 200
+        },
+        "timestamp_unix_nano": "1767227183024000000",
+        "started_at_unix_nano": "1767227183006000000",
+        "duration_ms": 18.0
+      },
+      "source_uri": "otel://inventory/traces/3781d0278dee51598fb7e7189988ac85/spans/00000000000000ca",
+      "raw_locator": "authored://iq-013/observations/7",
+      "content_hash": "ec07447de29e17e6ed60cce5604bd11849f69eff5516b99c35a6bd746ee40ad3"
+    },
+    {
+      "id": "ec65cfce-5ea7-5f99-a56a-ccc6e42632be",
+      "incident_id": "de2b8d1b-2e4f-5b5e-8f1a-3b854f691e8b",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-01-01T00:26:23.025000Z",
+      "severity": "info",
+      "summary": "POST /reserve completed in 20.000 ms (HTTP 200)",
+      "payload": {
+        "trace_id": "3781d0278dee51598fb7e7189988ac85",
+        "span_id": "00000000000000c9",
+        "parent_span_id": "00000000000000c8",
+        "name": "POST /reserve",
+        "kind": 3,
+        "attributes": {
+          "http.response.status_code": 200,
+          "peer.service": "inventory"
+        },
+        "timestamp_unix_nano": "1767227183025000000",
+        "started_at_unix_nano": "1767227183005000000",
+        "duration_ms": 20.0
+      },
+      "source_uri": "otel://checkout/traces/3781d0278dee51598fb7e7189988ac85/spans/00000000000000c9",
+      "raw_locator": "authored://iq-013/observations/6",
+      "content_hash": "346c6df6326044557a38e1b1d272b080a456b3a898cdea936c056a07104f8c52"
+    },
+    {
+      "id": "cc7a4b45-118b-5a4c-aef9-84017a488b8a",
+      "incident_id": "de2b8d1b-2e4f-5b5e-8f1a-3b854f691e8b",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-01-01T00:26:23.040000Z",
+      "severity": "error",
+      "summary": "POST /checkout completed in 40.000 ms (HTTP 500)",
+      "payload": {
+        "trace_id": "3781d0278dee51598fb7e7189988ac85",
+        "span_id": "00000000000000c8",
+        "parent_span_id": null,
+        "name": "POST /checkout",
+        "kind": 2,
+        "attributes": {
+          "deployment.revision": "checkout-v2",
+          "error.type": "response_contract_error",
+          "http.response.status_code": 500
+        },
+        "timestamp_unix_nano": "1767227183040000000",
+        "started_at_unix_nano": "1767227183000000000",
+        "duration_ms": 40.0
+      },
+      "source_uri": "otel://checkout/traces/3781d0278dee51598fb7e7189988ac85/spans/00000000000000c8",
+      "raw_locator": "authored://iq-013/observations/5",
+      "content_hash": "356126699fd4fd569c4bfc66a67854f2032d82d7b6940e7781aa4ff35a938f68"
+    }
+  ],
+  "coverage": {
+    "trace": {
+      "files_scanned": 0,
+      "bytes_scanned": 0,
+      "lines_scanned": 0,
+      "observations_scanned": 0,
+      "records_collected": 7,
+      "duplicates": 0
+    },
+    "log": {
+      "files_scanned": 0,
+      "bytes_scanned": 0,
+      "lines_scanned": 0,
+      "observations_scanned": 0,
+      "records_collected": 1,
+      "duplicates": 0
+    },
+    "metric": {
+      "files_scanned": 0,
+      "bytes_scanned": 0,
+      "lines_scanned": 0,
+      "observations_scanned": 0,
+      "records_collected": 0,
+      "duplicates": 0
+    }
+  },
+  "issues": []
+}

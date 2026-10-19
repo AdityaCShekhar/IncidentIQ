@@ -1,0 +1,56 @@
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+.envrc
+.aws/
+.ssh/
+.netrc
+.pypirc
+secrets/
+
+# Python environments and bytecode
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Test, lint, type-checking, and coverage artifacts
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pytype/
+.hypothesis/
+.tox/
+.nox/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Package/build output; dependency lockfiles remain versioned
+dist/
+build/
+*.egg-info/
+.eggs/
+*.egg
+
+# Local runtime data and evaluation scratch runs
+*.log
+*.sqlite
+*.sqlite3
+*.db
+/evals/runs/
+
+# Keep curated evaluation fixtures, published reports, and demo artifacts versionable.
+
+# Editor and operating-system files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db

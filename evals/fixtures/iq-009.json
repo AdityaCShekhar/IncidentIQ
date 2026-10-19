@@ -1,0 +1,329 @@
+{
+  "schema_version": 1,
+  "incident_id": "0bc52fbc-e76e-55ae-96fb-4a6ca54b70d5",
+  "window": {
+    "service": "checkout",
+    "related_services": [
+      "audit",
+      "inventory"
+    ],
+    "started_at": "2026-01-01T00:18:00Z",
+    "ended_at": "2026-01-01T00:19:00Z"
+  },
+  "status": "collected",
+  "limits": {
+    "max_files": 16,
+    "max_scan_bytes": 33554432,
+    "max_line_bytes": 1048576,
+    "max_lines": 100000,
+    "max_observations": 25000,
+    "max_records": 1000,
+    "deadline_seconds": 5.0
+  },
+  "records": [
+    {
+      "id": "4125bcd0-f623-58a7-80e8-57482b8ac3c1",
+      "incident_id": "0bc52fbc-e76e-55ae-96fb-4a6ca54b70d5",
+      "source_type": "metric",
+      "service": "audit",
+      "timestamp": "2026-01-01T00:18:20Z",
+      "severity": "info",
+      "summary": "incidentiq.db.pool.waiting instantaneous gauge snapshot",
+      "payload": {
+        "name": "incidentiq.db.pool.waiting",
+        "unit": "1",
+        "kind": "gauge",
+        "attributes": {
+          "incidentiq.pool.name": "main"
+        },
+        "timestamp_unix_nano": "1767226700000000000",
+        "interval_started_at": null,
+        "interval_started_at_unix_nano": null,
+        "interval_ended_at": "2026-01-01T00:18:20+00:00",
+        "value": 99.0
+      },
+      "source_uri": "otel://audit/metrics/incidentiq.db.pool.waiting/1767226700000000000/7c3be2f9a2ac35da8ac17d5e2feba2cb3411b4fb497ad6be422c47d7307212e6",
+      "raw_locator": "authored://iq-009/observations/9",
+      "content_hash": "be253ee9fed3c1ccadefa3e15c90cb77a171503140aab6890aca919527d7763d"
+    },
+    {
+      "id": "64e13acd-76ce-56c3-8862-7b449d8e7302",
+      "incident_id": "0bc52fbc-e76e-55ae-96fb-4a6ca54b70d5",
+      "source_type": "metric",
+      "service": "checkout",
+      "timestamp": "2026-01-01T00:18:20Z",
+      "severity": "info",
+      "summary": "incidentiq.db.pool.waiting instantaneous gauge snapshot",
+      "payload": {
+        "name": "incidentiq.db.pool.waiting",
+        "unit": "1",
+        "kind": "gauge",
+        "attributes": {
+          "incidentiq.pool.name": "main"
+        },
+        "timestamp_unix_nano": "1767226700000000000",
+        "interval_started_at": null,
+        "interval_started_at_unix_nano": null,
+        "interval_ended_at": "2026-01-01T00:18:20+00:00",
+        "value": 16.0
+      },
+      "source_uri": "otel://checkout/metrics/incidentiq.db.pool.waiting/1767226700000000000/aab241a1ae349a23ad9a7234c491e20b763995615f1e043bfefe1fffc227f26c",
+      "raw_locator": "authored://iq-009/observations/0",
+      "content_hash": "a5d25dcacd6d9d42a5d8b97800ddad2bbcdd8000337de145c3d56b2db89f8b2d"
+    },
+    {
+      "id": "9fbd0c35-16fb-57ee-82ae-2f34c3d426d6",
+      "incident_id": "0bc52fbc-e76e-55ae-96fb-4a6ca54b70d5",
+      "source_type": "metric",
+      "service": "audit",
+      "timestamp": "2026-01-01T00:18:20Z",
+      "severity": "info",
+      "summary": "incidentiq.db.pool.utilization instantaneous gauge snapshot",
+      "payload": {
+        "name": "incidentiq.db.pool.utilization",
+        "unit": "1",
+        "kind": "gauge",
+        "attributes": {
+          "incidentiq.pool.name": "main"
+        },
+        "timestamp_unix_nano": "1767226700000000000",
+        "interval_started_at": null,
+        "interval_started_at_unix_nano": null,
+        "interval_ended_at": "2026-01-01T00:18:20+00:00",
+        "value": 1.0
+      },
+      "source_uri": "otel://audit/metrics/incidentiq.db.pool.utilization/1767226700000000000/64f7c95f9d80d51336b0fa3c54244ab3166fbfcf25632e77ffaf9fbec094bbac",
+      "raw_locator": "authored://iq-009/observations/10",
+      "content_hash": "567bcecd05c936b72114b83e8a09193b7dbad3a39d3be9dc6fa2726be4b63888"
+    },
+    {
+      "id": "e7f79d89-a582-5865-b36d-859333dc03ec",
+      "incident_id": "0bc52fbc-e76e-55ae-96fb-4a6ca54b70d5",
+      "source_type": "metric",
+      "service": "checkout",
+      "timestamp": "2026-01-01T00:18:20Z",
+      "severity": "info",
+      "summary": "incidentiq.db.pool.utilization instantaneous gauge snapshot",
+      "payload": {
+        "name": "incidentiq.db.pool.utilization",
+        "unit": "1",
+        "kind": "gauge",
+        "attributes": {
+          "incidentiq.pool.name": "main"
+        },
+        "timestamp_unix_nano": "1767226700000000000",
+        "interval_started_at": null,
+        "interval_started_at_unix_nano": null,
+        "interval_ended_at": "2026-01-01T00:18:20+00:00",
+        "value": 0.97
+      },
+      "source_uri": "otel://checkout/metrics/incidentiq.db.pool.utilization/1767226700000000000/5929d01f686a9156f585bcf02f3fefcea466002637734c3d416cb4825ad0e6ec",
+      "raw_locator": "authored://iq-009/observations/1",
+      "content_hash": "89b4b0e0ed7ccfec549f05281a3d58a19841448cd8457838666bb037d82ce09a"
+    },
+    {
+      "id": "6cf5dccc-d65a-564d-9b7b-f078a3a15b5e",
+      "incident_id": "0bc52fbc-e76e-55ae-96fb-4a6ca54b70d5",
+      "source_type": "trace",
+      "service": "inventory",
+      "timestamp": "2026-01-01T00:18:20.024000Z",
+      "severity": "info",
+      "summary": "POST /reserve completed in 18.000 ms (HTTP 200)",
+      "payload": {
+        "trace_id": "9c4772c8c16d56429f430c838fdf27d5",
+        "span_id": "0000000000000066",
+        "parent_span_id": "0000000000000065",
+        "name": "POST /reserve",
+        "kind": 2,
+        "attributes": {
+          "http.response.status_code": 200
+        },
+        "timestamp_unix_nano": "1767226700024000000",
+        "started_at_unix_nano": "1767226700006000000",
+        "duration_ms": 18.0
+      },
+      "source_uri": "otel://inventory/traces/9c4772c8c16d56429f430c838fdf27d5/spans/0000000000000066",
+      "raw_locator": "authored://iq-009/observations/4",
+      "content_hash": "3ef96f9f0ebd31a07d484294a2720bb0d820f4e6376fc93655fe48688806b1af"
+    },
+    {
+      "id": "f6294176-3a04-5fc8-859e-db681f3764da",
+      "incident_id": "0bc52fbc-e76e-55ae-96fb-4a6ca54b70d5",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-01-01T00:18:20.025000Z",
+      "severity": "info",
+      "summary": "POST /reserve completed in 20.000 ms (HTTP 200)",
+      "payload": {
+        "trace_id": "9c4772c8c16d56429f430c838fdf27d5",
+        "span_id": "0000000000000065",
+        "parent_span_id": "0000000000000064",
+        "name": "POST /reserve",
+        "kind": 3,
+        "attributes": {
+          "http.response.status_code": 200,
+          "peer.service": "inventory"
+        },
+        "timestamp_unix_nano": "1767226700025000000",
+        "started_at_unix_nano": "1767226700005000000",
+        "duration_ms": 20.0
+      },
+      "source_uri": "otel://checkout/traces/9c4772c8c16d56429f430c838fdf27d5/spans/0000000000000065",
+      "raw_locator": "authored://iq-009/observations/3",
+      "content_hash": "22d90944d82be7d19f6a7f23723887c2d2b17e835d6c4fdc549dd1502bbf5f32"
+    },
+    {
+      "id": "185302fb-7eab-5dcc-8efc-aab1df8a215c",
+      "incident_id": "0bc52fbc-e76e-55ae-96fb-4a6ca54b70d5",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-01-01T00:18:20.800000Z",
+      "severity": "error",
+      "summary": "POST /checkout completed in 800.000 ms (HTTP 504)",
+      "payload": {
+        "trace_id": "9c4772c8c16d56429f430c838fdf27d5",
+        "span_id": "0000000000000064",
+        "parent_span_id": null,
+        "name": "POST /checkout",
+        "kind": 2,
+        "attributes": {
+          "http.response.status_code": 504
+        },
+        "timestamp_unix_nano": "1767226700800000000",
+        "started_at_unix_nano": "1767226700000000000",
+        "duration_ms": 800.0
+      },
+      "source_uri": "otel://checkout/traces/9c4772c8c16d56429f430c838fdf27d5/spans/0000000000000064",
+      "raw_locator": "authored://iq-009/observations/2",
+      "content_hash": "affe260288584c930c240222963558fab55f4dfdbf68d5f158f552a29fb47f9d"
+    },
+    {
+      "id": "b144787f-f8bd-5872-be9c-aafc7247578a",
+      "incident_id": "0bc52fbc-e76e-55ae-96fb-4a6ca54b70d5",
+      "source_type": "trace",
+      "service": "audit",
+      "timestamp": "2026-01-01T00:18:21.500000Z",
+      "severity": "error",
+      "summary": "POST /checkout completed in 1500.000 ms (HTTP 500)",
+      "payload": {
+        "trace_id": "bd2192d83bab5965855e5588e4e5eceb",
+        "span_id": "00000000000002bc",
+        "parent_span_id": null,
+        "name": "POST /checkout",
+        "kind": 2,
+        "attributes": {
+          "http.response.status_code": 500
+        },
+        "timestamp_unix_nano": "1767226701500000000",
+        "started_at_unix_nano": "1767226700000000000",
+        "duration_ms": 1500.0
+      },
+      "source_uri": "otel://audit/traces/bd2192d83bab5965855e5588e4e5eceb/spans/00000000000002bc",
+      "raw_locator": "authored://iq-009/observations/8",
+      "content_hash": "bdc66bb9f92d605574cd163d83984899223f9b27c9cb76f6023883a3377e9c20"
+    },
+    {
+      "id": "f14c73b5-99a4-5d8b-ba4c-916db4886edf",
+      "incident_id": "0bc52fbc-e76e-55ae-96fb-4a6ca54b70d5",
+      "source_type": "trace",
+      "service": "inventory",
+      "timestamp": "2026-01-01T00:18:23.024000Z",
+      "severity": "info",
+      "summary": "POST /reserve completed in 18.000 ms (HTTP 200)",
+      "payload": {
+        "trace_id": "2ca8cfc557d553efa102dd191a729928",
+        "span_id": "00000000000000ca",
+        "parent_span_id": "00000000000000c9",
+        "name": "POST /reserve",
+        "kind": 2,
+        "attributes": {
+          "http.response.status_code": 200
+        },
+        "timestamp_unix_nano": "1767226703024000000",
+        "started_at_unix_nano": "1767226703006000000",
+        "duration_ms": 18.0
+      },
+      "source_uri": "otel://inventory/traces/2ca8cfc557d553efa102dd191a729928/spans/00000000000000ca",
+      "raw_locator": "authored://iq-009/observations/7",
+      "content_hash": "47b58709235f8b328ece0bb14a4cec16b8efa695dff6d778d969ac28d1b9ad92"
+    },
+    {
+      "id": "b06399ba-29dc-55d2-8a3a-944b62442f30",
+      "incident_id": "0bc52fbc-e76e-55ae-96fb-4a6ca54b70d5",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-01-01T00:18:23.025000Z",
+      "severity": "info",
+      "summary": "POST /reserve completed in 20.000 ms (HTTP 200)",
+      "payload": {
+        "trace_id": "2ca8cfc557d553efa102dd191a729928",
+        "span_id": "00000000000000c9",
+        "parent_span_id": "00000000000000c8",
+        "name": "POST /reserve",
+        "kind": 3,
+        "attributes": {
+          "http.response.status_code": 200,
+          "peer.service": "inventory"
+        },
+        "timestamp_unix_nano": "1767226703025000000",
+        "started_at_unix_nano": "1767226703005000000",
+        "duration_ms": 20.0
+      },
+      "source_uri": "otel://checkout/traces/2ca8cfc557d553efa102dd191a729928/spans/00000000000000c9",
+      "raw_locator": "authored://iq-009/observations/6",
+      "content_hash": "34ab4fe45e74b53c07ff8b2dfba0a398a0d9b66bf4a73c397c323f6d964f63bd"
+    },
+    {
+      "id": "f721d0a5-562c-561e-a822-cbc2c7ae2b84",
+      "incident_id": "0bc52fbc-e76e-55ae-96fb-4a6ca54b70d5",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-01-01T00:18:23.800000Z",
+      "severity": "error",
+      "summary": "POST /checkout completed in 800.000 ms (HTTP 504)",
+      "payload": {
+        "trace_id": "2ca8cfc557d553efa102dd191a729928",
+        "span_id": "00000000000000c8",
+        "parent_span_id": null,
+        "name": "POST /checkout",
+        "kind": 2,
+        "attributes": {
+          "http.response.status_code": 504
+        },
+        "timestamp_unix_nano": "1767226703800000000",
+        "started_at_unix_nano": "1767226703000000000",
+        "duration_ms": 800.0
+      },
+      "source_uri": "otel://checkout/traces/2ca8cfc557d553efa102dd191a729928/spans/00000000000000c8",
+      "raw_locator": "authored://iq-009/observations/5",
+      "content_hash": "97461efba18ac093c7e1f8b7f9d852f86c921561596f71f4658d230b89ea0b73"
+    }
+  ],
+  "coverage": {
+    "trace": {
+      "files_scanned": 0,
+      "bytes_scanned": 0,
+      "lines_scanned": 0,
+      "observations_scanned": 0,
+      "records_collected": 7,
+      "duplicates": 0
+    },
+    "log": {
+      "files_scanned": 0,
+      "bytes_scanned": 0,
+      "lines_scanned": 0,
+      "observations_scanned": 0,
+      "records_collected": 0,
+      "duplicates": 0
+    },
+    "metric": {
+      "files_scanned": 0,
+      "bytes_scanned": 0,
+      "lines_scanned": 0,
+      "observations_scanned": 0,
+      "records_collected": 4,
+      "duplicates": 0
+    }
+  },
+  "issues": []
+}

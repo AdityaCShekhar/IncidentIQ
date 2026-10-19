@@ -1,0 +1,68 @@
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  memory_limiter:
+    check_interval: 1s
+    limit_mib: 128
+    spike_limit_mib: 32
+  batch:
+    timeout: 1s
+    send_batch_size: 256
+    send_batch_max_size: 512
+
+exporters:
+  otlp_http/jaeger:
+    endpoint: http://jaeger:4318
+    timeout: 3s
+    sending_queue:
+      queue_size: 256
+  prometheus:
+    endpoint: 0.0.0.0:8889
+    translation_strategy: UnderscoreEscapingWithSuffixes
+    resource_to_telemetry_conversion:
+      enabled: true
+  file/traces:
+    path: /telemetry/traces.jsonl
+    format: json
+    rotation:
+      max_megabytes: 10
+      max_backups: 3
+      max_days: 1
+  file/logs:
+    path: /telemetry/logs.jsonl
+    format: json
+    rotation:
+      max_megabytes: 10
+      max_backups: 3
+      max_days: 1
+  file/metrics:
+    path: /telemetry/metrics.jsonl
+    format: json
+    rotation:
+      max_megabytes: 10
+      max_backups: 3
+      max_days: 1
+
+extensions:
+  health_check:
+    endpoint: 0.0.0.0:13133
+
+service:
+  extensions: [health_check]
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [otlp_http/jaeger, file/traces]
+    logs:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [file/logs]
+    metrics:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [prometheus, file/metrics]

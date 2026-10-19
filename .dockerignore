@@ -1,0 +1,30 @@
+# Include only the inputs used by the current Dockerfile COPY instructions.
+# Update this list when adding build inputs to the Dockerfile.
+**
+!pyproject.toml
+!README.md
+!alembic.ini
+!app/
+!app/**
+!migrations/
+!migrations/**
+
+# Exclude local artifacts even when nested inside an included source directory.
+**/__pycache__/
+**/*.py[cod]
+**/.venv/
+**/venv/
+**/.pytest_cache/
+**/.ruff_cache/
+**/.mypy_cache/
+**/.env
+**/.env.*
+**/.envrc
+**/.aws/
+**/.ssh/
+**/secrets/
+**/*.log
+**/*.sqlite
+**/*.sqlite3
+**/*.db
+**/.DS_Store
