@@ -2,7 +2,7 @@
 
 **Version:** 1.0  
 **Target build window:** 6–8 weeks  
-**Primary developer environment:** Apple Silicon MacBook Pro; local-first development  
+**Primary developer environment:** Apple Silicon MacBook Pro; Docker Compose and Ollama development runtime\
 **Target role:** Applied AI / LLM Engineer  
 **Project type:** Evidence-grounded incident investigation copilot
 
@@ -326,7 +326,7 @@ incidentiq/
 │   ├── evaluation.md
 │   ├── demo-script.md
 │   └── decisions/
-│       ├── 0001-local-first-stack.md
+│       ├── 0001-development-stack.md
 │       └── 0002-bounded-state-machine.md
 ├── app/
 │   └── incidentiq/

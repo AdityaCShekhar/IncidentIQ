@@ -1,5 +1,6 @@
 import argparse
 import json
+from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime
 from pathlib import Path
 from statistics import median
@@ -91,7 +92,10 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description="Run a reproducible synthetic fault against checkout"
     )
-    parser.add_argument("name", choices=["slow_dependency", "deployment_regression"])
+    parser.add_argument(
+        "name",
+        choices=["slow_dependency", "deployment_regression", "pool_exhaustion", "retry_storm"],
+    )
     parser.add_argument("--base-url", default="http://127.0.0.1:8001")
     parser.add_argument("--requests", type=int, default=5)
     parser.add_argument("--baseline-ms", type=int, default=20)
@@ -103,6 +107,10 @@ def main() -> int:
         with httpx.Client(base_url=args.base_url, timeout=5, trust_env=False) as client:
             if args.name == "deployment_regression":
                 result = run_deployment_regression(client, requests=args.requests)
+            elif args.name == "pool_exhaustion":
+                result = run_pool_exhaustion(client, requests=max(4, args.requests))
+            elif args.name == "retry_storm":
+                result = run_retry_storm(client, requests=args.requests)
             else:
                 result = run_slow_dependency(
                     client,
@@ -117,13 +125,19 @@ def main() -> int:
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(f"Saved measured HTTP results to {output}")
-    for phase in result["phases"]:
-        print(f"{phase['name']}: median {phase['median_latency_ms']:.3f} ms")
-        print(f"  trace: {phase['samples'][-1]['trace_id']}")
+    for phase in result.get("phases", []):
+        if "median_latency_ms" in phase:
+            print(f"{phase['name']}: median {phase['median_latency_ms']:.3f} ms")
+        if phase.get("samples"):
+            print(f"  trace: {phase['samples'][-1]['trace_id']}")
         if "error_rate" in phase:
             print(f"  observed error rate: {phase['error_rate']:.0%}")
     if args.name == "deployment_regression":
         return 0 if result["regression_observed"] else 2
+    if args.name == "pool_exhaustion":
+        return 0 if result["pool_exhaustion_observed"] else 2
+    if args.name == "retry_storm":
+        return 0 if result["retry_storm_observed"] else 2
     print(f"Observed median increase: {result['observed_median_increase_ms']:.3f} ms")
     return 0 if result["latency_increased"] else 2
 
@@ -221,4 +235,95 @@ def run_deployment_regression(client: httpx.Client, *, requests: int = 5) -> dic
             activate("checkout-v1")
     result["ended_at"] = now()
     result["regression_observed"] = [phase["error_rate"] for phase in result["phases"]] == [0, 1, 0]
+    return result
+
+
+def run_pool_exhaustion(client: httpx.Client, *, requests: int = 12) -> dict:
+    if not 4 <= requests <= 20:
+        raise ValueError("pool exhaustion requests must be between 4 and 20")
+    run_id = str(uuid4())
+
+    def send(fault_mode: str) -> dict:
+        request_id = str(uuid4())
+        started = perf_counter()
+        response = client.post(
+            "/checkout",
+            json={"run_id": run_id, "delay_ms": 20, "fault_mode": fault_mode},
+            headers={"X-Request-ID": request_id},
+        )
+        return {
+            "request_id": request_id,
+            "trace_id": response.headers.get("X-Trace-ID", ""),
+            "status_code": response.status_code,
+            "latency_ms": round((perf_counter() - started) * 1000, 3),
+        }
+
+    baseline_started = now()
+    baseline = [send("none") for _ in range(min(4, requests))]
+    baseline_ended = now()
+    fault_started = now()
+    with ThreadPoolExecutor(max_workers=requests) as executor:
+        fault = list(executor.map(lambda _: send("pool_exhaustion"), range(requests)))
+    fault_ended = now()
+    result = {
+        "schema_version": 1,
+        "scenario": "pool_exhaustion",
+        "execution": "http",
+        "configuration": {"concurrent_requests": requests, "pool_capacity": 2},
+        "started_at": baseline_started,
+        "phases": [
+            {"name": "baseline", "run_id": run_id, "started_at": baseline_started,
+             "ended_at": baseline_ended, "samples": baseline},
+            {"name": "fault", "run_id": run_id, "started_at": fault_started,
+             "ended_at": fault_ended, "samples": fault},
+        ],
+        "pool_exhaustion_observed": any(item["status_code"] >= 500 for item in fault),
+    }
+    result["ended_at"] = fault_ended
+    return result
+
+
+def run_retry_storm(client: httpx.Client, *, requests: int = 5) -> dict:
+    if not 2 <= requests <= 20:
+        raise ValueError("retry storm requests must be between 2 and 20")
+    run_id = str(uuid4())
+    def phase(fault_mode: str, count: int) -> tuple[list[dict], list[int]]:
+        started_at = now()
+        samples, attempts = [], []
+        for _ in range(count):
+            request_id = str(uuid4())
+            started = perf_counter()
+            response = client.post(
+                "/checkout",
+                json={"run_id": run_id, "delay_ms": 20, "fault_mode": fault_mode},
+                headers={"X-Request-ID": request_id},
+            )
+            attempts.append(int(response.headers.get("X-Simulator-Retry-Attempts", "0")))
+            samples.append({
+                "request_id": request_id,
+                "trace_id": response.headers.get("X-Trace-ID", ""),
+                "status_code": response.status_code,
+                "latency_ms": round((perf_counter() - started) * 1000, 3),
+            })
+        return [{"name": "baseline" if fault_mode == "none" else "fault",
+                 "run_id": run_id, "started_at": started_at, "ended_at": now(),
+                 "samples": samples}], attempts
+
+    baseline_phases, _ = phase("none", requests)
+    fault_phases, observed_attempts = phase("retry_storm", requests)
+    phases = [*baseline_phases, *fault_phases]
+    fault_statuses = [sample["status_code"] for sample in fault_phases[0]["samples"]]
+    result = {
+        "schema_version": 1,
+        "scenario": "retry_storm",
+        "execution": "http",
+        "configuration": {"requests_per_phase": requests, "attempts_per_request": 3},
+        "started_at": phases[0]["started_at"],
+        "phases": phases,
+        "status_codes": fault_statuses,
+        "observed_attempts_per_request": observed_attempts,
+        "retry_storm_observed": all(code == 503 for code in fault_statuses)
+        and all(count == 3 for count in observed_attempts),
+        "ended_at": phases[-1]["ended_at"],
+    }
     return result

@@ -91,6 +91,11 @@ class Telemetry:
             unit="s",
             description="Synthetic service request duration",
         )
+        self.pool_wait = meter.create_histogram(
+            "incidentiq.database.pool.wait",
+            unit="s",
+            description="Synthetic inventory database pool acquisition wait",
+        )
 
     def record_request(
         self,

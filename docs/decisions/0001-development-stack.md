@@ -1,4 +1,4 @@
-# Local development stack
+# Development stack
 
 Status: accepted; updated for persisted incident collection.
 

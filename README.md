@@ -1,8 +1,10 @@
 # IncidentIQ
 
-IncidentIQ is an evidence-grounded incident investigation copilot being built against [SPEC.md](SPEC.md). It will investigate synthetic backend faults using telemetry, retrieval, and bounded diagnostic tools, with a benchmark comparing rules, LLM summary, RAG, and agent strategies.
+IncidentIQ is an evidence-grounded incident investigation copilot being built against [SPEC.md](SPEC.md). It investigates synthetic backend faults using telemetry, retrieval, and bounded diagnostic tools, with a benchmark comparing rules, LLM summary, RAG, and agent strategies.
 
-The current implementation includes persistent incident/evidence API routes, two deterministic faults (slow dependency and deployment regression), correlated telemetry, bounded collection with stable evidence IDs, and an evidence-citing rules baseline with 24 frozen synthetic evaluation cases. Progress and pending verification are recorded in [TASKS.md](TASKS.md).
+The demo runs through Docker Compose with Ollama available for local model inference. The project focuses on evidence quality, safe investigation workflows, and measured comparisons across diagnosis strategies.
+
+The current implementation includes persistent incident, evidence, and investigation APIs; four deterministic fault scenarios; correlated telemetry; bounded collection with stable evidence IDs; hybrid knowledge retrieval; and an evaluation harness with 24 frozen synthetic cases. Progress and pending verification are recorded in [TASKS.md](TASKS.md).
 
 ## Run locally
 
@@ -52,6 +54,15 @@ The scenario measures baseline checkout success, activates a faulty response for
 
 Structured deployment events become evidence records with `source_type=deployment`, persisted through the existing incident API. See [the deployment walkthrough](docs/demo-script.md#deployment-regression) for controls, cleanup, and limitations.
 
+## Pool exhaustion and retry storm demos
+
+```sh
+make scenario NAME=pool_exhaustion SCENARIO_ARGS='--requests 12'
+make scenario NAME=retry_storm
+```
+
+Pool exhaustion concurrently pressures a two-slot synthetic inventory pool and records measured responses and pool wait metrics. The retry storm makes exactly three downstream attempts before returning the synthetic 503. See [the scenario details](docs/demo-script.md#inventory-pool-exhaustion).
+
 ## Collect evidence
 
 After running the scenario, allow a few seconds for telemetry export, then collect its fault window:
@@ -79,12 +90,29 @@ make dataset
 make diagnose EVIDENCE=evals/fixtures/iq-001.json
 ```
 
-S0 returns a typed report with evidence references and abstains when no supported pattern matches. The dataset has 16 development and eight held-out cases; the latter are reserved for final reporting. All fixture numbers are authored synthetic inputs. Pool-exhaustion and retry-storm live simulators are still pending. See [evaluation design and limitations](docs/evaluation.md) for the label boundary, freeze checks, rule thresholds, and commands for actual simulator bundles.
+S0 returns a typed report with evidence references and abstains when no supported pattern matches. The dataset has 16 development and eight held-out cases; the latter are reserved for final reporting. All fixture numbers are authored synthetic inputs. Pool-exhaustion and retry-storm HTTP simulators are implemented but not yet runtime-verified. See [evaluation design and limitations](docs/evaluation.md) for the label boundary, freeze checks, rule thresholds, and commands for actual simulator bundles.
 
 Run the rules benchmark on the development split with `make benchmark`. It writes per-case raw
 reports plus aggregate JSON and Markdown under `evals/reports/dev-rules/`. Held-out scoring
 requires the explicit `--split held_out --final-report` flags. Metrics and their interpretation
 are documented in [evaluation design](docs/evaluation.md).
+
+The S1 local LLM summary strategy uses Ollama without retrieval or diagnostic tools. After
+installing and starting Ollama with a local model, run
+`make benchmark BENCHMARK_ARGS='--strategy llm_summary --model MODEL_TAG'`, replacing
+`MODEL_TAG` with the installed tag. Its raw outputs, model metadata, token counts, and latency are
+saved under `evals/reports/dev-llm_summary/`.
+
+To compare rules, LLM summary, RAG, and agent on the same development split, start Ollama with a
+model and run:
+
+```sh
+make benchmark BENCHMARK_ARGS='--strategy all --model MODEL_TAG'
+```
+
+This writes per-strategy case reports and a comparison summary under
+`evals/reports/dev-comparison/`. Failures, latency, and token usage are reported; the command does
+not establish that an AI strategy improves on rules.
 
 ## Knowledge retrieval
 
@@ -150,10 +178,10 @@ Compose waits for database health and successful migration completion before sta
 
 ## Validation status
 
-148 offline tests passed before the benchmark and retrieval harnesses were added, covering API health/errors, both fault scenarios through the real ASGI service chain, telemetry exporters and evidence collection, stable IDs and limits, and persistent incident/evidence HTTP behavior using SQLite ORM tests. Dataset and baseline checks cover 16 development contracts, frozen inputs, reproducible fixtures, citation validation, abstention, competing causes, and actual simulator SDK evidence. Held-out cases are validated for integrity without running a diagnosis strategy. Ruff lint/format checks pass; Compose parsing and offline migration SQL generation passed in preceding slices. The benchmark command has not executed because required dependencies are unavailable. The in-memory hashed-feature retrieval metrics are saved under `evals/reports/retrieval-dev/`; BGE model inference and PostgreSQL retrieval remain unverified.
+148 offline tests passed before the benchmark, retrieval, LLM, investigation, and new fault-scenario additions. They covered API health/errors, the original slow-dependency and deployment-regression scenarios, telemetry exporters/evidence collection, and persistent incident/evidence HTTP behavior using SQLite ORM checks. No tests were added or run for the later strategy and fault-scenario code in this session; static checks passed. The dev comparison was executed in Docker with Ollama; the selected 0.5B model failed structured-output validation for every model-backed case. Hashed-feature retrieval metrics are saved under `evals/reports/retrieval-dev/`; BGE inference and PostgreSQL retrieval remain unverified.
 
 Tests used cached packages on Python 3.11 because package downloads were unavailable. PostgreSQL is the application backend; SQLite is used only for offline ORM checks. The expanded PostgreSQL integration test is skipped without an explicit disposable test database. Container build/start, live PostgreSQL migration and row locking, telemetry-volume ownership, backend configuration and delivery, and saved Docker demo artifacts remain pending. This execution sandbox denies Docker daemon access and PostgreSQL socket creation. See [TASKS.md](TASKS.md) for the remaining acceptance checks.
 
 ## Scope and next session
 
-The next slice adds the executable evaluation harness and JSON/Markdown benchmark reports for S0, with explicit availability reporting for S1–S3. Retrieval, model inference, and investigation tools are pending. No aggregate diagnosis quality or performance benchmark results have been measured.
+The comparative benchmark supports rules, LLM summary, RAG, and agent strategies on the same frozen cases and writes per-strategy plus comparison reports. The [measured 16-case dev comparison](evals/reports/dev-comparison-qwen05-bounded/comparison.md) records rules accuracy of 1.00 and 100% model-backed case failures with `qwen2.5:0.5b` (invalid structured output; three agent timeouts). This verifies report generation and failure accounting, but a useful model-quality comparison still needs a model that returns valid reports.

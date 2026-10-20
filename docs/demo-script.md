@@ -1,6 +1,6 @@
 # Incident simulator demos
 
-This demo sends real HTTP requests through `checkout → inventory`, comparing a normal inventory delay with an injected slow response. It records client latency and trace identifiers. It is a simulator demonstration; diagnosis strategy benchmarks will be added after evidence collection.
+The simulator supports four repeatable faults over real HTTP requests: a slow dependency, bounded inventory pool exhaustion, deployment regression, and a three-attempt retry storm. It records observed responses and emits traces, logs, and metrics for the incident evidence workflow.
 
 ## Start the services
 
@@ -111,6 +111,26 @@ make evidence NAME=deployment_regression > docs/demos/deployment-regression-evid
 For the [API request example](api.md#create-from-a-scenario-window), substitute `docs/demos/deployment-regression.json`, title `Checkout deployment investigation`, and `scenario_id="deployment_regression"`. Query saved events with `/incidents/YOUR_INCIDENT_ID/evidence?source=deployment`. Baseline and recovery observations require their own windows, or a window spanning the whole scenario. Labels live separately in [the authored definition](../simulator/scenarios/deployment_regression.json) and never enter telemetry bundles.
 
 Inspect the checkout deployment log before its first v2 error and the v1 rollback before recovery. Checkout duration histogram dimensions now include the two-valued `deployment.revision`, alongside route and response status; run/request/trace IDs remain excluded. A short fault phase may fall between metric exports. Traces and event logs provide per-request/change evidence; cumulative metric snapshots must retain their full interval semantics.
+
+## Inventory pool exhaustion
+
+```sh
+make scenario NAME=pool_exhaustion SCENARIO_ARGS='--requests 12'
+```
+
+The scenario first sends baseline traffic, then concurrently sends up to 20 requests. In the fault phase, the inventory simulator has two synthetic database slots; each holds a slot for 250 ms while acquisition waits only 20 ms. Requests that cannot acquire a slot return HTTP 503. The inventory emits `incidentiq.database.pool.wait` observations for successful and timed-out acquisition. The JSON artifact saves every observed response and whether any exhaustion occurred. This is a deterministic pool pressure simulation, not a real database benchmark.
+
+After export, collect the fault window with `make evidence NAME=pool_exhaustion > docs/demos/pool-exhaustion-evidence.json`.
+
+## Retry storm
+
+```sh
+make scenario NAME=retry_storm
+```
+
+The checkout simulator makes three downstream attempts for one request while inventory returns synthetic 503 responses. A retry-attempt span attribute and response header expose the observed count; the artifact records the count and final status. This isolated simulator fault does not alter normal requests or shared deployment state.
+
+The artifact includes baseline and fault windows, so collect its evidence with `make evidence NAME=retry_storm > docs/demos/retry-storm-evidence.json`.
 
 ## Storage and limitations
 

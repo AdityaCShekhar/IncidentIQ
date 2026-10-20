@@ -1,0 +1,403 @@
+{
+  "base_url": "http://127.0.0.1:11434",
+  "dataset_version": "fixture-v1",
+  "generated_at": "2026-10-20T10:41:00.476917+00:00",
+  "metrics": {
+    "abstention_rate": 0.0,
+    "abstention_recall": 0.0,
+    "accuracy": 0.0,
+    "case_count": 16,
+    "citation_counts": {
+      "false_negative": 103,
+      "false_positive": 0,
+      "true_positive": 0
+    },
+    "citation_f1": 0.0,
+    "citation_precision": 0.0,
+    "citation_recall": 0.0,
+    "completion_tokens": null,
+    "confusion_matrix": {
+      "database_pool_exhaustion": {
+        "failed": 4
+      },
+      "deployment_regression": {
+        "failed": 4
+      },
+      "retry_storm": {
+        "failed": 4
+      },
+      "slow_dependency": {
+        "failed": 4
+      }
+    },
+    "correct_cases": 0,
+    "coverage": 0.0,
+    "failed_cases": 16,
+    "failure_rate": 1.0,
+    "macro_f1": 0.0,
+    "max_case_latency_ms": 54764.601,
+    "mean_case_latency_ms": 37926.43,
+    "p50_case_latency_ms": 35400.568,
+    "prompt_tokens": null,
+    "selective_accuracy": 0.0
+  },
+  "model": "qwen2.5:0.5b",
+  "results": [
+    {
+      "acceptable_aliases": [
+        "slow_dependency",
+        "slow downstream dependency",
+        "downstream latency"
+      ],
+      "case_id": "iq-001",
+      "citation_false_negative": 6,
+      "citation_false_positive": 0,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "failed",
+      "error_code": "invalid_model_output",
+      "expected_abstention": false,
+      "gold_cause": "slow_dependency",
+      "predicted_cause": null,
+      "raw_output": null,
+      "report": null,
+      "status": "failed",
+      "strategy_metadata": null,
+      "wall_time_ms": 34483.819
+    },
+    {
+      "acceptable_aliases": [
+        "slow_dependency",
+        "slow downstream dependency",
+        "downstream latency"
+      ],
+      "case_id": "iq-002",
+      "citation_false_negative": 6,
+      "citation_false_positive": 0,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "failed",
+      "error_code": "invalid_model_output",
+      "expected_abstention": false,
+      "gold_cause": "slow_dependency",
+      "predicted_cause": null,
+      "raw_output": null,
+      "report": null,
+      "status": "failed",
+      "strategy_metadata": null,
+      "wall_time_ms": 34047.145
+    },
+    {
+      "acceptable_aliases": [
+        "slow_dependency",
+        "slow downstream dependency",
+        "downstream latency"
+      ],
+      "case_id": "iq-003",
+      "citation_false_negative": 6,
+      "citation_false_positive": 0,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "failed",
+      "error_code": "invalid_model_output",
+      "expected_abstention": false,
+      "gold_cause": "slow_dependency",
+      "predicted_cause": null,
+      "raw_output": null,
+      "report": null,
+      "status": "failed",
+      "strategy_metadata": null,
+      "wall_time_ms": 35408.704
+    },
+    {
+      "acceptable_aliases": [
+        "slow_dependency",
+        "slow downstream dependency",
+        "downstream latency"
+      ],
+      "case_id": "iq-004",
+      "citation_false_negative": 2,
+      "citation_false_positive": 0,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "failed",
+      "error_code": "invalid_model_output",
+      "expected_abstention": true,
+      "gold_cause": "slow_dependency",
+      "predicted_cause": null,
+      "raw_output": null,
+      "report": null,
+      "status": "failed",
+      "strategy_metadata": null,
+      "wall_time_ms": 28374.768
+    },
+    {
+      "acceptable_aliases": [
+        "database_pool_exhaustion",
+        "database connection-pool exhaustion",
+        "database pool saturation"
+      ],
+      "case_id": "iq-007",
+      "citation_false_negative": 4,
+      "citation_false_positive": 0,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "failed",
+      "error_code": "invalid_model_output",
+      "expected_abstention": false,
+      "gold_cause": "database_pool_exhaustion",
+      "predicted_cause": null,
+      "raw_output": null,
+      "report": null,
+      "status": "failed",
+      "strategy_metadata": null,
+      "wall_time_ms": 48101.499
+    },
+    {
+      "acceptable_aliases": [
+        "database_pool_exhaustion",
+        "database connection-pool exhaustion",
+        "database pool saturation"
+      ],
+      "case_id": "iq-008",
+      "citation_false_negative": 4,
+      "citation_false_positive": 0,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "failed",
+      "error_code": "invalid_model_output",
+      "expected_abstention": false,
+      "gold_cause": "database_pool_exhaustion",
+      "predicted_cause": null,
+      "raw_output": null,
+      "report": null,
+      "status": "failed",
+      "strategy_metadata": null,
+      "wall_time_ms": 34172.088
+    },
+    {
+      "acceptable_aliases": [
+        "database_pool_exhaustion",
+        "database connection-pool exhaustion",
+        "database pool saturation"
+      ],
+      "case_id": "iq-009",
+      "citation_false_negative": 4,
+      "citation_false_positive": 0,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "failed",
+      "error_code": "invalid_model_output",
+      "expected_abstention": false,
+      "gold_cause": "database_pool_exhaustion",
+      "predicted_cause": null,
+      "raw_output": null,
+      "report": null,
+      "status": "failed",
+      "strategy_metadata": null,
+      "wall_time_ms": 54764.601
+    },
+    {
+      "acceptable_aliases": [
+        "database_pool_exhaustion",
+        "database connection-pool exhaustion",
+        "database pool saturation"
+      ],
+      "case_id": "iq-010",
+      "citation_false_negative": 2,
+      "citation_false_positive": 0,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "failed",
+      "error_code": "invalid_model_output",
+      "expected_abstention": true,
+      "gold_cause": "database_pool_exhaustion",
+      "predicted_cause": null,
+      "raw_output": null,
+      "report": null,
+      "status": "failed",
+      "strategy_metadata": null,
+      "wall_time_ms": 48202.475
+    },
+    {
+      "acceptable_aliases": [
+        "deployment_regression",
+        "checkout deployment regression",
+        "response contract regression"
+      ],
+      "case_id": "iq-013",
+      "citation_false_negative": 8,
+      "citation_false_positive": 0,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "failed",
+      "error_code": "invalid_model_output",
+      "expected_abstention": false,
+      "gold_cause": "deployment_regression",
+      "predicted_cause": null,
+      "raw_output": null,
+      "report": null,
+      "status": "failed",
+      "strategy_metadata": null,
+      "wall_time_ms": 40779.883
+    },
+    {
+      "acceptable_aliases": [
+        "deployment_regression",
+        "checkout deployment regression",
+        "response contract regression"
+      ],
+      "case_id": "iq-014",
+      "citation_false_negative": 7,
+      "citation_false_positive": 0,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "failed",
+      "error_code": "invalid_model_output",
+      "expected_abstention": false,
+      "gold_cause": "deployment_regression",
+      "predicted_cause": null,
+      "raw_output": null,
+      "report": null,
+      "status": "failed",
+      "strategy_metadata": null,
+      "wall_time_ms": 32817.806
+    },
+    {
+      "acceptable_aliases": [
+        "deployment_regression",
+        "checkout deployment regression",
+        "response contract regression"
+      ],
+      "case_id": "iq-015",
+      "citation_false_negative": 8,
+      "citation_false_positive": 0,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "failed",
+      "error_code": "invalid_model_output",
+      "expected_abstention": false,
+      "gold_cause": "deployment_regression",
+      "predicted_cause": null,
+      "raw_output": null,
+      "report": null,
+      "status": "failed",
+      "strategy_metadata": null,
+      "wall_time_ms": 35392.433
+    },
+    {
+      "acceptable_aliases": [
+        "deployment_regression",
+        "checkout deployment regression",
+        "response contract regression"
+      ],
+      "case_id": "iq-016",
+      "citation_false_negative": 2,
+      "citation_false_positive": 0,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "failed",
+      "error_code": "invalid_model_output",
+      "expected_abstention": true,
+      "gold_cause": "deployment_regression",
+      "predicted_cause": null,
+      "raw_output": null,
+      "report": null,
+      "status": "failed",
+      "strategy_metadata": null,
+      "wall_time_ms": 27404.856
+    },
+    {
+      "acceptable_aliases": [
+        "retry_storm",
+        "retry amplification",
+        "downstream retry storm"
+      ],
+      "case_id": "iq-019",
+      "citation_false_negative": 14,
+      "citation_false_positive": 0,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "failed",
+      "error_code": "invalid_model_output",
+      "expected_abstention": false,
+      "gold_cause": "retry_storm",
+      "predicted_cause": null,
+      "raw_output": null,
+      "report": null,
+      "status": "failed",
+      "strategy_metadata": null,
+      "wall_time_ms": 40232.159
+    },
+    {
+      "acceptable_aliases": [
+        "retry_storm",
+        "retry amplification",
+        "downstream retry storm"
+      ],
+      "case_id": "iq-020",
+      "citation_false_negative": 14,
+      "citation_false_positive": 0,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "failed",
+      "error_code": "invalid_model_output",
+      "expected_abstention": false,
+      "gold_cause": "retry_storm",
+      "predicted_cause": null,
+      "raw_output": null,
+      "report": null,
+      "status": "failed",
+      "strategy_metadata": null,
+      "wall_time_ms": 40768.212
+    },
+    {
+      "acceptable_aliases": [
+        "retry_storm",
+        "retry amplification",
+        "downstream retry storm"
+      ],
+      "case_id": "iq-021",
+      "citation_false_negative": 14,
+      "citation_false_positive": 0,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "failed",
+      "error_code": "invalid_model_output",
+      "expected_abstention": false,
+      "gold_cause": "retry_storm",
+      "predicted_cause": null,
+      "raw_output": null,
+      "report": null,
+      "status": "failed",
+      "strategy_metadata": null,
+      "wall_time_ms": 43475.663
+    },
+    {
+      "acceptable_aliases": [
+        "retry_storm",
+        "retry amplification",
+        "downstream retry storm"
+      ],
+      "case_id": "iq-022",
+      "citation_false_negative": 2,
+      "citation_false_positive": 0,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "failed",
+      "error_code": "invalid_model_output",
+      "expected_abstention": true,
+      "gold_cause": "retry_storm",
+      "predicted_cause": null,
+      "raw_output": null,
+      "report": null,
+      "status": "failed",
+      "strategy_metadata": null,
+      "wall_time_ms": 28396.774
+    }
+  ],
+  "split": "dev",
+  "strategy": "rag",
+  "strategy_version": "rag-v2",
+  "timeout_seconds": 120.0
+}

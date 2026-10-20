@@ -12,6 +12,7 @@ from sqlalchemy.exc import TimeoutError as DatabaseTimeout
 from starlette.exceptions import HTTPException
 
 from incidentiq.api.routes_incidents import router as incidents_router
+from incidentiq.api.routes_investigations import router as investigations_router
 from incidentiq.core.config import Settings
 from incidentiq.core.errors import APIError
 from incidentiq.core.logging import configure_logging
@@ -164,6 +165,7 @@ def create_app(settings: Settings | None = None, *, collector=None) -> FastAPI:
         return JSONResponse({"status": "ready", "checks": {"database": "ok", "schema": "ok"}})
 
     application.include_router(incidents_router)
+    application.include_router(investigations_router)
     return application
 
 

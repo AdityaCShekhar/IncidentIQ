@@ -8,7 +8,7 @@ The API persists incident metadata and collected evidence in PostgreSQL. Creatio
 make up
 ```
 
-The migration service upgrades through `0002_persist_evidence`. Existing incident rows receive empty collection metadata and zero evidence counts; their existing metadata and status are preserved. Readiness requires the current migration revision. `make migrate` applies the same upgrade explicitly.
+The migration service upgrades through `0004_investigations`. Existing incident rows receive empty collection metadata and zero evidence counts; their existing metadata and status are preserved. Readiness requires the current migration revision. `make migrate` applies the same upgrade explicitly.
 
 The API and Collector run as UID 10001. A separate startup job initializes ownership of the dedicated telemetry volume, including files from earlier local stacks. That job has no network and only the `CHOWN` capability. The Collector has a writable telemetry mount; the API reads it through a read-only mount. Client requests cannot change its path. Host API development can set `TELEMETRY_DIRECTORY` to a local OTLP snapshot directory.
 
@@ -98,6 +98,12 @@ Errors use this shape:
 An unknown incident returns 404, malformed UUIDs/fields/filters return 422, and unexpected application failures return a safe 500. Request IDs are included in the response header and error body. A collector exception is recorded as a failed collection with the `collector_failed` issue code.
 
 A process interruption or failed database finalization can leave an incident in `collecting`. There is no automatic recovery worker or public recollection endpoint in this slice. Inspect the saved incident; a later creation after telemetry export uses a new UUID. Repeated POST requests create distinct incidents. Authentication and public deployment are outside the local v1 setup.
+
+## Run an investigation
+
+`POST /incidents/{id}/investigations` accepts `{"strategy":"rules"}` or one of `llm_summary`, `rag`, and `agent` with a local Ollama `model` name. The call runs synchronously and returns a persisted investigation ID, status, structured report, model metadata, and tool-call audits. Rules needs no model. RAG adds up to five curated knowledge excerpts; the agent can make at most five allowlisted, read-only evidence and knowledge tool calls before diagnosis. Agent planning plus diagnosis is capped at three model calls, including one schema/citation repair attempt. The Ollama endpoint is fixed to loopback, and model requests have a bounded deadline.
+
+Use `GET /investigations/{id}` to read a saved result or failure. Runs and bounded tool summaries are persisted by migration 0004. Raw telemetry is not copied into tool audit records. Local model and PostgreSQL runtime verification remains pending.
 
 ## Verification status
 

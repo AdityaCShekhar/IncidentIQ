@@ -91,6 +91,30 @@ class EvidencePage(BaseModel):
     has_more: bool
 
 
+class InvestigationCreate(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    strategy: Literal["rules", "llm_summary", "rag", "agent"]
+    model: str | None = Field(default=None, min_length=1, max_length=200)
+
+
+class InvestigationResponse(BaseModel):
+    id: UUID
+    incident_id: UUID
+    strategy: str
+    status: str
+    model_name: str | None
+    model_configuration: dict = Field(validation_alias="model_config")
+    result: dict | None
+    error_code: str | None
+    error_summary: str | None
+    started_at: datetime
+    completed_at: datetime | None
+    latency_ms: float | None
+    prompt_tokens: int | None
+    completion_tokens: int | None
+    tool_calls: list[dict] = Field(default_factory=list)
+
+
 class ErrorDetail(BaseModel):
     code: str
     message: str
