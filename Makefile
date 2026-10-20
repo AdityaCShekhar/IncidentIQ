@@ -24,26 +24,26 @@ ps:
 	$(COMPOSE) ps --all
 
 sync:
-	$(UV) sync
+	$(UV) sync --frozen
 
 dev:
-	$(UV) run uvicorn incidentiq.main:app --reload --no-access-log
+	$(UV) run --frozen uvicorn incidentiq.main:app --reload --no-access-log
 
 test:
-	$(UV) run pytest -m "not integration"
+	$(UV) run --frozen pytest -m "not integration"
 
 test-integration:
-	$(UV) run pytest -m integration
+	$(UV) run --frozen pytest -m integration
 
 lint:
-	$(UV) run ruff check .
-	$(UV) run ruff format --check .
+	$(UV) run --frozen ruff check .
+	$(UV) run --frozen ruff format --check .
 
 simulator-up:
 	$(COMPOSE) up --build --detach --wait --wait-timeout 120 checkout prometheus
 
 scenario:
-	$(UV) run python scripts/run_scenario.py $(NAME) $(SCENARIO_ARGS)
+	$(UV) run --frozen python scripts/run_scenario.py $(NAME) $(SCENARIO_ARGS)
 
 telemetry-config:
 	$(COMPOSE) run --rm --no-deps otel-collector validate --config=/etc/otelcol-contrib/config.yaml
@@ -54,16 +54,16 @@ evidence:
 	@$(COMPOSE) --profile tools run --rm --no-deps -T evidence --scenario-file /scenarios/$(SCENARIO_FILE).json --phase fault --service checkout --related-service inventory $(EVIDENCE_ARGS)
 
 dataset:
-	$(UV) run python scripts/validate_dataset.py
+	$(UV) run --frozen python scripts/validate_dataset.py
 
 diagnose:
-	@$(UV) run python scripts/diagnose.py --evidence "$(EVIDENCE)"
+	@$(UV) run --frozen python scripts/diagnose.py --evidence "$(EVIDENCE)"
 
 benchmark:
-	$(UV) run python scripts/run_benchmark.py $(BENCHMARK_ARGS)
+	$(UV) run --frozen python scripts/run_benchmark.py $(BENCHMARK_ARGS)
 
 knowledge-reindex:
-	$(UV) run python scripts/evaluate_retrieval.py --backend postgres --reindex --split dev
+	$(UV) run --frozen python scripts/evaluate_retrieval.py --backend postgres --reindex --split dev
 
 retrieval-eval:
-	$(UV) run python scripts/evaluate_retrieval.py $(RETRIEVAL_ARGS)
+	$(UV) run --frozen python scripts/evaluate_retrieval.py $(RETRIEVAL_ARGS)

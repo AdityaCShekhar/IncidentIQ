@@ -18,4 +18,4 @@ All published ports bind to loopback. Inventory and the Collector's Prometheus s
 
 Jaeger provides a temporary inspection view; the Collector volume is the persistent trace/log source. File output is intended for the local benchmark scale, with rotation and explicit handling of missing or expired telemetry. [Collector documentation](https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.148.0/exporter/fileexporter/README.md) describes the format and its stability limits.
 
-Full dependency locking, container startup, backend configuration validation, and live telemetry inspection remain pending. The image tags and Python SDK pins do not replace a complete dependency lock or a clean Docker verification.
+The Python dependency graph is pinned in `uv.lock`; development and Docker installs use frozen resolution. The Docker runtime stack, Collector and Prometheus configuration, and slow-dependency telemetry flow have been verified. PostgreSQL row-lock behavior and deployment-regression runtime checks remain pending.

@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "scenario": "slow_dependency",
+  "execution": "http",
+  "configuration": {
+    "requests_per_phase": 5,
+    "baseline_ms": 20,
+    "fault_ms": 500
+  },
+  "started_at": "2026-10-20T11:24:57.894002+00:00",
+  "phases": [
+    {
+      "name": "baseline",
+      "run_id": "e0b322cc-bb49-402c-b7c6-81a6551e7d72",
+      "started_at": "2026-10-20T11:24:57.894040+00:00",
+      "ended_at": "2026-10-20T11:24:58.055620+00:00",
+      "median_latency_ms": 30.145,
+      "samples": [
+        {
+          "request_id": "b63688a0-4ca1-4c1d-8294-af304071b1d4",
+          "trace_id": "11a8a2884af32222e564cfdde0e5761e",
+          "status_code": 200,
+          "latency_ms": 43.423
+        },
+        {
+          "request_id": "3ebfb689-2e41-4c38-90e4-0d0a5b638b04",
+          "trace_id": "5e7c63d9e74e6072b709e8542b7f8218",
+          "status_code": 200,
+          "latency_ms": 30.937
+        },
+        {
+          "request_id": "a2613105-6907-42fd-9f5d-373b27b5e7e7",
+          "trace_id": "eb38b75d32888c5c3d7b20764be0a97a",
+          "status_code": 200,
+          "latency_ms": 29.941
+        },
+        {
+          "request_id": "16b67ba6-f763-4ad7-8c4b-84e1e5c58a51",
+          "trace_id": "4657f3f2ba71d868bf8724e14165e969",
+          "status_code": 200,
+          "latency_ms": 30.145
+        },
+        {
+          "request_id": "1d187386-ec26-4ce0-bc53-1ea9e3ed3821",
+          "trace_id": "fa0eec4bcf9f4659503dc7047bfc9c64",
+          "status_code": 200,
+          "latency_ms": 26.665
+        }
+      ]
+    },
+    {
+      "name": "fault",
+      "run_id": "9e3a0bb3-3440-4fd4-8d1f-2fe8b4c35256",
+      "started_at": "2026-10-20T11:24:58.055670+00:00",
+      "ended_at": "2026-10-20T11:25:00.614341+00:00",
+      "median_latency_ms": 511.654,
+      "samples": [
+        {
+          "request_id": "2bf381df-0342-4084-bb9c-78dfe14dcc03",
+          "trace_id": "e0217f41d806f11b53ccbba5be384ba5",
+          "status_code": 200,
+          "latency_ms": 511.185
+        },
+        {
+          "request_id": "5c0299dc-964c-4f53-8ac3-facf2cf1f544",
+          "trace_id": "343aa2dd12862a9bbd54aead497b6e6d",
+          "status_code": 200,
+          "latency_ms": 509.653
+        },
+        {
+          "request_id": "9573f8aa-b8b8-4b5d-9f82-ae8fe1673a68",
+          "trace_id": "109d44b8deaed2dd63c9e4e1598b2aed",
+          "status_code": 200,
+          "latency_ms": 512.817
+        },
+        {
+          "request_id": "5453260e-93e6-4e0d-8b3b-f254012d278b",
+          "trace_id": "3559a69df75bf475fbf8a967c2c9aec6",
+          "status_code": 200,
+          "latency_ms": 511.654
+        },
+        {
+          "request_id": "489f0948-41d3-4041-a5c8-1acf865e16a3",
+          "trace_id": "0e786e3eb851e4421254c53be38966c3",
+          "status_code": 200,
+          "latency_ms": 512.878
+        }
+      ]
+    }
+  ],
+  "ended_at": "2026-10-20T11:25:00.614380+00:00",
+  "observed_median_increase_ms": 481.509,
+  "latency_increased": true
+}

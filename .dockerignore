@@ -2,6 +2,7 @@
 # Update this list when adding build inputs to the Dockerfile.
 **
 !pyproject.toml
+!uv.lock
 !README.md
 !alembic.ini
 !app/

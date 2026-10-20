@@ -121,13 +121,13 @@ the development lexical, vector, and hybrid retrieval comparison with `make retr
 reports go to `evals/reports/retrieval-dev/`. For PostgreSQL full-text and pgvector, start the
 stack, apply migrations, run `make knowledge-reindex`, then run
 `make retrieval-eval RETRIEVAL_ARGS='--backend postgres'`. For semantic vectors, install the
-optional retrieval dependency with `uv sync --extra retrieval`, then pass
+optional retrieval dependency with `uv sync --frozen --extra retrieval`, then pass
 `--embedding-model BAAI/bge-small-en-v1.5` to both commands. Model inference runs locally after its
 first-use download. See [retrieval evaluation details](docs/evaluation.md).
 
 ## Application development
 
-Install Python 3.12 (3.11 is also supported) and [uv](https://docs.astral.sh/uv/getting-started/installation/). Dependency ranges are declared in `pyproject.toml`. A committed dependency lock and frozen installation commands are pending network-enabled dependency resolution; this foundation does not yet guarantee identical dependency versions across installs.
+Install Python 3.12 (3.11 is also supported) and [uv](https://docs.astral.sh/uv/getting-started/installation/). `uv.lock` pins the resolved dependency graph. `make sync` installs the locked development dependencies, and the Docker image installs locked runtime dependencies without dev tools.
 
 ```sh
 make sync

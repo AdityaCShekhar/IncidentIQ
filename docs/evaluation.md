@@ -207,7 +207,7 @@ fixtures and documents only.
 For local semantic embeddings, install the optional extra and select the quantized BGE model:
 
 ```sh
-uv sync --extra retrieval
+uv sync --frozen --extra retrieval
 make retrieval-eval RETRIEVAL_ARGS='--embedding-model BAAI/bge-small-en-v1.5'
 ```
 

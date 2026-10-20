@@ -1,9 +1,10 @@
 from alembic import context
 from incidentiq.core.config import Settings
 from incidentiq.db.models import Base
+from incidentiq.retrieval.models import RetrievalBase
 from sqlalchemy import create_engine, pool
 
-target_metadata = Base.metadata
+target_metadata = [Base.metadata, RetrievalBase.metadata]
 
 
 def run_migrations_offline() -> None:
