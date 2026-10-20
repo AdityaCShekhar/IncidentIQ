@@ -1,6 +1,6 @@
 # Evaluation dataset and deterministic baseline
 
-The current slice provides frozen synthetic inputs, the S0 rules strategy, a deterministic benchmark runner, and an Ollama-backed S1 summary strategy. S2 RAG and S3 tool-using investigation are not implemented.
+The project includes four comparable strategies: deterministic rules (S0), Ollama-backed summary (S1), retrieval-augmented diagnosis (S2), and bounded read-only tool investigation (S3). Their code paths and benchmark reports exist, but the tested low-resource model did not produce a valid model-backed diagnosis; AI diagnostic quality therefore remains unverified. The rules results are measured on authored synthetic fixtures only.
 
 ## Dataset v1
 
@@ -17,9 +17,9 @@ The current slice provides frozen synthetic inputs, the S0 rules strategy, a det
 
 Each family has clear, early/shorter, unrelated-noise, missing-evidence, instruction-text, and service-name variations. Instruction-text and service-name variations are held out. Every case specifies a seed, causal configuration, incident window, primary cause and aliases, affected services and dependency chain, alternatives, a safe diagnostic step, severity, and expected abstention behavior. Expectations separately identify relevant and irrelevant evidence UUIDs, observation roles, and evidence predicates.
 
-Ground-truth labels come from the declared fixture mechanisms in [the authoring recipe](../scripts/author_eval_fixtures.py), independently of diagnosis outputs. The recipe does not import or invoke a diagnosis strategy or model. It constructs observations, passes them through the existing evidence normalizer, and writes labels separately. These are repository-authored contracts, not labels derived from an LLM judge, and have not received an independent human audit.
+Ground-truth labels come from the declared fixture mechanisms in [the authoring recipe](../scripts/author_eval_fixtures.py), independently of diagnosis outputs. The recipe does not import or invoke a diagnosis strategy or model. It constructs observations, passes them through the existing evidence normalizer, and writes labels separately. These are repository-authored contracts, not labels derived from an LLM judge, and have not received an independent human audit. A [blind label-review protocol](evaluation-label-review.md) describes how to conduct that audit without exposing the answer key first.
 
-Pool-exhaustion and retry-storm faults now have bounded HTTP simulator commands as well as authored fixtures. Their runtime behavior and telemetry delivery remain unverified here. Slow-dependency and deployment-regression simulator output is separately checked against S0 using the real in-process service chain and SDK exports. Docker/backend delivery remains unverified in this environment.
+Pool-exhaustion and retry-storm faults have bounded HTTP simulator commands and authored fixtures. All four simulator faults and Docker telemetry collection were exercised; live pool-exhaustion and retry-storm artifacts are in [the W6A report directory](../evals/reports/w6a/). The authored labels have not received an independent human audit, and the cases are not measured production captures.
 
 ### Validate frozen data
 
@@ -53,7 +53,7 @@ The baseline accepts an `EvidenceBundle` through `run_rules(bundle)`. It receive
 | Deployment regression | A succeeded deployment event followed by at least two failing requests with matching revision attributes and successful contained dependency calls |
 | Retry storm | At least two slow requests, each with three to six contained calls on one dependency operation, sequential explicit retry indices starting at zero, and at least two failed attempts |
 
-Spans are joined by trace ID and parent span ID, and client intervals must fit inside their parent. Rules scope metrics and deployment events to the affected service. Cumulative metric snapshots do not establish pool saturation; only the named gauges are accepted. Pool/retry diagnostic attributes use project-owned names: `incidentiq.pool.name` and `incidentiq.retry_attempt`. The retry simulator emits explicit zero-based retry indices; pool metric contract verification remains pending.
+Spans are joined by trace ID and parent span ID, and client intervals must fit inside their parent. Rules scope metrics and deployment events to the affected service. Cumulative metric snapshots do not establish pool saturation; only the named gauges are accepted. Pool/retry diagnostic attributes use project-owned names: `incidentiq.pool.name` and `incidentiq.retry_attempt`. The retry simulator emits explicit zero-based retry indices. Docker evidence confirmed these attributes and behaviors in the W6A pool-exhaustion and retry-storm runs.
 
 Matching causes receive a fixed heuristic confidence of 0.7. This is not a measured or calibrated probability. Multiple matches return `inconclusive` with up to three hypotheses; equal scores sort by cause name for deterministic output. No match returns `insufficient_evidence` and an `unknown` hypothesis with confidence zero. Partial collection is disclosed even when a pattern matches. The baseline does not prove causality from a deployment's timing, infer missing retry attributes, or resolve complex competing causes.
 
@@ -81,7 +81,7 @@ uv run python scripts/diagnose.py \
   --output /tmp/incidentiq-rules-report.json
 ```
 
-Output records strategy/version, incident UUID, `model: null`, and the typed report. Exit zero means the computation succeeded, including an abstention; inspect `report.disposition`. Invalid evidence, references, scope, or file operations fail with a safe error and nonzero status. The CLI rejects an output path that would overwrite its input. The diagnosis is not persisted as an investigation yet; investigation API/storage comes later.
+Output records strategy/version, incident UUID, `model: null`, and the typed report. Exit zero means the computation succeeded, including an abstention; inspect `report.disposition`. Invalid evidence, references, scope, or file operations fail with a safe error and nonzero status. The CLI rejects an output path that would overwrite its input. For persisted investigations, use `POST /incidents/{id}/investigations` with `{"strategy":"rules"}`; see the [API walkthrough](api.md#run-an-investigation).
 
 ## Run the benchmark
 
@@ -157,13 +157,13 @@ are local model measurements; there is no hosted-model cost field. The official 
 
 ## Checks and limitations
 
-36 checks cover the dataset and rules contracts. The benchmark emits exact aggregate metrics, metadata, raw outputs, and Markdown/JSON summaries. Two existing strategy checks use real simulator SDK output rather than authored fixture inputs. The project had 148 passing offline tests before the benchmark harness was added.
+The dataset and rules checks cover fixture integrity, causal contracts, ordering, abstention, scope, and citations. The benchmark emits aggregate metrics, metadata, raw outputs, and Markdown/JSON summaries. Some rules checks use real simulator SDK output rather than authored fixtures. The historical offline suite had 148 passing tests before the benchmark harness and later workflow additions; see [TASKS.md](../TASKS.md) for the recorded scope and runtime verification status. Those historical results do not validate every later change.
 
 The held-out fixtures are parsed for integrity but are not diagnosed by tests. The benchmark command defaults to `dev` and requires an explicit final-report choice for `held_out`. Do not tune prompts after inspecting held-out outcomes without treating that set as development data and creating another holdout.
 
 This small dataset is deliberately simple and balanced by fault family. It shares authored templates, has only one cause per case, has no healthy/no-incident cases, and its held-out split currently has no incomplete cases. Development checks do not demonstrate generalization, calibrated confidence, or production usefulness. A later dataset should add independently reviewed live captures, healthy controls, stronger confounders, and held-out incomplete cases under a new version. Cross-strategy reports must retain this version and disclose these gaps.
 
-The 2026-10-20 dev comparison is saved in
+The 2026-10-20 development comparison is saved in
 [`evals/reports/dev-comparison-qwen05-bounded/`](../evals/reports/dev-comparison-qwen05-bounded/).
 The rules baseline completed all 16 cases with 1.00 accuracy, 0.857 macro-F1, and 0.759 citation
 F1. With `qwen2.5:0.5b`, all 16 `llm_summary` and RAG cases failed output validation; all 16 agent
@@ -174,14 +174,16 @@ records mean case latencies of 0.136 ms (rules), 50.98 s (summary), 37.93 s (RAG
 model compatibility failure on the authored dev fixtures, not evidence of production accuracy or
 an improvement over rules.
 
-The simulator now exposes four bounded repeatable fault commands: `slow_dependency`,
+The simulator exposes four bounded repeatable fault commands: `slow_dependency`,
 `deployment_regression`, `pool_exhaustion`, and `retry_storm`. For investigation safety, evidence and
 retrieved text are marked untrusted, tool names are selected from a fixed read-only registry, and
 tool inputs are Pydantic-validated. The agent has a five-tool-call ceiling and a three-model-call
-ceiling. Retrieval failures fall back to diagnosis with an explicit unavailable note; failed agent
-diagnosis retains completed tool audits. These paths have only received static syntax/diff checks in
-this session; injected-prompt, timeout, malformed-output, and live telemetry behavior still need
-runtime verification.
+ceiling. Docker verification exercised rejection of a disallowed tool plan, invalid tool arguments,
+retrieval failure, model timeout, malformed output, unavailable telemetry, and persistence of failed
+runs and audits; see [W6A artifacts](../evals/reports/w6a/). Resistance to prompt injection and the
+quality of valid model diagnoses remain unverified. The 2026-10-20 comparison reports latency and
+token counts when available, but did not measure system resource consumption. Higher-resource
+model evaluation is deferred on the current low-end system.
 
 ## Knowledge retrieval
 

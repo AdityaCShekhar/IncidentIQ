@@ -2,9 +2,11 @@
 
 IncidentIQ is an evidence-grounded incident investigation copilot being built against [SPEC.md](SPEC.md). It investigates synthetic backend faults using telemetry, retrieval, and bounded diagnostic tools, with a benchmark comparing rules, LLM summary, RAG, and agent strategies.
 
-The demo runs through Docker Compose with Ollama available for local model inference. The project focuses on evidence quality, safe investigation workflows, and measured comparisons across diagnosis strategies.
+The core demo runs through Docker Compose. Ollama is an optional local dependency for model-backed investigations and benchmarks; it is not included in the Compose stack. The project focuses on evidence quality, bounded investigation workflows, and measured comparisons across diagnosis strategies.
 
 The current implementation includes persistent incident, evidence, and investigation APIs; four deterministic fault scenarios; correlated telemetry; bounded collection with stable evidence IDs; hybrid knowledge retrieval; and an evaluation harness with 24 frozen synthetic cases. Progress and pending verification are recorded in [TASKS.md](TASKS.md).
+
+For concise, evidence-based resume bullets and the claims they require you to qualify, see the [resume summary](docs/resume-summary.md).
 
 ## Run locally
 
@@ -28,6 +30,53 @@ make down     # stop services; preserve PostgreSQL data
 ```
 
 Use `docker compose down --volumes` only when you intend to delete all local database data. These credentials are for synthetic local development.
+
+## Clean-clone walkthrough
+
+This walkthrough uses Docker for the services and Python/uv for scenario and API client commands. It does not require Ollama. Start from a fresh clone with Docker Compose, Make, Python 3.12 (3.11 is also supported), and [uv](https://docs.astral.sh/uv/getting-started/installation/):
+
+```sh
+make up
+curl -fsS http://localhost:8000/health/ready
+make sync
+make scenario NAME=slow_dependency SCENARIO_ARGS='--output docs/demos/clean-clone-slow-dependency.json'
+sleep 3
+make evidence NAME=slow_dependency SCENARIO_FILE=clean-clone-slow-dependency > /tmp/incidentiq-evidence.json
+```
+
+The scenario command records baseline and fault windows and emits traces, logs, and metrics. The evidence command reads the generated fault window through the read-only collector job. It writes evidence JSON to `/tmp`; its status and record count are printed to stderr. The additional scenario artifact is in `docs/demos/clean-clone-slow-dependency.json` so it does not replace the checked-in example.
+
+Create an incident request from that measured fault window and post it to the API:
+
+```sh
+uv run --frozen python - <<'PY' > /tmp/incidentiq-request.json
+import json
+from pathlib import Path
+from incidentiq.ingestion.cli import window_from_scenario
+
+window = window_from_scenario(
+    Path("docs/demos/clean-clone-slow-dependency.json"), "fault", "checkout", ["inventory"]
+)
+request = window.model_dump(mode="json")
+request.update(title="Clean-clone latency investigation", severity="high", scenario_id="slow_dependency")
+print(json.dumps(request))
+PY
+
+curl -fsS -X POST http://localhost:8000/incidents \
+  -H 'Content-Type: application/json' \
+  --data-binary @/tmp/incidentiq-request.json
+```
+
+Copy the returned incident `id` into these commands to inspect persisted evidence and run the deterministic rules strategy:
+
+```sh
+curl -fsS 'http://localhost:8000/incidents/INCIDENT_ID/evidence?limit=20'
+curl -fsS -X POST http://localhost:8000/incidents/INCIDENT_ID/investigations \
+  -H 'Content-Type: application/json' \
+  -d '{"strategy":"rules"}'
+```
+
+The investigation response includes its status, diagnosis, evidence references, and persisted ID. This demonstrates the local API workflow; it does not validate model-backed diagnosis quality. Inspect traces at <http://localhost:16686>. Stop the stack with `make down`; remove the generated scenario JSON manually if you do not want to keep it.
 
 ## Slow dependency demo
 
@@ -90,7 +139,7 @@ make dataset
 make diagnose EVIDENCE=evals/fixtures/iq-001.json
 ```
 
-S0 returns a typed report with evidence references and abstains when no supported pattern matches. The dataset has 16 development and eight held-out cases; the latter are reserved for final reporting. All fixture numbers are authored synthetic inputs. Pool-exhaustion and retry-storm HTTP simulators are implemented but not yet runtime-verified. See [evaluation design and limitations](docs/evaluation.md) for the label boundary, freeze checks, rule thresholds, and commands for actual simulator bundles.
+S0 returns a typed report with evidence references and abstains when no supported pattern matches. The dataset has 16 development and eight held-out cases; the latter are reserved for final reporting. All fixture numbers are authored synthetic inputs. Pool-exhaustion and retry-storm scenarios have been exercised in Docker; see [their measured artifacts](evals/reports/w6a/) and [evaluation design and limitations](docs/evaluation.md) for dataset boundaries and interpretation.
 
 Run the rules benchmark on the development split with `make benchmark`. It writes per-case raw
 reports plus aggregate JSON and Markdown under `evals/reports/dev-rules/`. Held-out scoring
@@ -176,12 +225,12 @@ Liveness checks the API process. Readiness checks PostgreSQL connectivity and th
 
 Compose waits for database health and successful migration completion before starting the API, following [Docker's startup dependency guidance](https://docs.docker.com/compose/how-tos/startup-order/).
 
+See the [threat model](docs/threat-model.md) for trust boundaries, current controls, and security limitations. This is a local development stack, with no API authentication or authorization.
+
 ## Validation status
 
-148 offline tests passed before the benchmark, retrieval, LLM, investigation, and new fault-scenario additions. They covered API health/errors, the original slow-dependency and deployment-regression scenarios, telemetry exporters/evidence collection, and persistent incident/evidence HTTP behavior using SQLite ORM checks. No tests were added or run for the later strategy and fault-scenario code in this session; static checks passed. The dev comparison was executed in Docker with Ollama; the selected 0.5B model failed structured-output validation for every model-backed case. Hashed-feature retrieval metrics are saved under `evals/reports/retrieval-dev/`; BGE inference and PostgreSQL retrieval remain unverified.
-
-Tests used cached packages on Python 3.11 because package downloads were unavailable. PostgreSQL is the application backend; SQLite is used only for offline ORM checks. The expanded PostgreSQL integration test is skipped without an explicit disposable test database. Container build/start, live PostgreSQL migration and row locking, telemetry-volume ownership, backend configuration and delivery, and saved Docker demo artifacts remain pending. This execution sandbox denies Docker daemon access and PostgreSQL socket creation. See [TASKS.md](TASKS.md) for the remaining acceptance checks.
+The recorded offline suite had 148 passing tests before later benchmark, retrieval, investigation, and fault-scenario additions. PostgreSQL migration/persistence and row-lock behavior, Collector volume access, the deployment regression, pool exhaustion, retry storm, and investigation failure persistence have since been verified in Docker; the current status and evidence links are in [TASKS.md](TASKS.md). Do not treat the historical offline test count as validation of every later addition. The model-backed development comparison records failures for the tested small model, so model diagnosis quality remains unverified.
 
 ## Scope and next session
 
-The comparative benchmark supports rules, LLM summary, RAG, and agent strategies on the same frozen cases and writes per-strategy plus comparison reports. The [measured 16-case dev comparison](evals/reports/dev-comparison-qwen05-bounded/comparison.md) records rules accuracy of 1.00 and 100% model-backed case failures with `qwen2.5:0.5b` (invalid structured output; three agent timeouts). This verifies report generation and failure accounting, but a useful model-quality comparison still needs a model that returns valid reports.
+The comparative benchmark supports rules, LLM summary, RAG, and agent strategies on the same frozen cases and writes per-strategy plus comparison reports. The [measured 16-case dev comparison](evals/reports/dev-comparison-qwen05-bounded/comparison.md) records rules accuracy of 1.00 and 100% model-backed case failures with `qwen2.5:0.5b` (invalid structured output; three agent timeouts). This verifies report generation and failure accounting, but it does not establish model diagnostic quality. A higher-resource model run remains pending; see [evaluation limitations](docs/evaluation.md).

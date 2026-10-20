@@ -9,13 +9,13 @@ Move a task between sections when its status changes. Completed means the listed
 | ID | Task | Completion criteria | Notes |
 | --- | --- | --- | --- |
 | W6B | Comparative evaluation | S0–S3 results where supported; latency/resource costs; failure examples; measured improvement or documented lack thereof | Ran all four strategies across 16 dev cases with `qwen2.5:0.5b`; see [comparison artifacts](evals/reports/dev-comparison-qwen05-bounded/comparison.md). Rules achieved 1.00 accuracy; all model-backed cases failed schema validation, with 3 additional agent timeouts. The runtime failure and latency are measured, but model quality comparison remains pending a model that can satisfy the report schema. |
+| W8 | Portfolio packaging | Architecture, threat model, decisions, demo, limitations, measured results, clean-clone walkthrough | In progress. Added a threat model, clean-clone walkthrough, resume-ready summary, and blind label-review protocol; reconciled stale status statements in project docs. W6B model-quality comparison remains unverified because the available system is low-end; no model or benchmark was run for this documentation work. Independent label review itself remains pending. |
 
 ## Not started
 
 | ID | Task | Completion criteria | Dependencies |
 | --- | --- | --- | --- |
 | W7 | Optional stretch work | Choose at most two only after core acceptance: reranker, Kafka, UI, jobs, second model | W6B |
-| W8 | Portfolio packaging | Architecture, threat model, decisions, demo, limitations, measured results, clean-clone walkthrough | W6B |
 
 ## Completed
 

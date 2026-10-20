@@ -1,10 +1,10 @@
 # Development stack
 
-Status: accepted; updated for persisted incident collection.
+Status: accepted; updated for knowledge retrieval and persisted incident collection.
 
 ## Decision
 
-Use one Python application image for the incident API and the two synthetic services. The simulator lives in `app/incidentiq/simulator` so it shares packaging and logging without requiring another build system. PostgreSQL 17 stores application records; Alembic owns schema changes. Add pgvector when retrieval begins.
+Use one Python application image for the incident API and the two synthetic services. The simulator lives in `app/incidentiq/simulator` so it shares packaging and logging without requiring another build system. PostgreSQL 17 stores application records and knowledge chunks; Alembic owns schema changes. The selected PostgreSQL image includes pgvector for optional semantic vectors, with lexical and deterministic hashed-feature retrieval as reproducible controls.
 
 Use manual OpenTelemetry instrumentation for the three spans in `checkout → inventory`. The small explicit span set makes request ancestry and diagnostic attributes easy to inspect. Each service owns its SDK providers; application factories accept test transports and in-memory exporters without replacing global providers.
 
@@ -18,4 +18,4 @@ All published ports bind to loopback. Inventory and the Collector's Prometheus s
 
 Jaeger provides a temporary inspection view; the Collector volume is the persistent trace/log source. File output is intended for the local benchmark scale, with rotation and explicit handling of missing or expired telemetry. [Collector documentation](https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/v0.148.0/exporter/fileexporter/README.md) describes the format and its stability limits.
 
-The Python dependency graph is pinned in `uv.lock`; development and Docker installs use frozen resolution. The Docker runtime stack, Collector and Prometheus configuration, and slow-dependency telemetry flow have been verified. PostgreSQL row-lock behavior and deployment-regression runtime checks remain pending.
+The Python dependency graph is pinned in `uv.lock`; development and Docker installs use frozen resolution. The Docker runtime stack, Collector and Prometheus configuration, slow-dependency and deployment-regression flows, PostgreSQL row-lock behavior, and pool-exhaustion/retry-storm telemetry were verified on 2026-10-20. See [TASKS.md](../../TASKS.md) and the linked demo/evidence reports for the recorded results. These local synthetic checks do not establish production readiness.
