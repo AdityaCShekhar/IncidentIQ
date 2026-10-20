@@ -1,7 +1,10 @@
 import json
 import os
+from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
+from threading import Event
+from time import monotonic, sleep
 from uuid import UUID
 
 import pytest
@@ -10,10 +13,12 @@ from alembic.config import Config
 from fastapi.testclient import TestClient
 from incidentiq.core.config import Settings
 from incidentiq.db.models import EvidenceRow, Incident
+from incidentiq.db.repositories import IncidentRepository
 from incidentiq.db.session import build_engine, database_is_ready
 from incidentiq.ingestion.normalize import nanoseconds
+from incidentiq.ingestion.schemas import CollectionLimits, EvidenceBundle, EvidenceWindow
 from incidentiq.main import create_app
-from sqlalchemy import inspect, make_url, select
+from sqlalchemy import inspect, make_url, select, text
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
@@ -85,6 +90,75 @@ def test_migration_persistence_constraints_and_readiness(monkeypatch, tmp_path):
             with pytest.raises(IntegrityError):
                 session.commit()
             session.rollback()
+
+        lock_incident = Incident(
+            title="Row lock check",
+            service="checkout",
+            severity="high",
+            started_at=now,
+            ended_at=now + timedelta(minutes=5),
+        )
+        with Session(engine) as session:
+            session.add(lock_incident)
+            session.commit()
+            lock_incident_id = lock_incident.id
+        bundle = EvidenceBundle(
+            incident_id=lock_incident_id,
+            window=EvidenceWindow(
+                service="checkout",
+                started_at=now,
+                ended_at=now + timedelta(minutes=5),
+            ),
+            status="empty",
+            limits=CollectionLimits(),
+            records=[],
+            coverage={},
+            issues=[],
+        )
+        lock_session = Session(engine)
+        lock_session.begin()
+        assert (
+            lock_session.scalar(
+                select(Incident).where(Incident.id == lock_incident_id).with_for_update()
+            )
+            is not None
+        )
+        worker_started = Event()
+
+        def finalize_incident():
+            worker_started.set()
+            with Session(engine) as session:
+                IncidentRepository(session).save_bundle(lock_incident_id, bundle)
+
+        with ThreadPoolExecutor(max_workers=1) as executor:
+            future = executor.submit(finalize_incident)
+            try:
+                assert worker_started.wait(timeout=2)
+                deadline = monotonic() + 5
+                lock_wait_seen = False
+                while monotonic() < deadline:
+                    with engine.connect() as connection:
+                        lock_wait_seen = connection.scalar(
+                            text(
+                                "SELECT EXISTS (SELECT 1 FROM pg_stat_activity "
+                                "WHERE datname = current_database() "
+                                "AND wait_event_type = 'Lock' "
+                                "AND pid <> pg_backend_pid())"
+                            )
+                        )
+                    if lock_wait_seen:
+                        break
+                    sleep(0.02)
+                assert lock_wait_seen, "save_bundle did not wait for the incident row lock"
+            finally:
+                lock_session.rollback()
+                lock_session.close()
+            future.result(timeout=5)
+        with Session(engine) as session:
+            finalized = session.get(Incident, lock_incident_id)
+            assert finalized is not None
+            assert finalized.status == "failed"
+            assert finalized.collection_status == "empty"
 
         with TestClient(create_app(settings)) as client:
             assert client.get("/health/ready").status_code == 200

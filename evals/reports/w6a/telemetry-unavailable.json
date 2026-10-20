@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "incident_id": "23741323-ccf3-5db2-bad7-f647d8516b6f",
+  "window": {
+    "service": "checkout",
+    "related_services": [
+      "inventory"
+    ],
+    "started_at": "2026-10-20T12:08:49Z",
+    "ended_at": "2026-10-20T12:08:55Z"
+  },
+  "status": "unavailable",
+  "limits": {
+    "max_files": 16,
+    "max_scan_bytes": 33554432,
+    "max_line_bytes": 1048576,
+    "max_lines": 100000,
+    "max_observations": 25000,
+    "max_records": 100,
+    "deadline_seconds": 5.0
+  },
+  "records": [],
+  "coverage": {
+    "trace": {
+      "files_scanned": 0,
+      "bytes_scanned": 0,
+      "lines_scanned": 0,
+      "observations_scanned": 0,
+      "records_collected": 0,
+      "duplicates": 0
+    },
+    "log": {
+      "files_scanned": 0,
+      "bytes_scanned": 0,
+      "lines_scanned": 0,
+      "observations_scanned": 0,
+      "records_collected": 0,
+      "duplicates": 0
+    },
+    "metric": {
+      "files_scanned": 0,
+      "bytes_scanned": 0,
+      "lines_scanned": 0,
+      "observations_scanned": 0,
+      "records_collected": 0,
+      "duplicates": 0
+    }
+  },
+  "issues": [
+    {
+      "code": "directory_unavailable",
+      "source_type": null,
+      "count": 1
+    },
+    {
+      "code": "missing_source_files",
+      "source_type": "log",
+      "count": 1
+    },
+    {
+      "code": "missing_source_files",
+      "source_type": "metric",
+      "count": 1
+    },
+    {
+      "code": "missing_source_files",
+      "source_type": "trace",
+      "count": 1
+    }
+  ]
+}

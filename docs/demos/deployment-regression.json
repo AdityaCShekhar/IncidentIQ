@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "scenario": "deployment_regression",
+  "execution": "http",
+  "configuration": {
+    "requests_per_phase": 5,
+    "delay_ms": 20
+  },
+  "started_at": "2026-10-20T11:49:46.422639+00:00",
+  "phases": [
+    {
+      "name": "baseline",
+      "run_id": "0e815e21-2e62-41b3-9ba3-2b3168d3d483",
+      "started_at": "2026-10-20T11:49:46.422671+00:00",
+      "ended_at": "2026-10-20T11:49:46.591119+00:00",
+      "deployment": null,
+      "samples": [
+        {
+          "request_id": "e3215e4a-770e-4b9c-bc28-3486cd1f6768",
+          "trace_id": "ba63b5d7b9c8e8d028579c57203cd785",
+          "revision": "checkout-v1",
+          "status_code": 200,
+          "latency_ms": 39.205
+        },
+        {
+          "request_id": "4693013c-e3b3-4b41-8f8b-6bfc9ffdd7d9",
+          "trace_id": "9860468d8d3c8dc5cf9cbabe9c3b8726",
+          "revision": "checkout-v1",
+          "status_code": 200,
+          "latency_ms": 34.265
+        },
+        {
+          "request_id": "1a38738f-6ed7-4077-b206-6f8bb77aabd1",
+          "trace_id": "ef1a1868bba14c78e624869ebc92c7af",
+          "revision": "checkout-v1",
+          "status_code": 200,
+          "latency_ms": 31.447
+        },
+        {
+          "request_id": "3098ac66-e187-4c3e-bb38-277111c11f36",
+          "trace_id": "52c3b4f08c74bf0938970410f465688a",
+          "revision": "checkout-v1",
+          "status_code": 200,
+          "latency_ms": 31.031
+        },
+        {
+          "request_id": "02e83273-7861-4e99-b304-9e4e99098ea1",
+          "trace_id": "435df7b18752a4987a4bd335c29560c1",
+          "revision": "checkout-v1",
+          "status_code": 200,
+          "latency_ms": 31.955
+        }
+      ],
+      "median_latency_ms": 31.955,
+      "error_rate": 0.0
+    },
+    {
+      "name": "fault",
+      "run_id": "0e815e21-2e62-41b3-9ba3-2b3168d3d483",
+      "started_at": "2026-10-20T11:49:46.591162+00:00",
+      "ended_at": "2026-10-20T11:49:46.757419+00:00",
+      "deployment": {
+        "run_id": "0e815e21-2e62-41b3-9ba3-2b3168d3d483",
+        "revision": "checkout-v2",
+        "changed": true,
+        "event": {
+          "id": "96a6b4a3-b6b9-4a73-86ab-c2a2378a0724",
+          "run_id": "0e815e21-2e62-41b3-9ba3-2b3168d3d483",
+          "previous_revision": "checkout-v1",
+          "revision": "checkout-v2",
+          "timestamp_unix_nano": 1792496986594005745
+        }
+      },
+      "samples": [
+        {
+          "request_id": "3a5b5f00-04fb-4966-bb62-400c9a3c8962",
+          "trace_id": "110b40c4e7300f63553de9e51bdd125f",
+          "revision": "checkout-v2",
+          "status_code": 500,
+          "latency_ms": 32.277
+        },
+        {
+          "request_id": "ab051d21-e120-4d8a-91b7-20b1d96e42c1",
+          "trace_id": "b4eb1481531a9725a73cf36e54353b02",
+          "revision": "checkout-v2",
+          "status_code": 500,
+          "latency_ms": 32.375
+        },
+        {
+          "request_id": "9c713007-5361-41e3-8a5f-2bf13e09edd5",
+          "trace_id": "97734b53a6f3eb5e43bcaa551b8f0ad5",
+          "revision": "checkout-v2",
+          "status_code": 500,
+          "latency_ms": 31.402
+        },
+        {
+          "request_id": "275988a0-29d1-49f8-a992-b78462277d8c",
+          "trace_id": "c7b2cfef142c319b12055529025f0581",
+          "revision": "checkout-v2",
+          "status_code": 500,
+          "latency_ms": 32.376
+        },
+        {
+          "request_id": "bf746810-b7ee-4d96-adc5-86e7bdd6febd",
+          "trace_id": "844c0d625e6d207aa9cb0663d41957de",
+          "revision": "checkout-v2",
+          "status_code": 500,
+          "latency_ms": 32.844
+        }
+      ],
+      "median_latency_ms": 32.375,
+      "error_rate": 1.0
+    },
+    {
+      "name": "recovery",
+      "run_id": "0e815e21-2e62-41b3-9ba3-2b3168d3d483",
+      "started_at": "2026-10-20T11:49:46.757461+00:00",
+      "ended_at": "2026-10-20T11:49:46.928143+00:00",
+      "deployment": {
+        "run_id": "0e815e21-2e62-41b3-9ba3-2b3168d3d483",
+        "revision": "checkout-v1",
+        "changed": true,
+        "event": {
+          "id": "43d84d75-6572-4d94-84bd-af533887d45f",
+          "run_id": "0e815e21-2e62-41b3-9ba3-2b3168d3d483",
+          "previous_revision": "checkout-v2",
+          "revision": "checkout-v1",
+          "timestamp_unix_nano": 1792496986759737479
+        }
+      },
+      "samples": [
+        {
+          "request_id": "4dbba9f0-d585-4a80-b469-2306c1156d38",
+          "trace_id": "e6fd6d598abcc9bf951a9a78f21d66f2",
+          "revision": "checkout-v1",
+          "status_code": 200,
+          "latency_ms": 33.002
+        },
+        {
+          "request_id": "2af1b4dc-d8d4-408a-8161-b023cc8c956b",
+          "trace_id": "d9ab45abfd65db5fa25f4e974a8a88fb",
+          "revision": "checkout-v1",
+          "status_code": 200,
+          "latency_ms": 32.039
+        },
+        {
+          "request_id": "700a7f99-4477-4ac1-9348-0ba3cd4aa035",
+          "trace_id": "9ff7f7f00cebd795b26429e205c8b9e5",
+          "revision": "checkout-v1",
+          "status_code": 200,
+          "latency_ms": 32.555
+        },
+        {
+          "request_id": "42c1b49c-2976-4854-828c-444cf8721f29",
+          "trace_id": "d3147cdd7830f71269f0adbc2eb17a8e",
+          "revision": "checkout-v1",
+          "status_code": 200,
+          "latency_ms": 34.264
+        },
+        {
+          "request_id": "3aad2e3d-de15-44ab-9f43-43223f0dd89d",
+          "trace_id": "2c1ee5566c870ba6f59090f314e318f3",
+          "revision": "checkout-v1",
+          "status_code": 200,
+          "latency_ms": 34.571
+        }
+      ],
+      "median_latency_ms": 33.002,
+      "error_rate": 0.0
+    }
+  ],
+  "ended_at": "2026-10-20T11:49:46.928182+00:00",
+  "regression_observed": true
+}

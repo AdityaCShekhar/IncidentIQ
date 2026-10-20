@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "scenario": "pool_exhaustion",
+  "execution": "http",
+  "configuration": {
+    "concurrent_requests": 12,
+    "pool_capacity": 2
+  },
+  "started_at": "2026-10-20T12:08:48.945163+00:00",
+  "phases": [
+    {
+      "name": "baseline",
+      "run_id": "b5a553f0-2ff3-46c8-867d-9e35643b2f5c",
+      "started_at": "2026-10-20T12:08:48.945163+00:00",
+      "ended_at": "2026-10-20T12:08:49.077473+00:00",
+      "samples": [
+        {
+          "request_id": "e30a5956-7c97-41ac-a25c-8bd68060ff9f",
+          "trace_id": "fad4da86b09700ead8be97d60c9022ba",
+          "status_code": 200,
+          "latency_ms": 33.202
+        },
+        {
+          "request_id": "7a53d9b6-9105-437e-99f4-36dbe133300d",
+          "trace_id": "55339a75a4de2dcdf8dd4f28bf7b3462",
+          "status_code": 200,
+          "latency_ms": 32.751
+        },
+        {
+          "request_id": "7af6b1ab-be53-4a9f-b1ca-22f010e06ede",
+          "trace_id": "34b444ec3bfa62ef52800d314946c326",
+          "status_code": 200,
+          "latency_ms": 33.326
+        },
+        {
+          "request_id": "ef53cb65-cf10-4dd1-82d8-4d0f47d21f1f",
+          "trace_id": "2d340089f38987ac318e607b6fb6134b",
+          "status_code": 200,
+          "latency_ms": 32.828
+        }
+      ]
+    },
+    {
+      "name": "fault",
+      "run_id": "b5a553f0-2ff3-46c8-867d-9e35643b2f5c",
+      "started_at": "2026-10-20T12:08:49.077490+00:00",
+      "ended_at": "2026-10-20T12:08:49.416344+00:00",
+      "samples": [
+        {
+          "request_id": "57d6f656-c445-44bf-b2a6-8ead8357d844",
+          "trace_id": "4fbafe019413aabe5b2831842eab2dc9",
+          "status_code": 200,
+          "latency_ms": 282.413
+        },
+        {
+          "request_id": "8ea27afa-d42f-40de-a034-adff503accc0",
+          "trace_id": "7f0d672dadde97862fcd6d4dc4a42bb5",
+          "status_code": 200,
+          "latency_ms": 334.955
+        },
+        {
+          "request_id": "e54da2da-782c-451e-9e75-035dd6117caf",
+          "trace_id": "021815f59595bc585f39f85a7659b142",
+          "status_code": 503,
+          "latency_ms": 80.883
+        },
+        {
+          "request_id": "4b14fdb7-0a44-4cff-949d-38a3e7fb59df",
+          "trace_id": "58b3007e402ec7492fc329f186dd2d2d",
+          "status_code": 503,
+          "latency_ms": 84.308
+        },
+        {
+          "request_id": "f0608c2f-608b-4885-b218-640cf8b46177",
+          "trace_id": "72536d72f7f6c6b5c09911ad7c74f242",
+          "status_code": 503,
+          "latency_ms": 85.667
+        },
+        {
+          "request_id": "d2d6a7cf-e230-422c-a46d-fe4e4b886dc0",
+          "trace_id": "2d723bab570bacb27a8a56c8c36454c0",
+          "status_code": 503,
+          "latency_ms": 79.215
+        },
+        {
+          "request_id": "68e2ade3-8f65-4eac-b359-1c1e774c237a",
+          "trace_id": "f4392fdfc1bb3d8fdcc14614943a136a",
+          "status_code": 503,
+          "latency_ms": 84.044
+        },
+        {
+          "request_id": "98eae8bf-4f87-47ae-84bf-f97cc575e4f3",
+          "trace_id": "07fb466b3753414cb622c2912593b2aa",
+          "status_code": 503,
+          "latency_ms": 84.135
+        },
+        {
+          "request_id": "a74ad30e-e7f6-4d14-987f-d16d80fca887",
+          "trace_id": "6ec43d2683a22537508509363d106f04",
+          "status_code": 503,
+          "latency_ms": 82.546
+        },
+        {
+          "request_id": "37de1078-ec0f-4f67-afa1-70fa498cfe94",
+          "trace_id": "4d467c998c38c9be7634055010a3d077",
+          "status_code": 503,
+          "latency_ms": 80.987
+        },
+        {
+          "request_id": "85a3639b-6c6c-455a-ae88-757e0a4d2fe0",
+          "trace_id": "83dc29f3df34a0596555f153fc4c1f9d",
+          "status_code": 503,
+          "latency_ms": 78.974
+        },
+        {
+          "request_id": "0d7a5484-9226-426b-b7cb-53e33c52fb6f",
+          "trace_id": "660c160bcd2e8315eb1bc80cb38982dc",
+          "status_code": 503,
+          "latency_ms": 78.589
+        }
+      ]
+    }
+  ],
+  "pool_exhaustion_observed": true,
+  "ended_at": "2026-10-20T12:08:49.416344+00:00"
+}

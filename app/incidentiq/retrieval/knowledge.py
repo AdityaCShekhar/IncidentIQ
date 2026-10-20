@@ -320,10 +320,17 @@ class PostgresKnowledgeStore:
 
     def lexical(self, query: str, limit: int = 10) -> list[Hit]:
         hits = self._query(
-            """SELECT id, document_id, section, text, source, document_type, service, tags,
-                      ts_rank_cd(search_vector, plainto_tsquery('simple', :query)) AS score
+            """WITH query_terms AS (
+                   SELECT string_agg(quote_literal(term), ' | ') AS query
+                   FROM regexp_split_to_table(lower(:query), '[^[:alnum:]_]+') AS term
+                   WHERE term <> ''
+               )
+               SELECT id, document_id, section, text, source, document_type, service, tags,
+                      ts_rank_cd(search_vector, to_tsquery('simple', query_terms.query)) AS score
                FROM knowledge_chunks
-               WHERE search_vector @@ plainto_tsquery('simple', :query)
+               CROSS JOIN query_terms
+               WHERE query_terms.query IS NOT NULL
+                 AND search_vector @@ to_tsquery('simple', query_terms.query)
                ORDER BY score DESC, id LIMIT :limit""",
             {"query": query[:2000], "limit": limit},
             "lexical",

@@ -98,6 +98,8 @@ class InvestigationCreate(BaseModel):
 
 
 class InvestigationResponse(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+
     id: UUID
     incident_id: UUID
     strategy: str

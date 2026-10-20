@@ -96,6 +96,8 @@ The command runs three phases using one random run ID, with five requests per ph
 
 These are authored expectations; the command validates actual responses and records observed error rates and client latencies. Results go to `docs/demos/deployment-regression.json`. `--requests` remains bounded to 1–20 per phase. `--baseline-ms` and `--fault-ms` apply only to the slow-dependency scenario; this scenario keeps inventory delay at 20 ms throughout.
 
+Docker verification on 2026-10-20 measured five requests per phase: baseline median 31.955 ms with 0% errors, fault median 32.375 ms with 100% errors, and recovery median 33.002 ms with 0% errors. The fault-window collector returned 27 records and no issues. The persisted incident `5c861a28-f478-4532-94f5-337c3799638b` contains five failing checkout server spans (`response_contract_error`), five successful inventory server spans, and the deployment change event. The measured phase results are saved in the artifact above.
+
 Revision v2 uses a faulty response formatter that expects `reservation_id`, absent from inventory's current response contract. Its inventory client span succeeds, then the checkout server span fails. Compare the correlated spans, `error.type`, and `deployment.revision`; a checkout error alone is insufficient to attribute the cause to a deployment.
 
 The checkout simulator's `POST /simulator/deployments` control accepts exactly a UUID `run_id` and revision `checkout-v1` or `checkout-v2`. It emits a structured `deployment_changed` event when the revision changes. Repeating an active v2 activation returns the same event without another log. Other run IDs use v1. The inventory service does not expose this route. This control belongs to the fault simulator and is never a diagnostic agent tool.
@@ -131,6 +133,8 @@ make scenario NAME=retry_storm
 The checkout simulator makes three downstream attempts for one request while inventory returns synthetic 503 responses. A retry-attempt span attribute and response header expose the observed count; the artifact records the count and final status. This isolated simulator fault does not alter normal requests or shared deployment state.
 
 The artifact includes baseline and fault windows, so collect its evidence with `make evidence NAME=retry_storm > docs/demos/retry-storm-evidence.json`.
+
+Docker verification on 2026-10-20 measured pool exhaustion with four baseline HTTP 200s and twelve concurrent fault responses: ten HTTP 503 and two HTTP 200. The pool fault window collected 67 records with no issues. Retry-storm verification measured five baseline HTTP 200s and five fault HTTP 503s; each fault request made exactly three downstream attempts. Its fault window collected 62 records with no issues, including 15 inventory retry spans (five each for attempt indices 0, 1, and 2). See the [pool-exhaustion run and evidence](../evals/reports/w6a/pool-exhaustion.json) and [retry-storm run and evidence](../evals/reports/w6a/retry-storm.json); corresponding evidence bundles are in the same directory. The duration metrics are cumulative snapshots and retain their full interval semantics.
 
 ## Storage and limitations
 

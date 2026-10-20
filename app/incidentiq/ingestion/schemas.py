@@ -60,7 +60,7 @@ class CollectionLimits(BaseModel):
 
 
 class EvidenceRecord(BaseModel):
-    model_config = ConfigDict(extra="forbid", frozen=True)
+    model_config = ConfigDict(extra="forbid", frozen=True, from_attributes=True)
 
     id: UUID
     incident_id: UUID

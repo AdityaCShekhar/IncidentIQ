@@ -1,0 +1,2058 @@
+{
+  "schema_version": 1,
+  "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+  "window": {
+    "service": "checkout",
+    "related_services": [
+      "inventory"
+    ],
+    "started_at": "2026-10-20T12:08:53.439386Z",
+    "ended_at": "2026-10-20T12:08:55.071782Z"
+  },
+  "status": "collected",
+  "limits": {
+    "max_files": 16,
+    "max_scan_bytes": 33554432,
+    "max_line_bytes": 1048576,
+    "max_lines": 100000,
+    "max_observations": 25000,
+    "max_records": 100,
+    "deadline_seconds": 5.0
+  },
+  "records": [
+    {
+      "id": "5978919d-fa61-5bb1-928d-8a8d2de55058",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "log",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:53.548463Z",
+      "severity": "error",
+      "summary": "request_completed",
+      "payload": {
+        "message": "request_completed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "latency_ms": 102.544,
+          "operation": "POST /reserve",
+          "request_id": "37baf8bf-f015-4591-a0d4-3b63055fbf54",
+          "run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "status_code": 503
+        },
+        "timestamp_unix_nano": "1792498133548463581",
+        "trace_id": "4c8f765d8dd53e88907031ee2cb837a0",
+        "span_id": "e24a1d849036a3ce"
+      },
+      "source_uri": "otel://inventory/logs/1792498133548463581/f246583f63411832f49bdc15424026b8ef1ab747d79958b7c8aca8be1bfc6c77",
+      "raw_locator": "logs.jsonl:10#/resourceLogs/1/scopeLogs/0/logRecords/2",
+      "content_hash": "a6eab8ec049215ce5598a04772923ebf21e956fccba817bb6aa081f95ae8c59e"
+    },
+    {
+      "id": "75168977-344f-53c1-9d46-f8c7269ddc5b",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:53.548756Z",
+      "severity": "error",
+      "summary": "POST /reserve completed in 103.193 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "4c8f765d8dd53e88907031ee2cb837a0",
+        "span_id": "e24a1d849036a3ce",
+        "parent_span_id": "5d0cf3f2c287d0dc",
+        "name": "POST /reserve",
+        "kind": 2,
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "http.route": "/reserve",
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "request_id": "37baf8bf-f015-4591-a0d4-3b63055fbf54"
+        },
+        "timestamp_unix_nano": "1792498133548756947",
+        "started_at_unix_nano": "1792498133445564199",
+        "duration_ms": 103.192748
+      },
+      "source_uri": "otel://inventory/traces/4c8f765d8dd53e88907031ee2cb837a0/spans/e24a1d849036a3ce",
+      "raw_locator": "traces.jsonl:10#/resourceSpans/2/scopeSpans/0/spans/2",
+      "content_hash": "831d285995f79f5e03c17fff98e36473879c06abe6404a4ec1738937bf6c81e8"
+    },
+    {
+      "id": "da0c1b75-7ef4-54d8-b09d-0d3486c98531",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:53.552445Z",
+      "severity": "error",
+      "summary": "POST inventory /reserve completed in 109.995 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "4c8f765d8dd53e88907031ee2cb837a0",
+        "span_id": "5d0cf3f2c287d0dc",
+        "parent_span_id": "7cdf2a8997573baf",
+        "name": "POST inventory /reserve",
+        "kind": 3,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "error.type": "unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "incidentiq.retry_attempt": 0,
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "peer.service": "inventory"
+        },
+        "timestamp_unix_nano": "1792498133552445052",
+        "started_at_unix_nano": "1792498133442449770",
+        "duration_ms": 109.995282
+      },
+      "source_uri": "otel://checkout/traces/4c8f765d8dd53e88907031ee2cb837a0/spans/5d0cf3f2c287d0dc",
+      "raw_locator": "traces.jsonl:10#/resourceSpans/3/scopeSpans/0/spans/0",
+      "content_hash": "c905d6122cef4ae2b60b361d4cde8762019941670ff899027034d2dbfd7f5db4"
+    },
+    {
+      "id": "cb2ac69e-35b1-585e-b719-e4622f71b5d1",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "log",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:53.657276Z",
+      "severity": "error",
+      "summary": "request_completed",
+      "payload": {
+        "message": "request_completed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "latency_ms": 101.955,
+          "operation": "POST /reserve",
+          "request_id": "37baf8bf-f015-4591-a0d4-3b63055fbf54",
+          "run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "status_code": 503
+        },
+        "timestamp_unix_nano": "1792498133657276495",
+        "trace_id": "4c8f765d8dd53e88907031ee2cb837a0",
+        "span_id": "6a8bc25c3184e26d"
+      },
+      "source_uri": "otel://inventory/logs/1792498133657276495/78c1e53bfce6776dc02f4f0b3a8ddea878ae3cc70b4a72ea95857e4d1b5618dc",
+      "raw_locator": "logs.jsonl:10#/resourceLogs/1/scopeLogs/0/logRecords/3",
+      "content_hash": "082ace025315ec015d78337f2239a36d00aac931057e7b6c65a9586ec1dc8e92"
+    },
+    {
+      "id": "898e8100-54c1-5ca7-b7e2-3c13fd92f35f",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:53.657402Z",
+      "severity": "error",
+      "summary": "POST /reserve completed in 102.196 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "4c8f765d8dd53e88907031ee2cb837a0",
+        "span_id": "6a8bc25c3184e26d",
+        "parent_span_id": "8ded214bde6213b6",
+        "name": "POST /reserve",
+        "kind": 2,
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "http.route": "/reserve",
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "request_id": "37baf8bf-f015-4591-a0d4-3b63055fbf54"
+        },
+        "timestamp_unix_nano": "1792498133657402584",
+        "started_at_unix_nano": "1792498133555206367",
+        "duration_ms": 102.196217
+      },
+      "source_uri": "otel://inventory/traces/4c8f765d8dd53e88907031ee2cb837a0/spans/6a8bc25c3184e26d",
+      "raw_locator": "traces.jsonl:10#/resourceSpans/2/scopeSpans/0/spans/3",
+      "content_hash": "5060ea9d6ba3dcc46c561abdd59d265b955857c05ed478c91f059e20e9befc23"
+    },
+    {
+      "id": "5f8e5576-36c7-5cf8-8c6e-e0766b0da728",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:53.659153Z",
+      "severity": "error",
+      "summary": "POST inventory /reserve completed in 106.533 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "4c8f765d8dd53e88907031ee2cb837a0",
+        "span_id": "8ded214bde6213b6",
+        "parent_span_id": "7cdf2a8997573baf",
+        "name": "POST inventory /reserve",
+        "kind": 3,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "error.type": "unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "incidentiq.retry_attempt": 1,
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "peer.service": "inventory"
+        },
+        "timestamp_unix_nano": "1792498133659153144",
+        "started_at_unix_nano": "1792498133552620000",
+        "duration_ms": 106.533144
+      },
+      "source_uri": "otel://checkout/traces/4c8f765d8dd53e88907031ee2cb837a0/spans/8ded214bde6213b6",
+      "raw_locator": "traces.jsonl:10#/resourceSpans/3/scopeSpans/0/spans/1",
+      "content_hash": "41dbdf923faa9f957d67461647227d7ddbe27fe276fc0bbc832e481746fd5b6b"
+    },
+    {
+      "id": "3e556629-dfe2-51a4-a5b9-0f56b0d7863d",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "log",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:53.763114Z",
+      "severity": "error",
+      "summary": "request_completed",
+      "payload": {
+        "message": "request_completed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "latency_ms": 101.938,
+          "operation": "POST /reserve",
+          "request_id": "37baf8bf-f015-4591-a0d4-3b63055fbf54",
+          "run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "status_code": 503
+        },
+        "timestamp_unix_nano": "1792498133763114474",
+        "trace_id": "4c8f765d8dd53e88907031ee2cb837a0",
+        "span_id": "2ba29a7815fbd69b"
+      },
+      "source_uri": "otel://inventory/logs/1792498133763114474/dab141a6bbcceefac0b3b2629754d32935b78582a224f7a409dcd090407baddd",
+      "raw_locator": "logs.jsonl:10#/resourceLogs/1/scopeLogs/0/logRecords/4",
+      "content_hash": "fc59c6d0a651f7b5a350f09baa9991d8d92d3708ddadb12770efdf613fef4cf1"
+    },
+    {
+      "id": "f58050b1-e798-5784-b35d-bf71d9ca40a2",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:53.763388Z",
+      "severity": "error",
+      "summary": "POST /reserve completed in 102.627 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "4c8f765d8dd53e88907031ee2cb837a0",
+        "span_id": "2ba29a7815fbd69b",
+        "parent_span_id": "e180cbb9e67cdd0a",
+        "name": "POST /reserve",
+        "kind": 2,
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "http.route": "/reserve",
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "request_id": "37baf8bf-f015-4591-a0d4-3b63055fbf54"
+        },
+        "timestamp_unix_nano": "1792498133763388400",
+        "started_at_unix_nano": "1792498133660761618",
+        "duration_ms": 102.626782
+      },
+      "source_uri": "otel://inventory/traces/4c8f765d8dd53e88907031ee2cb837a0/spans/2ba29a7815fbd69b",
+      "raw_locator": "traces.jsonl:10#/resourceSpans/2/scopeSpans/0/spans/4",
+      "content_hash": "429c205b228727481203871edfd817b5002f73a7a650f25ec874da397c943e9d"
+    },
+    {
+      "id": "07bd0d08-46cf-53e1-a2a6-1f8a659c921b",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:53.766910Z",
+      "severity": "error",
+      "summary": "POST inventory /reserve completed in 107.654 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "4c8f765d8dd53e88907031ee2cb837a0",
+        "span_id": "e180cbb9e67cdd0a",
+        "parent_span_id": "7cdf2a8997573baf",
+        "name": "POST inventory /reserve",
+        "kind": 3,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "error.type": "unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "incidentiq.retry_attempt": 2,
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "peer.service": "inventory"
+        },
+        "timestamp_unix_nano": "1792498133766910017",
+        "started_at_unix_nano": "1792498133659255976",
+        "duration_ms": 107.654041
+      },
+      "source_uri": "otel://checkout/traces/4c8f765d8dd53e88907031ee2cb837a0/spans/e180cbb9e67cdd0a",
+      "raw_locator": "traces.jsonl:10#/resourceSpans/3/scopeSpans/0/spans/2",
+      "content_hash": "19cfeed9036551cc87ba5be6e9b47fe321195c4a4957fa0fb6d3fa242e093b4f"
+    },
+    {
+      "id": "bd9e676d-debc-5d05-9279-644c80200f3b",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "log",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:53.767541Z",
+      "severity": "error",
+      "summary": "request_completed",
+      "payload": {
+        "message": "request_completed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "latency_ms": 326.064,
+          "operation": "POST /checkout",
+          "request_id": "37baf8bf-f015-4591-a0d4-3b63055fbf54",
+          "run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "status_code": 503
+        },
+        "timestamp_unix_nano": "1792498133767541162",
+        "trace_id": "4c8f765d8dd53e88907031ee2cb837a0",
+        "span_id": "7cdf2a8997573baf"
+      },
+      "source_uri": "otel://checkout/logs/1792498133767541162/36732a956e985930809804556fe5c017bc2a524274f7a089c5084e401fabe537",
+      "raw_locator": "logs.jsonl:10#/resourceLogs/2/scopeLogs/0/logRecords/0",
+      "content_hash": "4a2af0a06f7a76db4a7b78a48da5062b4c8fe113046fd8d7557e3818485563b2"
+    },
+    {
+      "id": "58f90402-811b-51a6-9eed-7e2918d1f45c",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:53.767723Z",
+      "severity": "error",
+      "summary": "POST /checkout completed in 326.396 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "4c8f765d8dd53e88907031ee2cb837a0",
+        "span_id": "7cdf2a8997573baf",
+        "parent_span_id": null,
+        "name": "POST /checkout",
+        "kind": 2,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "http.route": "/checkout",
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "request_id": "37baf8bf-f015-4591-a0d4-3b63055fbf54"
+        },
+        "timestamp_unix_nano": "1792498133767723222",
+        "started_at_unix_nano": "1792498133441327017",
+        "duration_ms": 326.396205
+      },
+      "source_uri": "otel://checkout/traces/4c8f765d8dd53e88907031ee2cb837a0/spans/7cdf2a8997573baf",
+      "raw_locator": "traces.jsonl:10#/resourceSpans/3/scopeSpans/0/spans/3",
+      "content_hash": "3997a8facdff7e7de72a46b73867e3f2ec35dacdd1ee94a19520870ed9a532ef"
+    },
+    {
+      "id": "e266209d-e2b0-5ffd-a185-7b074cfe3dc4",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "log",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:53.877922Z",
+      "severity": "error",
+      "summary": "request_completed",
+      "payload": {
+        "message": "request_completed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "latency_ms": 102.459,
+          "operation": "POST /reserve",
+          "request_id": "692db88e-612e-4cc5-b38b-46a875aa6031",
+          "run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "status_code": 503
+        },
+        "timestamp_unix_nano": "1792498133877922838",
+        "trace_id": "661e17426e08f6098abc5d7d014a548e",
+        "span_id": "60e2717bdfd5e03f"
+      },
+      "source_uri": "otel://inventory/logs/1792498133877922838/9c5dc4cfd2087ed150eb3266de613e1aea5822618894c7afc91da748703b4cbf",
+      "raw_locator": "logs.jsonl:10#/resourceLogs/3/scopeLogs/0/logRecords/0",
+      "content_hash": "5d2928b66a000a31eea350460f22a06fdb61b78e660248f22113afe6476b25a6"
+    },
+    {
+      "id": "6503eb82-1264-58e7-9906-27b365539e56",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:53.878104Z",
+      "severity": "error",
+      "summary": "POST /reserve completed in 102.851 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "661e17426e08f6098abc5d7d014a548e",
+        "span_id": "60e2717bdfd5e03f",
+        "parent_span_id": "0ca58419227211cf",
+        "name": "POST /reserve",
+        "kind": 2,
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "http.route": "/reserve",
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "request_id": "692db88e-612e-4cc5-b38b-46a875aa6031"
+        },
+        "timestamp_unix_nano": "1792498133878104516",
+        "started_at_unix_nano": "1792498133775253453",
+        "duration_ms": 102.851063
+      },
+      "source_uri": "otel://inventory/traces/661e17426e08f6098abc5d7d014a548e/spans/60e2717bdfd5e03f",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/0/scopeSpans/0/spans/0",
+      "content_hash": "bd42f2bb8f1ee0f13ec9be9435921075c80717e4d462d4d815275211bea499c7"
+    },
+    {
+      "id": "c01594d0-0ac5-5d38-9f56-3bd00ae6e9a7",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:53.880899Z",
+      "severity": "error",
+      "summary": "POST inventory /reserve completed in 108.578 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "661e17426e08f6098abc5d7d014a548e",
+        "span_id": "0ca58419227211cf",
+        "parent_span_id": "bf4fa8b408908b45",
+        "name": "POST inventory /reserve",
+        "kind": 3,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "error.type": "unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "incidentiq.retry_attempt": 0,
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "peer.service": "inventory"
+        },
+        "timestamp_unix_nano": "1792498133880899619",
+        "started_at_unix_nano": "1792498133772321274",
+        "duration_ms": 108.578345
+      },
+      "source_uri": "otel://checkout/traces/661e17426e08f6098abc5d7d014a548e/spans/0ca58419227211cf",
+      "raw_locator": "traces.jsonl:10#/resourceSpans/3/scopeSpans/0/spans/4",
+      "content_hash": "e32b42c8b03b22ae42ee1b1dcdaeac4c13c8245c9099768ab52ea27a33880133"
+    },
+    {
+      "id": "cf629773-c106-5413-8f17-9416e4a232b9",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "log",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:53.987472Z",
+      "severity": "error",
+      "summary": "request_completed",
+      "payload": {
+        "message": "request_completed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "latency_ms": 103.379,
+          "operation": "POST /reserve",
+          "request_id": "692db88e-612e-4cc5-b38b-46a875aa6031",
+          "run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "status_code": 503
+        },
+        "timestamp_unix_nano": "1792498133987472565",
+        "trace_id": "661e17426e08f6098abc5d7d014a548e",
+        "span_id": "c20e75855e144acd"
+      },
+      "source_uri": "otel://inventory/logs/1792498133987472565/ba54eabfc9bcf6e1c26b9d59a7d8e92047657c9be56ed22f03e7f1444acb533c",
+      "raw_locator": "logs.jsonl:10#/resourceLogs/3/scopeLogs/0/logRecords/1",
+      "content_hash": "3474e3d5d5a7bbb75c62908ffce65a9fad493c9087ba5408f6bb5265015da809"
+    },
+    {
+      "id": "9b32610a-df5c-5cb9-95ed-c2731c4dd22c",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:53.987648Z",
+      "severity": "error",
+      "summary": "POST /reserve completed in 103.788 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "661e17426e08f6098abc5d7d014a548e",
+        "span_id": "c20e75855e144acd",
+        "parent_span_id": "d63eefc98194de55",
+        "name": "POST /reserve",
+        "kind": 2,
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "http.route": "/reserve",
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "request_id": "692db88e-612e-4cc5-b38b-46a875aa6031"
+        },
+        "timestamp_unix_nano": "1792498133987648565",
+        "started_at_unix_nano": "1792498133883860889",
+        "duration_ms": 103.787676
+      },
+      "source_uri": "otel://inventory/traces/661e17426e08f6098abc5d7d014a548e/spans/c20e75855e144acd",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/0/scopeSpans/0/spans/1",
+      "content_hash": "27687415c26539f2f0e624a09c3a7fee61e0d42e8f1b8708e4987b1e534a39d7"
+    },
+    {
+      "id": "96ea41e0-62df-5b3a-a8fa-677c9a3e19cf",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:53.990570Z",
+      "severity": "error",
+      "summary": "POST inventory /reserve completed in 109.499 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "661e17426e08f6098abc5d7d014a548e",
+        "span_id": "d63eefc98194de55",
+        "parent_span_id": "bf4fa8b408908b45",
+        "name": "POST inventory /reserve",
+        "kind": 3,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "error.type": "unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "incidentiq.retry_attempt": 1,
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "peer.service": "inventory"
+        },
+        "timestamp_unix_nano": "1792498133990570951",
+        "started_at_unix_nano": "1792498133881072002",
+        "duration_ms": 109.498949
+      },
+      "source_uri": "otel://checkout/traces/661e17426e08f6098abc5d7d014a548e/spans/d63eefc98194de55",
+      "raw_locator": "traces.jsonl:10#/resourceSpans/3/scopeSpans/0/spans/5",
+      "content_hash": "5031cecd21f0ea8e43434eedeed23a2a102af97dd85c76bbdcbcdd770dd90924"
+    },
+    {
+      "id": "47f95969-63b9-5d2e-b826-91440b026b91",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "log",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.096005Z",
+      "severity": "error",
+      "summary": "request_completed",
+      "payload": {
+        "message": "request_completed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "latency_ms": 102.114,
+          "operation": "POST /reserve",
+          "request_id": "692db88e-612e-4cc5-b38b-46a875aa6031",
+          "run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "status_code": 503
+        },
+        "timestamp_unix_nano": "1792498134096005195",
+        "trace_id": "661e17426e08f6098abc5d7d014a548e",
+        "span_id": "15268e77d7c21afa"
+      },
+      "source_uri": "otel://inventory/logs/1792498134096005195/8bbf2587639bb5cd67d63b0d8a13f4c1cc9fadf91b76d88484f825ffc8fa83a8",
+      "raw_locator": "logs.jsonl:10#/resourceLogs/3/scopeLogs/0/logRecords/2",
+      "content_hash": "d384d9db444e7f0ef4fd8fe8078bad42cba299fe87930ba84d723c6d87b60cb3"
+    },
+    {
+      "id": "79fcd52d-95b8-5e1b-9c6c-def8f79b4b36",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.096238Z",
+      "severity": "error",
+      "summary": "POST /reserve completed in 102.695 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "661e17426e08f6098abc5d7d014a548e",
+        "span_id": "15268e77d7c21afa",
+        "parent_span_id": "66cd51b623dae3b7",
+        "name": "POST /reserve",
+        "kind": 2,
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "http.route": "/reserve",
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "request_id": "692db88e-612e-4cc5-b38b-46a875aa6031"
+        },
+        "timestamp_unix_nano": "1792498134096238438",
+        "started_at_unix_nano": "1792498133993543634",
+        "duration_ms": 102.694804
+      },
+      "source_uri": "otel://inventory/traces/661e17426e08f6098abc5d7d014a548e/spans/15268e77d7c21afa",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/0/scopeSpans/0/spans/2",
+      "content_hash": "d53ce9cc4dad6a801091bcdf2cd6a1e1629a184a4d58d1b27f00b95056d5e423"
+    },
+    {
+      "id": "5378d469-6099-5c8f-8ae1-0d5cf081265a",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:54.098598Z",
+      "severity": "error",
+      "summary": "POST inventory /reserve completed in 107.852 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "661e17426e08f6098abc5d7d014a548e",
+        "span_id": "66cd51b623dae3b7",
+        "parent_span_id": "bf4fa8b408908b45",
+        "name": "POST inventory /reserve",
+        "kind": 3,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "error.type": "unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "incidentiq.retry_attempt": 2,
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "peer.service": "inventory"
+        },
+        "timestamp_unix_nano": "1792498134098598481",
+        "started_at_unix_nano": "1792498133990746081",
+        "duration_ms": 107.8524
+      },
+      "source_uri": "otel://checkout/traces/661e17426e08f6098abc5d7d014a548e/spans/66cd51b623dae3b7",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/1/scopeSpans/0/spans/0",
+      "content_hash": "6e0bd15aab6b4028b32e916393f274b15394646e1f2879e1adab0cffc8352e62"
+    },
+    {
+      "id": "0b19ea25-dc0e-5784-b606-a69a695c6db0",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "log",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:54.099030Z",
+      "severity": "error",
+      "summary": "request_completed",
+      "payload": {
+        "message": "request_completed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "latency_ms": 327.642,
+          "operation": "POST /checkout",
+          "request_id": "692db88e-612e-4cc5-b38b-46a875aa6031",
+          "run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "status_code": 503
+        },
+        "timestamp_unix_nano": "1792498134099030480",
+        "trace_id": "661e17426e08f6098abc5d7d014a548e",
+        "span_id": "bf4fa8b408908b45"
+      },
+      "source_uri": "otel://checkout/logs/1792498134099030480/43e6aa924e216b058ba588e27adcf6969ab7008f23a0c3171aaa83b03a14aba4",
+      "raw_locator": "logs.jsonl:11#/resourceLogs/0/scopeLogs/0/logRecords/0",
+      "content_hash": "afde925b4863bfdc2cbf55806e2c114222bdc297a69a380eee3752f7b59e4b50"
+    },
+    {
+      "id": "bdfeaecc-c673-5bdd-b646-6c54abf33a71",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:54.099152Z",
+      "severity": "error",
+      "summary": "POST /checkout completed in 327.843 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "661e17426e08f6098abc5d7d014a548e",
+        "span_id": "bf4fa8b408908b45",
+        "parent_span_id": null,
+        "name": "POST /checkout",
+        "kind": 2,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "http.route": "/checkout",
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "request_id": "692db88e-612e-4cc5-b38b-46a875aa6031"
+        },
+        "timestamp_unix_nano": "1792498134099152416",
+        "started_at_unix_nano": "1792498133771309031",
+        "duration_ms": 327.843385
+      },
+      "source_uri": "otel://checkout/traces/661e17426e08f6098abc5d7d014a548e/spans/bf4fa8b408908b45",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/1/scopeSpans/0/spans/1",
+      "content_hash": "b15056232249050b1f2eeece9de3a394e947af6399e0789f26d3473f04011dad"
+    },
+    {
+      "id": "11619118-19a5-5cf3-94a1-adeed47e0f26",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "metric",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:54.124197Z",
+      "severity": "info",
+      "summary": "incidentiq.request.duration cumulative histogram snapshot",
+      "payload": {
+        "name": "incidentiq.request.duration",
+        "unit": "s",
+        "kind": "histogram",
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "http.response.status_code": 200,
+          "http.route": "/checkout"
+        },
+        "timestamp_unix_nano": "1792498134124197231",
+        "interval_started_at": "2026-10-20T11:24:57.934879+00:00",
+        "interval_started_at_unix_nano": "1792495497934879809",
+        "interval_ended_at": "2026-10-20T12:08:54.124197+00:00",
+        "aggregation_temporality": "cumulative",
+        "count": 37,
+        "bounds": [
+          0.005,
+          0.01,
+          0.025,
+          0.05,
+          0.1,
+          0.25,
+          0.5,
+          1.0,
+          2.5,
+          5.0
+        ],
+        "bucket_counts": [
+          0,
+          0,
+          1,
+          27,
+          0,
+          0,
+          4,
+          5,
+          0,
+          0,
+          0
+        ],
+        "sum": 4.569219198002429,
+        "min": 0.024806820000776497,
+        "max": 0.51037662500039
+      },
+      "source_uri": "otel://checkout/metrics/incidentiq.request.duration/1792498134124197231/09a88608412e8bab23681b173468701f0c544f92bbce227a56546d26b2b9fcee",
+      "raw_locator": "metrics.jsonl:2634#/resourceMetrics/1/scopeMetrics/0/metrics/0/histogram/dataPoints/0",
+      "content_hash": "54e571c16c86f76a780ee32a6e1dc0c5ecde958d84f558584fe230a020c28f7f"
+    },
+    {
+      "id": "3a9d411b-00f9-5e4c-996c-b6854fa4b908",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "metric",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:54.124197Z",
+      "severity": "info",
+      "summary": "incidentiq.request.duration cumulative histogram snapshot",
+      "payload": {
+        "name": "incidentiq.request.duration",
+        "unit": "s",
+        "kind": "histogram",
+        "attributes": {
+          "deployment.revision": "checkout-v2",
+          "http.response.status_code": 500,
+          "http.route": "/checkout"
+        },
+        "timestamp_unix_nano": "1792498134124197231",
+        "interval_started_at": "2026-10-20T11:49:46.625841+00:00",
+        "interval_started_at_unix_nano": "1792496986625841098",
+        "interval_ended_at": "2026-10-20T12:08:54.124197+00:00",
+        "aggregation_temporality": "cumulative",
+        "count": 5,
+        "bounds": [
+          0.005,
+          0.01,
+          0.025,
+          0.05,
+          0.1,
+          0.25,
+          0.5,
+          1.0,
+          2.5,
+          5.0
+        ],
+        "bucket_counts": [
+          0,
+          0,
+          0,
+          5,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "sum": 0.14572297099948628,
+        "min": 0.028325952000159305,
+        "max": 0.029822440999851096
+      },
+      "source_uri": "otel://checkout/metrics/incidentiq.request.duration/1792498134124197231/9646efd51c5ce6dde6e9956e4e9a4b4435d05377a0e46c75dd66b0ec0e6dc20b",
+      "raw_locator": "metrics.jsonl:2634#/resourceMetrics/1/scopeMetrics/0/metrics/0/histogram/dataPoints/1",
+      "content_hash": "aa13558483085a24deefac1e66425cd08fa3e1a7a2c3a6db67a45ef0f2155d10"
+    },
+    {
+      "id": "488e4bfa-34a4-59fd-be3e-2d8093d6ca6a",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "metric",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:54.124197Z",
+      "severity": "info",
+      "summary": "incidentiq.request.duration cumulative histogram snapshot",
+      "payload": {
+        "name": "incidentiq.request.duration",
+        "unit": "s",
+        "kind": "histogram",
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "http.response.status_code": 503,
+          "http.route": "/checkout"
+        },
+        "timestamp_unix_nano": "1792498134124197231",
+        "interval_started_at": "2026-10-20T12:08:37.738561+00:00",
+        "interval_started_at_unix_nano": "1792498117738561807",
+        "interval_ended_at": "2026-10-20T12:08:54.124197+00:00",
+        "aggregation_temporality": "cumulative",
+        "count": 22,
+        "bounds": [
+          0.005,
+          0.01,
+          0.025,
+          0.05,
+          0.1,
+          0.25,
+          0.5,
+          1.0,
+          2.5,
+          5.0
+        ],
+        "bucket_counts": [
+          0,
+          0,
+          0,
+          0,
+          20,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        "sum": 2.0309026729883044,
+        "min": 0.06134259399914299,
+        "max": 0.3276420740003232
+      },
+      "source_uri": "otel://checkout/metrics/incidentiq.request.duration/1792498134124197231/e7e7b3581a15de69f765d20dac3cd1b8e5177575cc164ec84eebc937bed0622f",
+      "raw_locator": "metrics.jsonl:2634#/resourceMetrics/1/scopeMetrics/0/metrics/0/histogram/dataPoints/2",
+      "content_hash": "b0f8926ef7b3e10a6fb1b970d9e30a3a8b2fa70eda4969d9fc933e37d2efda64"
+    },
+    {
+      "id": "4eeb832c-3740-54f5-8f48-fcf16c9270fb",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "log",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.206574Z",
+      "severity": "error",
+      "summary": "request_completed",
+      "payload": {
+        "message": "request_completed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "latency_ms": 101.94,
+          "operation": "POST /reserve",
+          "request_id": "3e7c439f-0ca3-4809-8903-0b95cebcc105",
+          "run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "status_code": 503
+        },
+        "timestamp_unix_nano": "1792498134206574255",
+        "trace_id": "7b5e63ffa51de4918ac355dd5dcaba56",
+        "span_id": "222328df2650c1d8"
+      },
+      "source_uri": "otel://inventory/logs/1792498134206574255/748f44dcfbe087de93e3ba6ba374c84e770c7f31189d0c45261570f921928011",
+      "raw_locator": "logs.jsonl:10#/resourceLogs/3/scopeLogs/0/logRecords/3",
+      "content_hash": "dc03632794452b4cb92ec6671939891ac08b7a61f6c196aebc4315a541861c07"
+    },
+    {
+      "id": "6b5b5f62-0e97-59b5-923d-13732cec30eb",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.206668Z",
+      "severity": "error",
+      "summary": "POST /reserve completed in 102.106 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "7b5e63ffa51de4918ac355dd5dcaba56",
+        "span_id": "222328df2650c1d8",
+        "parent_span_id": "92d1cfa1b904e07d",
+        "name": "POST /reserve",
+        "kind": 2,
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "http.route": "/reserve",
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "request_id": "3e7c439f-0ca3-4809-8903-0b95cebcc105"
+        },
+        "timestamp_unix_nano": "1792498134206668689",
+        "started_at_unix_nano": "1792498134104562324",
+        "duration_ms": 102.106365
+      },
+      "source_uri": "otel://inventory/traces/7b5e63ffa51de4918ac355dd5dcaba56/spans/222328df2650c1d8",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/0/scopeSpans/0/spans/3",
+      "content_hash": "d1811ca6694669ca28e0325c43c92cfa5b737e1b23d7e738c25229762e0cc2ec"
+    },
+    {
+      "id": "7c247c8e-cb56-5c02-b1fc-e57018539a35",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:54.209250Z",
+      "severity": "error",
+      "summary": "POST inventory /reserve completed in 106.716 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "7b5e63ffa51de4918ac355dd5dcaba56",
+        "span_id": "92d1cfa1b904e07d",
+        "parent_span_id": "bb8ee9bcca19886b",
+        "name": "POST inventory /reserve",
+        "kind": 3,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "error.type": "unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "incidentiq.retry_attempt": 0,
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "peer.service": "inventory"
+        },
+        "timestamp_unix_nano": "1792498134209250490",
+        "started_at_unix_nano": "1792498134102534215",
+        "duration_ms": 106.716275
+      },
+      "source_uri": "otel://checkout/traces/7b5e63ffa51de4918ac355dd5dcaba56/spans/92d1cfa1b904e07d",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/1/scopeSpans/0/spans/2",
+      "content_hash": "9e6497a8e4d754a42b513dd3eceb9ea20e7dee3fe331202039b0cedee0d60c3a"
+    },
+    {
+      "id": "9235b7d7-88c9-5d50-917a-0c607cf6b553",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "log",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.314092Z",
+      "severity": "error",
+      "summary": "request_completed",
+      "payload": {
+        "message": "request_completed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "latency_ms": 102.295,
+          "operation": "POST /reserve",
+          "request_id": "3e7c439f-0ca3-4809-8903-0b95cebcc105",
+          "run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "status_code": 503
+        },
+        "timestamp_unix_nano": "1792498134314092256",
+        "trace_id": "7b5e63ffa51de4918ac355dd5dcaba56",
+        "span_id": "7957796e0b77a213"
+      },
+      "source_uri": "otel://inventory/logs/1792498134314092256/698e38bba3159adcd09d3d640e458a06e01764f77d4b50ba5aa8d27a1d81641c",
+      "raw_locator": "logs.jsonl:10#/resourceLogs/3/scopeLogs/0/logRecords/4",
+      "content_hash": "b8f52a785b9d474ee00999434b614b815431dc151e96d16a3b1141d4b49ca91c"
+    },
+    {
+      "id": "e10029ec-1737-55d1-b807-3e4b3a5b2fc0",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.314266Z",
+      "severity": "error",
+      "summary": "POST /reserve completed in 102.645 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "7b5e63ffa51de4918ac355dd5dcaba56",
+        "span_id": "7957796e0b77a213",
+        "parent_span_id": "b395d84c4fc3309f",
+        "name": "POST /reserve",
+        "kind": 2,
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "http.route": "/reserve",
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "request_id": "3e7c439f-0ca3-4809-8903-0b95cebcc105"
+        },
+        "timestamp_unix_nano": "1792498134314266369",
+        "started_at_unix_nano": "1792498134211620885",
+        "duration_ms": 102.645484
+      },
+      "source_uri": "otel://inventory/traces/7b5e63ffa51de4918ac355dd5dcaba56/spans/7957796e0b77a213",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/0/scopeSpans/0/spans/4",
+      "content_hash": "51702dccdadb62a0661b208a0bff872f3b17baa97ffd680703c2ffde01d75820"
+    },
+    {
+      "id": "287a5cdf-537e-5a8f-b6eb-5e9e8203c705",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:54.317040Z",
+      "severity": "error",
+      "summary": "POST inventory /reserve completed in 107.674 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "7b5e63ffa51de4918ac355dd5dcaba56",
+        "span_id": "b395d84c4fc3309f",
+        "parent_span_id": "bb8ee9bcca19886b",
+        "name": "POST inventory /reserve",
+        "kind": 3,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "error.type": "unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "incidentiq.retry_attempt": 1,
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "peer.service": "inventory"
+        },
+        "timestamp_unix_nano": "1792498134317040510",
+        "started_at_unix_nano": "1792498134209366728",
+        "duration_ms": 107.673782
+      },
+      "source_uri": "otel://checkout/traces/7b5e63ffa51de4918ac355dd5dcaba56/spans/b395d84c4fc3309f",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/1/scopeSpans/0/spans/3",
+      "content_hash": "1ba6bb8e1ca9d5d5d40966e1c931571fc9651b07f96ef9d79770a4ac09037b23"
+    },
+    {
+      "id": "95be74d4-5616-5570-935f-5df7a7eda5e4",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "log",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.422919Z",
+      "severity": "error",
+      "summary": "request_completed",
+      "payload": {
+        "message": "request_completed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "latency_ms": 102.523,
+          "operation": "POST /reserve",
+          "request_id": "3e7c439f-0ca3-4809-8903-0b95cebcc105",
+          "run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "status_code": 503
+        },
+        "timestamp_unix_nano": "1792498134422919460",
+        "trace_id": "7b5e63ffa51de4918ac355dd5dcaba56",
+        "span_id": "121ce40c45d4dc57"
+      },
+      "source_uri": "otel://inventory/logs/1792498134422919460/8db36051c2ac71ae423abf13f7e76dd37c69b85161d74f3d8e103e0ab3dab819",
+      "raw_locator": "logs.jsonl:11#/resourceLogs/1/scopeLogs/0/logRecords/0",
+      "content_hash": "0e0bce5627298688f72dff77b62dfdeec1bd4059d524438fd10825333c301e73"
+    },
+    {
+      "id": "279bd715-99c1-5d0e-8407-b102ee594518",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.423167Z",
+      "severity": "error",
+      "summary": "POST /reserve completed in 103.202 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "7b5e63ffa51de4918ac355dd5dcaba56",
+        "span_id": "121ce40c45d4dc57",
+        "parent_span_id": "dedf18fc98157132",
+        "name": "POST /reserve",
+        "kind": 2,
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "http.route": "/reserve",
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "request_id": "3e7c439f-0ca3-4809-8903-0b95cebcc105"
+        },
+        "timestamp_unix_nano": "1792498134423167628",
+        "started_at_unix_nano": "1792498134319965700",
+        "duration_ms": 103.201928
+      },
+      "source_uri": "otel://inventory/traces/7b5e63ffa51de4918ac355dd5dcaba56/spans/121ce40c45d4dc57",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/2/scopeSpans/0/spans/0",
+      "content_hash": "27602e2a782be41fe544ccfb41721db8b1b521474e0ee0ef2e25ed5464dea68e"
+    },
+    {
+      "id": "094e41b2-4eff-5f2a-8af5-b37136f00a23",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:54.427293Z",
+      "severity": "error",
+      "summary": "POST inventory /reserve completed in 110.072 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "7b5e63ffa51de4918ac355dd5dcaba56",
+        "span_id": "dedf18fc98157132",
+        "parent_span_id": "bb8ee9bcca19886b",
+        "name": "POST inventory /reserve",
+        "kind": 3,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "error.type": "unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "incidentiq.retry_attempt": 2,
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "peer.service": "inventory"
+        },
+        "timestamp_unix_nano": "1792498134427293455",
+        "started_at_unix_nano": "1792498134317221232",
+        "duration_ms": 110.072223
+      },
+      "source_uri": "otel://checkout/traces/7b5e63ffa51de4918ac355dd5dcaba56/spans/dedf18fc98157132",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/1/scopeSpans/0/spans/4",
+      "content_hash": "0420faa120bca5cc48ceda8f7a7eb2fce3cd916bc35546270ba57632d8063fad"
+    },
+    {
+      "id": "9e13ec77-4049-5db6-bb3c-af5bb7f94634",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "log",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:54.428082Z",
+      "severity": "error",
+      "summary": "request_completed",
+      "payload": {
+        "message": "request_completed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "latency_ms": 326.158,
+          "operation": "POST /checkout",
+          "request_id": "3e7c439f-0ca3-4809-8903-0b95cebcc105",
+          "run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "status_code": 503
+        },
+        "timestamp_unix_nano": "1792498134428082554",
+        "trace_id": "7b5e63ffa51de4918ac355dd5dcaba56",
+        "span_id": "bb8ee9bcca19886b"
+      },
+      "source_uri": "otel://checkout/logs/1792498134428082554/c3af5d93570da80d7e69adba37158408447b6b98cc3a2f46c26aa35ab590d0fb",
+      "raw_locator": "logs.jsonl:11#/resourceLogs/0/scopeLogs/0/logRecords/1",
+      "content_hash": "f22e2b13e1372a3188269c185a477c67ea33e5da6372d3ef7d5ebd49d8deadd6"
+    },
+    {
+      "id": "107f0e87-8df5-52a6-b555-4acdbbb02b58",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:54.428304Z",
+      "severity": "error",
+      "summary": "POST /checkout completed in 326.623 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "7b5e63ffa51de4918ac355dd5dcaba56",
+        "span_id": "bb8ee9bcca19886b",
+        "parent_span_id": null,
+        "name": "POST /checkout",
+        "kind": 2,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "http.route": "/checkout",
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "request_id": "3e7c439f-0ca3-4809-8903-0b95cebcc105"
+        },
+        "timestamp_unix_nano": "1792498134428304440",
+        "started_at_unix_nano": "1792498134101681202",
+        "duration_ms": 326.623238
+      },
+      "source_uri": "otel://checkout/traces/7b5e63ffa51de4918ac355dd5dcaba56/spans/bb8ee9bcca19886b",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/1/scopeSpans/0/spans/5",
+      "content_hash": "37ff77f4a114d73445bc4cc2d52bda397b435277a704fb50e4bc81e90668c338"
+    },
+    {
+      "id": "06471d9b-812a-513e-9024-c8e2ba5627ef",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "metric",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.430389Z",
+      "severity": "info",
+      "summary": "incidentiq.request.duration cumulative histogram snapshot",
+      "payload": {
+        "name": "incidentiq.request.duration",
+        "unit": "s",
+        "kind": "histogram",
+        "attributes": {
+          "http.response.status_code": 503,
+          "http.route": "/reserve"
+        },
+        "timestamp_unix_nano": "1792498134430389388",
+        "interval_started_at": "2026-10-20T12:08:37.734609+00:00",
+        "interval_started_at_unix_nano": "1792498117734609266",
+        "interval_ended_at": "2026-10-20T12:08:54.430389+00:00",
+        "aggregation_temporality": "cumulative",
+        "count": 29,
+        "bounds": [
+          0.005,
+          0.01,
+          0.025,
+          0.05,
+          0.1,
+          0.25,
+          0.5,
+          1.0,
+          2.5,
+          5.0
+        ],
+        "bucket_counts": [
+          0,
+          0,
+          6,
+          14,
+          0,
+          9,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "sum": 1.4529536199988797,
+        "min": 0.02429474500058859,
+        "max": 0.10337948999949731
+      },
+      "source_uri": "otel://inventory/metrics/incidentiq.request.duration/1792498134430389388/4de79952ed909b8263ce8e25650ba6de873b8cf53d957f8d1b703ad641fedfd7",
+      "raw_locator": "metrics.jsonl:2635#/resourceMetrics/0/scopeMetrics/0/metrics/0/histogram/dataPoints/1",
+      "content_hash": "ae938ef4f5082cb87cf5dcb4b432fc5ef32c6b5782e49478697e39650ec1f30f"
+    },
+    {
+      "id": "cbbdbe57-34a4-5637-af3c-275ca1378b55",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "metric",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.430389Z",
+      "severity": "info",
+      "summary": "incidentiq.database.pool.wait cumulative histogram snapshot",
+      "payload": {
+        "name": "incidentiq.database.pool.wait",
+        "unit": "s",
+        "kind": "histogram",
+        "attributes": {},
+        "timestamp_unix_nano": "1792498134430389388",
+        "interval_started_at": "2026-10-20T12:08:37.674032+00:00",
+        "interval_started_at_unix_nano": "1792498117674032578",
+        "interval_ended_at": "2026-10-20T12:08:54.430389+00:00",
+        "aggregation_temporality": "cumulative",
+        "count": 4,
+        "bounds": [
+          0.0,
+          5.0,
+          10.0,
+          25.0,
+          50.0,
+          75.0,
+          100.0,
+          250.0,
+          500.0,
+          750.0,
+          1000.0,
+          2500.0,
+          5000.0,
+          7500.0,
+          10000.0
+        ],
+        "bucket_counts": [
+          0,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "sum": 0.00021559699962381274,
+        "min": 0.000029695000193896703,
+        "max": 0.00007884099977673031
+      },
+      "source_uri": "otel://inventory/metrics/incidentiq.database.pool.wait/1792498134430389388/755b36c58a0cae4f3789aabab9428cea40a148fb422724f1943d26cc5790bd0f",
+      "raw_locator": "metrics.jsonl:2635#/resourceMetrics/0/scopeMetrics/0/metrics/1/histogram/dataPoints/0",
+      "content_hash": "048621bf414a4257325a78d1ca3507d02ce029e383f6e6a488510813b3b157b6"
+    },
+    {
+      "id": "e096e163-6855-59c3-ab2a-ef1558624791",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "metric",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.430389Z",
+      "severity": "info",
+      "summary": "incidentiq.database.pool.wait cumulative histogram snapshot",
+      "payload": {
+        "name": "incidentiq.database.pool.wait",
+        "unit": "s",
+        "kind": "histogram",
+        "attributes": {},
+        "timestamp_unix_nano": "1792498134430389388",
+        "interval_started_at": "2026-10-20T12:08:37.734068+00:00",
+        "interval_started_at_unix_nano": "1792498117734068405",
+        "interval_ended_at": "2026-10-20T12:08:54.430389+00:00",
+        "aggregation_temporality": "cumulative",
+        "count": 20,
+        "bounds": [
+          0.0,
+          5.0,
+          10.0,
+          25.0,
+          50.0,
+          75.0,
+          100.0,
+          250.0,
+          500.0,
+          750.0,
+          1000.0,
+          2500.0,
+          5000.0,
+          7500.0,
+          10000.0
+        ],
+        "bucket_counts": [
+          0,
+          20,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "sum": 0.4280442980052612,
+        "min": 0.0201756939986808,
+        "max": 0.022691197000312968
+      },
+      "source_uri": "otel://inventory/metrics/incidentiq.database.pool.wait/1792498134430389388/d4f2498f7135bccb4a076147aad5f12d4c361b36389de42db45f0fe07ee941f5",
+      "raw_locator": "metrics.jsonl:2635#/resourceMetrics/0/scopeMetrics/0/metrics/1/histogram/dataPoints/1",
+      "content_hash": "d38c042f21ef8e500f992400fee5e51132cfe4d458725bbea4f8b04f1c7afd5a"
+    },
+    {
+      "id": "fc632f1e-b92f-5e14-9f22-489a4522866d",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "metric",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.430389Z",
+      "severity": "info",
+      "summary": "incidentiq.request.duration cumulative histogram snapshot",
+      "payload": {
+        "name": "incidentiq.request.duration",
+        "unit": "s",
+        "kind": "histogram",
+        "attributes": {
+          "http.response.status_code": 200,
+          "http.route": "/reserve"
+        },
+        "timestamp_unix_nano": "1792498134430389388",
+        "interval_started_at": "2026-10-20T11:24:57.929442+00:00",
+        "interval_started_at_unix_nano": "1792495497929442130",
+        "interval_ended_at": "2026-10-20T12:08:54.430389+00:00",
+        "aggregation_temporality": "cumulative",
+        "count": 42,
+        "bounds": [
+          0.005,
+          0.01,
+          0.025,
+          0.05,
+          0.1,
+          0.25,
+          0.5,
+          1.0,
+          2.5,
+          5.0
+        ],
+        "bucket_counts": [
+          0,
+          0,
+          33,
+          0,
+          0,
+          0,
+          4,
+          5,
+          0,
+          0,
+          0
+        ],
+        "sum": 4.333692002003772,
+        "min": 0.020837051999478717,
+        "max": 0.5037779599997521
+      },
+      "source_uri": "otel://inventory/metrics/incidentiq.request.duration/1792498134430389388/d5242007d9b1a72fd5442cd2a3cdd0f87ccb5167cc246765d7250ec8cd5c38c3",
+      "raw_locator": "metrics.jsonl:2635#/resourceMetrics/0/scopeMetrics/0/metrics/0/histogram/dataPoints/0",
+      "content_hash": "391df18257c0746c97bf0973d91397b1942fcad9b7e5bf5131d6c04d3ba743ab"
+    },
+    {
+      "id": "e6a60de0-4a20-513f-99e0-4e3711c543a6",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "log",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.537275Z",
+      "severity": "error",
+      "summary": "request_completed",
+      "payload": {
+        "message": "request_completed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "latency_ms": 101.845,
+          "operation": "POST /reserve",
+          "request_id": "17dcc25c-ac59-45dd-9663-6a474abd078e",
+          "run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "status_code": 503
+        },
+        "timestamp_unix_nano": "1792498134537275015",
+        "trace_id": "ead7527ab9be9b99237c1e482bee0479",
+        "span_id": "5e24181f26011795"
+      },
+      "source_uri": "otel://inventory/logs/1792498134537275015/3d11c3014439967d24095e9c3d8ced268edf74204f653403ef9271f94e568999",
+      "raw_locator": "logs.jsonl:11#/resourceLogs/1/scopeLogs/0/logRecords/1",
+      "content_hash": "72a67109ed3c9ca437ddc1e04b08193e81e2fff392c3e359d2cdc844885a3c3a"
+    },
+    {
+      "id": "e0597a04-87c1-57d2-9f91-47b0f6ed8bac",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.537470Z",
+      "severity": "error",
+      "summary": "POST /reserve completed in 102.301 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "ead7527ab9be9b99237c1e482bee0479",
+        "span_id": "5e24181f26011795",
+        "parent_span_id": "47a25d47063a771b",
+        "name": "POST /reserve",
+        "kind": 2,
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "http.route": "/reserve",
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "request_id": "17dcc25c-ac59-45dd-9663-6a474abd078e"
+        },
+        "timestamp_unix_nano": "1792498134537470837",
+        "started_at_unix_nano": "1792498134435170166",
+        "duration_ms": 102.300671
+      },
+      "source_uri": "otel://inventory/traces/ead7527ab9be9b99237c1e482bee0479/spans/5e24181f26011795",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/2/scopeSpans/0/spans/1",
+      "content_hash": "f7527f62d65fb9350831791eeeaa751076f1d7f661c75369bd2cccd75e656e37"
+    },
+    {
+      "id": "02f598a6-848e-50c5-8712-86b79982a1ef",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:54.540120Z",
+      "severity": "error",
+      "summary": "POST inventory /reserve completed in 107.448 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "ead7527ab9be9b99237c1e482bee0479",
+        "span_id": "47a25d47063a771b",
+        "parent_span_id": "9b0963c3ada4eda0",
+        "name": "POST inventory /reserve",
+        "kind": 3,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "error.type": "unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "incidentiq.retry_attempt": 0,
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "peer.service": "inventory"
+        },
+        "timestamp_unix_nano": "1792498134540120433",
+        "started_at_unix_nano": "1792498134432672544",
+        "duration_ms": 107.447889
+      },
+      "source_uri": "otel://checkout/traces/ead7527ab9be9b99237c1e482bee0479/spans/47a25d47063a771b",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/3/scopeSpans/0/spans/0",
+      "content_hash": "64ac562ce34685ee2d7bcd0109191ff039bb8dad6a5321b2502a6e6df42aebb9"
+    },
+    {
+      "id": "ca986ed0-831a-59ec-999f-0cac2b586278",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "log",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.644237Z",
+      "severity": "error",
+      "summary": "request_completed",
+      "payload": {
+        "message": "request_completed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "latency_ms": 101.645,
+          "operation": "POST /reserve",
+          "request_id": "17dcc25c-ac59-45dd-9663-6a474abd078e",
+          "run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "status_code": 503
+        },
+        "timestamp_unix_nano": "1792498134644237935",
+        "trace_id": "ead7527ab9be9b99237c1e482bee0479",
+        "span_id": "36fe88129566ad58"
+      },
+      "source_uri": "otel://inventory/logs/1792498134644237935/18aaee1eb9ee19bb813b560d55a3a9074d5c367d691fb59e01583da9c8845d0d",
+      "raw_locator": "logs.jsonl:11#/resourceLogs/1/scopeLogs/0/logRecords/2",
+      "content_hash": "5f1b734b998d15c018c1d54a38eaa26f3cf942853fa523dd4828c6e3b9ef3424"
+    },
+    {
+      "id": "a1dd2bca-589c-553c-b0fc-6e3aa679ac03",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.644351Z",
+      "severity": "error",
+      "summary": "POST /reserve completed in 101.842 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "ead7527ab9be9b99237c1e482bee0479",
+        "span_id": "36fe88129566ad58",
+        "parent_span_id": "43779d9a20d7ac57",
+        "name": "POST /reserve",
+        "kind": 2,
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "http.route": "/reserve",
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "request_id": "17dcc25c-ac59-45dd-9663-6a474abd078e"
+        },
+        "timestamp_unix_nano": "1792498134644351370",
+        "started_at_unix_nano": "1792498134542509869",
+        "duration_ms": 101.841501
+      },
+      "source_uri": "otel://inventory/traces/ead7527ab9be9b99237c1e482bee0479/spans/36fe88129566ad58",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/2/scopeSpans/0/spans/2",
+      "content_hash": "08734ecc303c447fe227810e92fbd15eb1f8acba3b8a8921c365b5361b0679ae"
+    },
+    {
+      "id": "bd99a762-73d5-5c1b-bddb-b97b4f708260",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:54.645957Z",
+      "severity": "error",
+      "summary": "POST inventory /reserve completed in 105.664 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "ead7527ab9be9b99237c1e482bee0479",
+        "span_id": "43779d9a20d7ac57",
+        "parent_span_id": "9b0963c3ada4eda0",
+        "name": "POST inventory /reserve",
+        "kind": 3,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "error.type": "unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "incidentiq.retry_attempt": 1,
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "peer.service": "inventory"
+        },
+        "timestamp_unix_nano": "1792498134645957377",
+        "started_at_unix_nano": "1792498134540293648",
+        "duration_ms": 105.663729
+      },
+      "source_uri": "otel://checkout/traces/ead7527ab9be9b99237c1e482bee0479/spans/43779d9a20d7ac57",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/3/scopeSpans/0/spans/1",
+      "content_hash": "23a8d839d968e2ea8e8348ed539840cf85622b84192c3718bac84eeeaf1c54f9"
+    },
+    {
+      "id": "60e16bbb-9077-56fb-89ab-2f1215a2102a",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "log",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.749282Z",
+      "severity": "error",
+      "summary": "request_completed",
+      "payload": {
+        "message": "request_completed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "latency_ms": 101.63,
+          "operation": "POST /reserve",
+          "request_id": "17dcc25c-ac59-45dd-9663-6a474abd078e",
+          "run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "status_code": 503
+        },
+        "timestamp_unix_nano": "1792498134749282084",
+        "trace_id": "ead7527ab9be9b99237c1e482bee0479",
+        "span_id": "643e6f29c9064724"
+      },
+      "source_uri": "otel://inventory/logs/1792498134749282084/3b4e733dfe1f64e5a6679de82c3ea5c49a4372e48e4577a6c270baa7c845dcec",
+      "raw_locator": "logs.jsonl:11#/resourceLogs/1/scopeLogs/0/logRecords/3",
+      "content_hash": "02f909c4723c034593a64040f538cd02330057996a21d84f8f3f3a72db318ba0"
+    },
+    {
+      "id": "067c847b-f800-545b-962a-320dfab1cd3f",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.749397Z",
+      "severity": "error",
+      "summary": "POST /reserve completed in 101.855 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "ead7527ab9be9b99237c1e482bee0479",
+        "span_id": "643e6f29c9064724",
+        "parent_span_id": "d9997ee30833fae7",
+        "name": "POST /reserve",
+        "kind": 2,
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "http.route": "/reserve",
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "request_id": "17dcc25c-ac59-45dd-9663-6a474abd078e"
+        },
+        "timestamp_unix_nano": "1792498134749397530",
+        "started_at_unix_nano": "1792498134647542268",
+        "duration_ms": 101.855262
+      },
+      "source_uri": "otel://inventory/traces/ead7527ab9be9b99237c1e482bee0479/spans/643e6f29c9064724",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/2/scopeSpans/0/spans/3",
+      "content_hash": "f3455276ee6ef45d77559fee475d770c053de5c32f3f4a1e33b9ebb693be02bd"
+    },
+    {
+      "id": "7cb1946b-24d9-541e-a484-00c9fcb393fe",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:54.751043Z",
+      "severity": "error",
+      "summary": "POST inventory /reserve completed in 104.982 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "ead7527ab9be9b99237c1e482bee0479",
+        "span_id": "d9997ee30833fae7",
+        "parent_span_id": "9b0963c3ada4eda0",
+        "name": "POST inventory /reserve",
+        "kind": 3,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "error.type": "unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "incidentiq.retry_attempt": 2,
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "peer.service": "inventory"
+        },
+        "timestamp_unix_nano": "1792498134751043311",
+        "started_at_unix_nano": "1792498134646061598",
+        "duration_ms": 104.981713
+      },
+      "source_uri": "otel://checkout/traces/ead7527ab9be9b99237c1e482bee0479/spans/d9997ee30833fae7",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/3/scopeSpans/0/spans/2",
+      "content_hash": "d90b2257e9f1933f4d1a3ece137546c46474c2eabcdc1fa6a52b721eb0a56491"
+    },
+    {
+      "id": "f1616d10-c6a3-58b7-881d-235fdb6a4549",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "log",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:54.751415Z",
+      "severity": "error",
+      "summary": "request_completed",
+      "payload": {
+        "message": "request_completed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "latency_ms": 319.712,
+          "operation": "POST /checkout",
+          "request_id": "17dcc25c-ac59-45dd-9663-6a474abd078e",
+          "run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "status_code": 503
+        },
+        "timestamp_unix_nano": "1792498134751415454",
+        "trace_id": "ead7527ab9be9b99237c1e482bee0479",
+        "span_id": "9b0963c3ada4eda0"
+      },
+      "source_uri": "otel://checkout/logs/1792498134751415454/abd346d7d4a93cf93b2e9a1869564871adef62d39dc0fc1dcbaea9f4c66c1df7",
+      "raw_locator": "logs.jsonl:11#/resourceLogs/2/scopeLogs/0/logRecords/0",
+      "content_hash": "33c09545c5ba13d4490f09c24cfd361364c13d679ec676170897e1233b64dd29"
+    },
+    {
+      "id": "d397866f-93c1-504c-a3c5-937db68fdb80",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:54.751521Z",
+      "severity": "error",
+      "summary": "POST /checkout completed in 319.880 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "ead7527ab9be9b99237c1e482bee0479",
+        "span_id": "9b0963c3ada4eda0",
+        "parent_span_id": null,
+        "name": "POST /checkout",
+        "kind": 2,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "http.route": "/checkout",
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "request_id": "17dcc25c-ac59-45dd-9663-6a474abd078e"
+        },
+        "timestamp_unix_nano": "1792498134751521923",
+        "started_at_unix_nano": "1792498134431641840",
+        "duration_ms": 319.880083
+      },
+      "source_uri": "otel://checkout/traces/ead7527ab9be9b99237c1e482bee0479/spans/9b0963c3ada4eda0",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/3/scopeSpans/0/spans/3",
+      "content_hash": "8c4d7f3ac533284acc4edca7fb16e7bbb36b65b373d9fba03723dafb5c49bb19"
+    },
+    {
+      "id": "094010aa-8ace-5af6-9461-ecdbe26cfa33",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "log",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.857676Z",
+      "severity": "error",
+      "summary": "request_completed",
+      "payload": {
+        "message": "request_completed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "latency_ms": 101.496,
+          "operation": "POST /reserve",
+          "request_id": "e1244457-ea5d-47c2-a64d-30dfefb1270f",
+          "run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "status_code": 503
+        },
+        "timestamp_unix_nano": "1792498134857676162",
+        "trace_id": "0d87c08fcaeadcc04c61bf83a3189435",
+        "span_id": "40e08cf16fe2e101"
+      },
+      "source_uri": "otel://inventory/logs/1792498134857676162/daa612c49e6074ac20dcd26b446481a74bb97ba6fe9f7fe1ffd8092719f51960",
+      "raw_locator": "logs.jsonl:11#/resourceLogs/1/scopeLogs/0/logRecords/4",
+      "content_hash": "698cc8f6471a0030a2d1da4930f2f4838d96467dfdc110acba4176981a60e51f"
+    },
+    {
+      "id": "4695816a-cea4-59b3-8e83-1f6d4643b80c",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.857855Z",
+      "severity": "error",
+      "summary": "POST /reserve completed in 101.920 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "0d87c08fcaeadcc04c61bf83a3189435",
+        "span_id": "40e08cf16fe2e101",
+        "parent_span_id": "bfa2fa142c5bc01d",
+        "name": "POST /reserve",
+        "kind": 2,
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "http.route": "/reserve",
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "request_id": "e1244457-ea5d-47c2-a64d-30dfefb1270f"
+        },
+        "timestamp_unix_nano": "1792498134857855007",
+        "started_at_unix_nano": "1792498134755935326",
+        "duration_ms": 101.919681
+      },
+      "source_uri": "otel://inventory/traces/0d87c08fcaeadcc04c61bf83a3189435/spans/40e08cf16fe2e101",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/2/scopeSpans/0/spans/4",
+      "content_hash": "20892588f8ee31d51517178017b39a7849554c16e7c8a97a8996f5c0e2196c78"
+    },
+    {
+      "id": "17801fcc-e6c3-512d-a73d-8aa91488c45b",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:54.860401Z",
+      "severity": "error",
+      "summary": "POST inventory /reserve completed in 106.016 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "0d87c08fcaeadcc04c61bf83a3189435",
+        "span_id": "bfa2fa142c5bc01d",
+        "parent_span_id": "b326ac524f6ce78b",
+        "name": "POST inventory /reserve",
+        "kind": 3,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "error.type": "unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "incidentiq.retry_attempt": 0,
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "peer.service": "inventory"
+        },
+        "timestamp_unix_nano": "1792498134860401787",
+        "started_at_unix_nano": "1792498134754385688",
+        "duration_ms": 106.016099
+      },
+      "source_uri": "otel://checkout/traces/0d87c08fcaeadcc04c61bf83a3189435/spans/bfa2fa142c5bc01d",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/3/scopeSpans/0/spans/4",
+      "content_hash": "b2aabd468fd8c3c663c381ba19ac6168fea029fd909c9cec25ff781ae2d4d84c"
+    },
+    {
+      "id": "33a3654c-2955-5d2d-844e-0ca3520ee48d",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "log",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.964413Z",
+      "severity": "error",
+      "summary": "request_completed",
+      "payload": {
+        "message": "request_completed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "latency_ms": 101.293,
+          "operation": "POST /reserve",
+          "request_id": "e1244457-ea5d-47c2-a64d-30dfefb1270f",
+          "run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "status_code": 503
+        },
+        "timestamp_unix_nano": "1792498134964413428",
+        "trace_id": "0d87c08fcaeadcc04c61bf83a3189435",
+        "span_id": "8c9a03ee87b9da78"
+      },
+      "source_uri": "otel://inventory/logs/1792498134964413428/0dd1c9a0c5cc6880b65db07f0eb872e4e53410523329b0d273b5c11c78b1a193",
+      "raw_locator": "logs.jsonl:11#/resourceLogs/3/scopeLogs/0/logRecords/0",
+      "content_hash": "59183082edcb240fc4209747fe1c90f6794cd860ddda917897d4474953ecbbbc"
+    },
+    {
+      "id": "b25f298e-d8d5-5537-b2e1-8ca65e6ec603",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:54.964502Z",
+      "severity": "error",
+      "summary": "POST /reserve completed in 101.456 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "0d87c08fcaeadcc04c61bf83a3189435",
+        "span_id": "8c9a03ee87b9da78",
+        "parent_span_id": "447238b5c8eb950b",
+        "name": "POST /reserve",
+        "kind": 2,
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "http.route": "/reserve",
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "request_id": "e1244457-ea5d-47c2-a64d-30dfefb1270f"
+        },
+        "timestamp_unix_nano": "1792498134964502583",
+        "started_at_unix_nano": "1792498134863046464",
+        "duration_ms": 101.456119
+      },
+      "source_uri": "otel://inventory/traces/0d87c08fcaeadcc04c61bf83a3189435/spans/8c9a03ee87b9da78",
+      "raw_locator": "traces.jsonl:12#/resourceSpans/0/scopeSpans/0/spans/0",
+      "content_hash": "5c608f701bd4564c63e8f5bfdec726a2bb23b47b56b8d9fdfc4fd2c73596ef3e"
+    },
+    {
+      "id": "c2f0645a-3efa-5c3e-aa82-22d6956fcf32",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:54.966167Z",
+      "severity": "error",
+      "summary": "POST inventory /reserve completed in 105.598 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "0d87c08fcaeadcc04c61bf83a3189435",
+        "span_id": "447238b5c8eb950b",
+        "parent_span_id": "b326ac524f6ce78b",
+        "name": "POST inventory /reserve",
+        "kind": 3,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "error.type": "unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "incidentiq.retry_attempt": 1,
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "peer.service": "inventory"
+        },
+        "timestamp_unix_nano": "1792498134966167197",
+        "started_at_unix_nano": "1792498134860569430",
+        "duration_ms": 105.597767
+      },
+      "source_uri": "otel://checkout/traces/0d87c08fcaeadcc04c61bf83a3189435/spans/447238b5c8eb950b",
+      "raw_locator": "traces.jsonl:11#/resourceSpans/3/scopeSpans/0/spans/5",
+      "content_hash": "67fe2409da8bf4c8ddcd9348ecc02f6c42fd1c671a75aafa3895b803e043c91a"
+    },
+    {
+      "id": "7b1eab29-307f-5704-92ff-7e96eae1b33f",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "log",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:55.069035Z",
+      "severity": "error",
+      "summary": "request_completed",
+      "payload": {
+        "message": "request_completed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "latency_ms": 101.16,
+          "operation": "POST /reserve",
+          "request_id": "e1244457-ea5d-47c2-a64d-30dfefb1270f",
+          "run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "status_code": 503
+        },
+        "timestamp_unix_nano": "1792498135069035928",
+        "trace_id": "0d87c08fcaeadcc04c61bf83a3189435",
+        "span_id": "cc579f2470209691"
+      },
+      "source_uri": "otel://inventory/logs/1792498135069035928/07a7a0921d8990ee1639eee7c38cf2dd4d4639ed31425adb4aeaba1cac87a37f",
+      "raw_locator": "logs.jsonl:11#/resourceLogs/3/scopeLogs/0/logRecords/1",
+      "content_hash": "5912a9eaef3a308dea4ba628fe786d7bb0a53028cf9fe5fed5c1bb78f876c8c8"
+    },
+    {
+      "id": "e711f48f-6b34-5df3-a67c-446401b671ea",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "inventory",
+      "timestamp": "2026-10-20T12:08:55.069109Z",
+      "severity": "error",
+      "summary": "POST /reserve completed in 101.306 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "0d87c08fcaeadcc04c61bf83a3189435",
+        "span_id": "cc579f2470209691",
+        "parent_span_id": "534403e3caeb1dde",
+        "name": "POST /reserve",
+        "kind": 2,
+        "attributes": {
+          "error.type": "downstream_unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "http.route": "/reserve",
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "request_id": "e1244457-ea5d-47c2-a64d-30dfefb1270f"
+        },
+        "timestamp_unix_nano": "1792498135069109274",
+        "started_at_unix_nano": "1792498134967802836",
+        "duration_ms": 101.306438
+      },
+      "source_uri": "otel://inventory/traces/0d87c08fcaeadcc04c61bf83a3189435/spans/cc579f2470209691",
+      "raw_locator": "traces.jsonl:12#/resourceSpans/0/scopeSpans/0/spans/1",
+      "content_hash": "c4be20df75f84949a36dc9dda6f4965f769e9b7c5b3b3341c3c118d52efbdc62"
+    },
+    {
+      "id": "b5a9421d-3f50-52f5-ba2b-6a14047bd418",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:55.070510Z",
+      "severity": "error",
+      "summary": "POST inventory /reserve completed in 104.240 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "0d87c08fcaeadcc04c61bf83a3189435",
+        "span_id": "534403e3caeb1dde",
+        "parent_span_id": "b326ac524f6ce78b",
+        "name": "POST inventory /reserve",
+        "kind": 3,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "error.type": "unavailable",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "incidentiq.retry_attempt": 2,
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "peer.service": "inventory"
+        },
+        "timestamp_unix_nano": "1792498135070510477",
+        "started_at_unix_nano": "1792498134966270369",
+        "duration_ms": 104.240108
+      },
+      "source_uri": "otel://checkout/traces/0d87c08fcaeadcc04c61bf83a3189435/spans/534403e3caeb1dde",
+      "raw_locator": "traces.jsonl:12#/resourceSpans/1/scopeSpans/0/spans/0",
+      "content_hash": "917bcd47abb2c437b8c538bc830885436e2ea87c25d75c6781d9c09f6fa2c480"
+    },
+    {
+      "id": "3af1a14d-20e7-55ed-b468-5eae9f29da3a",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "log",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:55.070856Z",
+      "severity": "error",
+      "summary": "request_completed",
+      "payload": {
+        "message": "request_completed",
+        "timestamp_basis": "event_time",
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "latency_ms": 317.244,
+          "operation": "POST /checkout",
+          "request_id": "e1244457-ea5d-47c2-a64d-30dfefb1270f",
+          "run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "status_code": 503
+        },
+        "timestamp_unix_nano": "1792498135070856616",
+        "trace_id": "0d87c08fcaeadcc04c61bf83a3189435",
+        "span_id": "b326ac524f6ce78b"
+      },
+      "source_uri": "otel://checkout/logs/1792498135070856616/8ef75c6a0289535e5a736cad9b8bf2892c86bd92be0edc5f4d11a601b04ba957",
+      "raw_locator": "logs.jsonl:12#/resourceLogs/0/scopeLogs/0/logRecords/0",
+      "content_hash": "4dc2c959f30f64cd17367ea66069722607cf2d93d672718cb265ce3c4dd64a87"
+    },
+    {
+      "id": "6acb7638-fc94-5152-b2d3-ae8eac54cfe0",
+      "incident_id": "10a5f045-8893-5825-b389-fe5cc8f5b096",
+      "source_type": "trace",
+      "service": "checkout",
+      "timestamp": "2026-10-20T12:08:55.070953Z",
+      "severity": "error",
+      "summary": "POST /checkout completed in 317.410 ms (HTTP 503)",
+      "payload": {
+        "trace_id": "0d87c08fcaeadcc04c61bf83a3189435",
+        "span_id": "b326ac524f6ce78b",
+        "parent_span_id": null,
+        "name": "POST /checkout",
+        "kind": 2,
+        "attributes": {
+          "deployment.revision": "checkout-v1",
+          "http.request.method": "POST",
+          "http.response.status_code": 503,
+          "http.route": "/checkout",
+          "incidentiq.run_id": "7f3f2061-06cc-4896-928b-ad47d02170e0",
+          "request_id": "e1244457-ea5d-47c2-a64d-30dfefb1270f"
+        },
+        "timestamp_unix_nano": "1792498135070953868",
+        "started_at_unix_nano": "1792498134753544265",
+        "duration_ms": 317.409603
+      },
+      "source_uri": "otel://checkout/traces/0d87c08fcaeadcc04c61bf83a3189435/spans/b326ac524f6ce78b",
+      "raw_locator": "traces.jsonl:12#/resourceSpans/1/scopeSpans/0/spans/1",
+      "content_hash": "59dfad69dc50f6326c30af1179d704fb420f037c99d455ea0d01fb9adc384eeb"
+    }
+  ],
+  "coverage": {
+    "trace": {
+      "files_scanned": 1,
+      "bytes_scanned": 166309,
+      "lines_scanned": 12,
+      "observations_scanned": 221,
+      "records_collected": 35,
+      "duplicates": 0
+    },
+    "log": {
+      "files_scanned": 1,
+      "bytes_scanned": 138328,
+      "lines_scanned": 12,
+      "observations_scanned": 146,
+      "records_collected": 20,
+      "duplicates": 0
+    },
+    "metric": {
+      "files_scanned": 1,
+      "bytes_scanned": 7104606,
+      "lines_scanned": 2740,
+      "observations_scanned": 7203,
+      "records_collected": 7,
+      "duplicates": 0
+    }
+  },
+  "issues": []
+}

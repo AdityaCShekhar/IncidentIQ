@@ -221,7 +221,8 @@ Compose database uses the pgvector PostgreSQL 17 image. Run `make knowledge-rein
 the knowledge index, then use `make retrieval-eval RETRIEVAL_ARGS='--backend postgres'` to measure
 the PostgreSQL backend. To index and measure semantic vectors, pass `--embedding-model
 BAAI/bge-small-en-v1.5` to both commands. Reindexing replaces all rows in `knowledge_chunks`;
-changing models requires a full reindex.
+changing models requires a full reindex. PostgreSQL full-text search ORs sanitized query terms so
+that it can return matches when only some observed evidence terms occur in a runbook.
 
 The default vectors are deterministic hashed lexical features (`hash-ngram-v1`) for a reproducible
 offline control. The generated [hash-feature report](../evals/reports/retrieval-dev/retrieval.md)
@@ -235,4 +236,23 @@ measured the checksummed development fixtures as follows:
 
 These values describe 16 authored development fixtures and 13 curated chunks. They do not
 establish semantic-model quality or generalization. The BGE model path and PostgreSQL backend have
-not been run in this environment. Both vectorizers execute locally at inference time.
+been exercised locally. The comparison results are linked below; all vectorizers execute locally
+at inference time.
+
+The measured reports cover the same 16 development fixtures and 13 chunks. Metrics are
+Recall@1/Recall@3/Recall@5/MRR:
+
+| Backend | Embedding | Lexical | Vector | Hybrid |
+| --- | --- | --- | --- | --- |
+| Memory | Hashed features | 0.0938/0.2188/0.5313/0.4969 | 0.0781/0.2969/0.5104/0.5417 | 0.1094/0.3594/0.4688/0.5677 |
+| Memory | BGE small | 0.0938/0.2188/0.5313/0.4969 | 0.1406/0.3438/0.5313/0.5406 | 0.1406/0.3906/0.5156/0.5469 |
+| PostgreSQL | Hashed features | 0.1719/0.3438/0.5313/0.5990 | 0.0781/0.2969/0.5104/0.5417 | 0.1875/0.3125/0.4844/0.6354 |
+| PostgreSQL | BGE small | 0.1719/0.3438/0.5313/0.5990 | 0.1406/0.3438/0.5313/0.5406 | 0.1563/0.4219/0.5156/0.5833 |
+
+The [hashed memory report](../evals/reports/retrieval-dev/hash-bge-comparison/retrieval.md),
+[BGE memory report](../evals/reports/retrieval-dev/bge-memory/retrieval.md),
+[hashed PostgreSQL report](../evals/reports/retrieval-dev/postgres-hash/retrieval.md), and
+[BGE PostgreSQL report](../evals/reports/retrieval-dev/bge-postgres/retrieval.md) include
+per-query rankings and snippets. BGE improves vector Recall@1 in this small corpus, while hybrid
+MRR does not improve over hashed features. The authored judgments are synthetic; these numbers
+compare the included fixtures and do not establish generalization or production search quality.
