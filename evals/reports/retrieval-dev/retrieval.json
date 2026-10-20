@@ -1,0 +1,3009 @@
+{
+  "backend": "memory",
+  "chunk_count": 13,
+  "corpus_version": "knowledge-v1",
+  "dataset_version": "fixture-v1",
+  "embedding_library": "builtin",
+  "embedding_library_version": "builtin-v1",
+  "embedding_model": "hash-ngram-v1",
+  "generated_at": "2026-10-20T06:51:51.978090+00:00",
+  "metrics": {
+    "hybrid": {
+      "recall_at_1": 0.109375,
+      "recall_at_3": 0.359375,
+      "recall_at_5": 0.46875,
+      "reciprocal_rank": 0.5677083333333334
+    },
+    "lexical": {
+      "recall_at_1": 0.09375,
+      "recall_at_3": 0.21875,
+      "recall_at_5": 0.53125,
+      "reciprocal_rank": 0.496875
+    },
+    "vector": {
+      "recall_at_1": 0.078125,
+      "recall_at_3": 0.296875,
+      "recall_at_5": 0.5104166666666666,
+      "reciprocal_rank": 0.5416666666666666
+    }
+  },
+  "results": [
+    {
+      "case_id": "iq-001",
+      "methods": {
+        "hybrid": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 0.5,
+          "relevant_count": 2,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.032266458495966696,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.03125763125763126,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.03125,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.031054405392392875,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 0.030886196246139225,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        },
+        "lexical": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 0.25,
+          "relevant_count": 2,
+          "results": [
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 15.607817529426438,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            },
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 12.87138198855297,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 2.7931510600905027,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 2.759751430673508,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 2.743349372490596,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        },
+        "vector": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.5,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 0.3333333333333333,
+          "relevant_count": 2,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.2167934114521104,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.1965525722710651,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.18753292490984186,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.13268881606704924,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "incidents/retry-amplification",
+              "document_type": "prior_incident",
+              "id": "c56c0955-c590-5300-b3fe-990ce7fc103a",
+              "score": 0.12845524226640032,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "Slow checkout traces contained sequential attempts for the same inventory operation, including repeated failures. The team checked retry backoff and inventory health. Parallel calls without explicit attempt indices were excluded from the retry diagnosis.",
+              "source": "incidents/retry-amplification.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        }
+      },
+      "query": "checkout POST /reserve completed in 698.000 ms (HTTP 200) POST /reserve completed in 700.000 ms (HTTP 200) POST /checkout completed in 800.000 ms (HTTP 200) POST /reserve completed in 698.000 ms (HTTP 200) POST /reserve completed in 700.000 ms (HTTP 200) POST /checkout completed in 800.000 ms (HTTP 200)"
+    },
+    {
+      "case_id": "iq-002",
+      "methods": {
+        "hybrid": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 0.5,
+          "relevant_count": 2,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.032266458495966696,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.0315136476426799,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.030798389007344232,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.030776515151515152,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 0.030621785881252923,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            }
+          ],
+          "retrieved_relevant_count": 1
+        },
+        "lexical": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 0.25,
+          "relevant_count": 2,
+          "results": [
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 15.607817529426438,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            },
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 12.87138198855297,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 2.7931510600905027,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 2.759751430673508,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 2.743349372490596,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        },
+        "vector": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 0.5,
+          "relevant_count": 2,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.2107872253977044,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.1831319641555281,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.15939100411168253,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.1510016099822967,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/retry-handling",
+              "document_type": "runbook",
+              "id": "b59627b9-ae8f-5c3b-af01-2a19e518266c",
+              "score": 0.12927399996494868,
+              "section": "Detect retry amplification",
+              "service": "checkout",
+              "snippet": "Group contained client spans by dependency operation and trace. Verify explicit sequential retry attempt attributes and repeated failed attempts. Parallel fan-out without retry attributes is not evidence of retries.",
+              "source": "runbooks/retry-handling.md"
+            }
+          ],
+          "retrieved_relevant_count": 1
+        }
+      },
+      "query": "checkout POST /reserve completed in 238.000 ms (HTTP 200) POST /reserve completed in 240.000 ms (HTTP 200) POST /checkout completed in 280.000 ms (HTTP 200) POST /reserve completed in 238.000 ms (HTTP 200) POST /reserve completed in 240.000 ms (HTTP 200) POST /checkout completed in 280.000 ms (HTTP 200)"
+    },
+    {
+      "case_id": "iq-003",
+      "methods": {
+        "hybrid": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.5,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 0.3333333333333333,
+          "relevant_count": 2,
+          "results": [
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.031746031746031744,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.031544957774465976,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.031054405392392875,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 0.030886196246139225,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.03076923076923077,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        },
+        "lexical": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 0.2,
+          "relevant_count": 2,
+          "results": [
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 20.23201415536702,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 18.20912045099751,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 14.384020556640465,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/pool-pressure",
+              "document_type": "prior_incident",
+              "id": "69c46cf3-d609-55f2-9b8e-a1576fb23eb2",
+              "score": 6.919933143102193,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "Checkout requests slowed while waiting acquisitions and utilization gauges from the same named database pool rose together. The team inspected query latency and connection ownership. Unrelated pools and cumulative counters did not support the diagnosis.",
+              "source": "incidents/pool-pressure.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 5.694941835716984,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            }
+          ],
+          "retrieved_relevant_count": 1
+        },
+        "vector": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.5,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 0.5,
+          "relevant_count": 2,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.23815364691407967,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.21575356491573489,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.20494490959613582,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.19801606799713464,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.1756309086439966,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        }
+      },
+      "query": "checkout incidentiq.db.pool.waiting instantaneous gauge snapshot incidentiq.db.pool.utilization instantaneous gauge snapshot POST /reserve completed in 698.000 ms (HTTP 200) POST /reserve completed in 700.000 ms (HTTP 200) POST /checkout completed in 800.000 ms (HTTP 200) POST /checkout completed in 1500.000 ms (HTTP 500) POST /reserve completed in 698.000 ms (HTTP 200) POST /reserve completed in 700.000 ms (HTTP 200) POST /checkout completed in 800.000 ms (HTTP 200)"
+    },
+    {
+      "case_id": "iq-004",
+      "methods": {
+        "hybrid": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 0.5,
+          "relevant_count": 2,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.032266458495966696,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.0315136476426799,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.03149801587301587,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.030776515151515152,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 0.03047794966520434,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        },
+        "lexical": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 0.25,
+          "relevant_count": 2,
+          "results": [
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 5.2026058431421465,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            },
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 4.2904606628509905,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 2.7931510600905027,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 2.759751430673508,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 2.743349372490596,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        },
+        "vector": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 1.0,
+          "recall_at_5": 1.0,
+          "reciprocal_rank": 0.5,
+          "relevant_count": 2,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.2519346629191094,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.2504061477997258,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.22607282338587958,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.20818563928446318,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.15579736344163883,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        }
+      },
+      "query": "checkout POST /checkout completed in 800.000 ms (HTTP 503) POST /checkout completed in 800.000 ms (HTTP 503)"
+    },
+    {
+      "case_id": "iq-007",
+      "methods": {
+        "hybrid": {
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 1.0,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.03200204813108039,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.031544957774465976,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 0.031099324975891997,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.030798389007344232,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.03076923076923077,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        },
+        "lexical": {
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.75,
+          "reciprocal_rank": 1.0,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 18.086783823941524,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 15.607817529426438,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 13.49133690186097,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/pool-pressure",
+              "document_type": "prior_incident",
+              "id": "69c46cf3-d609-55f2-9b8e-a1576fb23eb2",
+              "score": 6.306121816646816,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "Checkout requests slowed while waiting acquisitions and utilization gauges from the same named database pool rose together. The team inspected query latency and connection ownership. Unrelated pools and cumulative counters did not support the diagnosis.",
+              "source": "incidents/pool-pressure.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 4.775024692159148,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            }
+          ],
+          "retrieved_relevant_count": 3
+        },
+        "vector": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.25,
+          "recall_at_5": 0.25,
+          "reciprocal_rank": 0.5,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.22073161924530568,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.21757375501764728,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.21378438122781782,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.18484114861953585,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.15587720803068641,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            }
+          ],
+          "retrieved_relevant_count": 1
+        }
+      },
+      "query": "checkout incidentiq.db.pool.waiting instantaneous gauge snapshot incidentiq.db.pool.utilization instantaneous gauge snapshot POST /reserve completed in 18.000 ms (HTTP 200) POST /reserve completed in 20.000 ms (HTTP 200) POST /checkout completed in 800.000 ms (HTTP 504) POST /reserve completed in 18.000 ms (HTTP 200) POST /reserve completed in 20.000 ms (HTTP 200) POST /checkout completed in 800.000 ms (HTTP 504)"
+    },
+    {
+      "case_id": "iq-008",
+      "methods": {
+        "hybrid": {
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.25,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 1.0,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.031746031746031744,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.031544957774465976,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.031054405392392875,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 0.030886196246139225,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.03076923076923077,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        },
+        "lexical": {
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.75,
+          "reciprocal_rank": 1.0,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 18.086783823941524,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 15.607817529426438,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 13.49133690186097,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/pool-pressure",
+              "document_type": "prior_incident",
+              "id": "69c46cf3-d609-55f2-9b8e-a1576fb23eb2",
+              "score": 6.306121816646816,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "Checkout requests slowed while waiting acquisitions and utilization gauges from the same named database pool rose together. The team inspected query latency and connection ownership. Unrelated pools and cumulative counters did not support the diagnosis.",
+              "source": "incidents/pool-pressure.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 4.775024692159148,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            }
+          ],
+          "retrieved_relevant_count": 3
+        },
+        "vector": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.25,
+          "recall_at_5": 0.25,
+          "reciprocal_rank": 0.3333333333333333,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.2277609560350848,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.21796020419098205,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.20634039635914256,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.1950849678945367,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.15346836869376648,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            }
+          ],
+          "retrieved_relevant_count": 1
+        }
+      },
+      "query": "checkout incidentiq.db.pool.waiting instantaneous gauge snapshot incidentiq.db.pool.utilization instantaneous gauge snapshot POST /reserve completed in 18.000 ms (HTTP 200) POST /reserve completed in 20.000 ms (HTTP 200) POST /checkout completed in 800.000 ms (HTTP 200) POST /reserve completed in 18.000 ms (HTTP 200) POST /reserve completed in 20.000 ms (HTTP 200) POST /checkout completed in 800.000 ms (HTTP 200)"
+    },
+    {
+      "case_id": "iq-009",
+      "methods": {
+        "hybrid": {
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 1.0,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.03252247488101534,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 0.031544957774465976,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.031054405392392875,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.031009615384615385,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.03057889822595705,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        },
+        "lexical": {
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.75,
+          "reciprocal_rank": 1.0,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 25.447415990755573,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 25.19730649416296,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 18.20912045099751,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            },
+            {
+              "document_id": "incidents/pool-pressure",
+              "document_type": "prior_incident",
+              "id": "69c46cf3-d609-55f2-9b8e-a1576fb23eb2",
+              "score": 11.384620980382879,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "Checkout requests slowed while waiting acquisitions and utilization gauges from the same named database pool rose together. The team inspected query latency and connection ownership. Unrelated pools and cumulative counters did not support the diagnosis.",
+              "source": "incidents/pool-pressure.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 7.710215097202624,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            }
+          ],
+          "retrieved_relevant_count": 3
+        },
+        "vector": {
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.25,
+          "recall_at_5": 0.25,
+          "reciprocal_rank": 1.0,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.26675567771220027,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.2284568458704963,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.2250432776968814,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.18453772176292066,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.17806935795331777,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            }
+          ],
+          "retrieved_relevant_count": 1
+        }
+      },
+      "query": "checkout incidentiq.db.pool.waiting instantaneous gauge snapshot incidentiq.db.pool.waiting instantaneous gauge snapshot incidentiq.db.pool.utilization instantaneous gauge snapshot incidentiq.db.pool.utilization instantaneous gauge snapshot POST /reserve completed in 18.000 ms (HTTP 200) POST /reserve completed in 20.000 ms (HTTP 200) POST /checkout completed in 800.000 ms (HTTP 504) POST /checkout completed in 1500.000 ms (HTTP 500) POST /reserve completed in 18.000 ms (HTTP 200) POST /reserve completed in 20.000 ms (HTTP 200) POST /checkout completed in 800.000 ms (HTTP 504)"
+    },
+    {
+      "case_id": "iq-010",
+      "methods": {
+        "hybrid": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.25,
+          "reciprocal_rank": 0.25,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.032266458495966696,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.0315136476426799,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.03149801587301587,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.030776515151515152,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 0.03047794966520434,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            }
+          ],
+          "retrieved_relevant_count": 1
+        },
+        "lexical": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.25,
+          "recall_at_5": 0.25,
+          "reciprocal_rank": 0.5,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 5.2026058431421465,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            },
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 4.2904606628509905,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 2.7931510600905027,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 2.759751430673508,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 2.743349372490596,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            }
+          ],
+          "retrieved_relevant_count": 1
+        },
+        "vector": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.25,
+          "reciprocal_rank": 0.25,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.2519346629191094,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.2504061477997258,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.22607282338587958,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.20818563928446318,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.15579736344163883,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            }
+          ],
+          "retrieved_relevant_count": 1
+        }
+      },
+      "query": "checkout POST /checkout completed in 800.000 ms (HTTP 503) POST /checkout completed in 800.000 ms (HTTP 503)"
+    },
+    {
+      "case_id": "iq-013",
+      "methods": {
+        "hybrid": {
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.75,
+          "reciprocal_rank": 1.0,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.032266458495966696,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.03149801587301587,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.03128054740957967,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.031009615384615385,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 0.030679156908665108,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            }
+          ],
+          "retrieved_relevant_count": 3
+        },
+        "lexical": {
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.75,
+          "reciprocal_rank": 1.0,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 18.20912045099751,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            },
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 15.016612319978465,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 11.440869542648654,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 5.752293282407137,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 5.519502861347015,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            }
+          ],
+          "retrieved_relevant_count": 3
+        },
+        "vector": {
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 1.0,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.288588095641715,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.24327945028861483,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.2293401037415768,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.1782760394774433,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.16440520244982798,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        }
+      },
+      "query": "checkout POST /checkout completed in 30.000 ms (HTTP 200) Deployment changed checkout-v1 to checkout-v2 POST /reserve completed in 18.000 ms (HTTP 200) POST /reserve completed in 20.000 ms (HTTP 200) POST /checkout completed in 40.000 ms (HTTP 500) POST /reserve completed in 18.000 ms (HTTP 200) POST /reserve completed in 20.000 ms (HTTP 200) POST /checkout completed in 40.000 ms (HTTP 500)"
+    },
+    {
+      "case_id": "iq-014",
+      "methods": {
+        "hybrid": {
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.75,
+          "reciprocal_rank": 1.0,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.032266458495966696,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.03149801587301587,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.03128054740957967,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.031009615384615385,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 0.03047794966520434,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            }
+          ],
+          "retrieved_relevant_count": 3
+        },
+        "lexical": {
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.75,
+          "reciprocal_rank": 1.0,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 15.607817529426438,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            },
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 12.87138198855297,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 10.509819189285153,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 5.11562277551825,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 4.5995857177891795,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            }
+          ],
+          "retrieved_relevant_count": 3
+        },
+        "vector": {
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 1.0,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.28915050531915476,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.2387978769286153,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.23121963373005935,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.1742332677173632,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.15997668853049865,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        }
+      },
+      "query": "checkout Deployment changed checkout-v1 to checkout-v2 POST /reserve completed in 18.000 ms (HTTP 200) POST /reserve completed in 20.000 ms (HTTP 200) POST /checkout completed in 40.000 ms (HTTP 500) POST /reserve completed in 18.000 ms (HTTP 200) POST /reserve completed in 20.000 ms (HTTP 200) POST /checkout completed in 40.000 ms (HTTP 500)"
+    },
+    {
+      "case_id": "iq-015",
+      "methods": {
+        "hybrid": {
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.25,
+          "recall_at_5": 0.25,
+          "reciprocal_rank": 1.0,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.032018442622950824,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.031746031746031744,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.031054405392392875,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 0.030886196246139225,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.030536130536130537,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            }
+          ],
+          "retrieved_relevant_count": 1
+        },
+        "lexical": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.25,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 0.5,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 22.377244486792517,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 20.810423372568582,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 17.06207152097895,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 12.371919896012155,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "incidents/pool-pressure",
+              "document_type": "prior_incident",
+              "id": "69c46cf3-d609-55f2-9b8e-a1576fb23eb2",
+              "score": 8.761367122468323,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "Checkout requests slowed while waiting acquisitions and utilization gauges from the same named database pool rose together. The team inspected query latency and connection ownership. Unrelated pools and cumulative counters did not support the diagnosis.",
+              "source": "incidents/pool-pressure.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        },
+        "vector": {
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.25,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 1.0,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.294598622177907,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.2579427277913979,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.22665187761787017,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.2238712242761668,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.20785750546655082,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        }
+      },
+      "query": "checkout POST /checkout completed in 30.000 ms (HTTP 200) Deployment changed checkout-v1 to checkout-v2 incidentiq.db.pool.waiting instantaneous gauge snapshot incidentiq.db.pool.utilization instantaneous gauge snapshot POST /reserve completed in 18.000 ms (HTTP 200) POST /reserve completed in 20.000 ms (HTTP 200) POST /checkout completed in 40.000 ms (HTTP 500) POST /checkout completed in 1500.000 ms (HTTP 500) POST /reserve completed in 18.000 ms (HTTP 200) POST /reserve completed in 20.000 ms (HTTP 200) POST /checkout completed in 40.000 ms (HTTP 500)"
+    },
+    {
+      "case_id": "iq-016",
+      "methods": {
+        "hybrid": {
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.25,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 1.0,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.032266458495966696,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.0315136476426799,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.03149801587301587,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.030776515151515152,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 0.03047794966520434,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        },
+        "lexical": {
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.5,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 1.0,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 5.2026058431421465,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            },
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 4.2904606628509905,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 2.7931510600905027,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 2.759751430673508,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 2.743349372490596,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        },
+        "vector": {
+          "recall_at_1": 0.25,
+          "recall_at_3": 0.25,
+          "recall_at_5": 0.5,
+          "reciprocal_rank": 1.0,
+          "relevant_count": 4,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.2519346629191094,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.2504061477997258,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.22607282338587958,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.20818563928446318,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.15579736344163883,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        }
+      },
+      "query": "checkout POST /checkout completed in 800.000 ms (HTTP 503) POST /checkout completed in 800.000 ms (HTTP 503)"
+    },
+    {
+      "case_id": "iq-019",
+      "methods": {
+        "hybrid": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "reciprocal_rank": 0.0,
+          "relevant_count": 3,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.03200204813108039,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.03131881575727918,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.03125763125763126,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 0.030886196246139225,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.030330882352941176,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            }
+          ],
+          "retrieved_relevant_count": 0
+        },
+        "lexical": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "reciprocal_rank": 0.0,
+          "relevant_count": 3,
+          "results": [
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 36.41824090199502,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            },
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 30.03322463995693,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 2.7931510600905027,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 2.759751430673508,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 2.743349372490596,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            }
+          ],
+          "retrieved_relevant_count": 0
+        },
+        "vector": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.6666666666666666,
+          "reciprocal_rank": 0.25,
+          "relevant_count": 3,
+          "results": [
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.16185059245044622,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.1608678956126729,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.13599935114282224,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/retry-handling",
+              "document_type": "runbook",
+              "id": "b32a025b-00dd-589e-9097-7019b327803b",
+              "score": 0.13409862209584256,
+              "section": "Safe response",
+              "service": "checkout",
+              "snippet": "Check retry policy, backoff, and dependency health before changing limits. Preserve request and trace identifiers. Avoid a retry increase while a downstream dependency is already slow or failing.",
+              "source": "runbooks/retry-handling.md"
+            },
+            {
+              "document_id": "incidents/retry-amplification",
+              "document_type": "prior_incident",
+              "id": "c56c0955-c590-5300-b3fe-990ce7fc103a",
+              "score": 0.11907062287703488,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "Slow checkout traces contained sequential attempts for the same inventory operation, including repeated failures. The team checked retry backoff and inventory health. Parallel calls without explicit attempt indices were excluded from the retry diagnosis.",
+              "source": "incidents/retry-amplification.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        }
+      },
+      "query": "checkout POST /reserve completed in 198.000 ms (HTTP 503) POST /reserve completed in 200.000 ms (HTTP 503) POST /reserve completed in 198.000 ms (HTTP 503) POST /reserve completed in 200.000 ms (HTTP 503) POST /reserve completed in 198.000 ms (HTTP 503) POST /reserve completed in 200.000 ms (HTTP 503) POST /checkout completed in 900.000 ms (HTTP 502) POST /reserve completed in 198.000 ms (HTTP 503) POST /reserve completed in 200.000 ms (HTTP 503) POST /reserve completed in 198.000 ms (HTTP 503) POST /reserve completed in 200.000 ms (HTTP 503) POST /reserve completed in 198.000 ms (HTTP 503) POST /reserve completed in 200.000 ms (HTTP 503) POST /checkout completed in 900.000 ms (HTTP 502)"
+    },
+    {
+      "case_id": "iq-020",
+      "methods": {
+        "hybrid": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "reciprocal_rank": 0.0,
+          "relevant_count": 3,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.03200204813108039,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.03131881575727918,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.03125763125763126,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 0.030886196246139225,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.030330882352941176,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            }
+          ],
+          "retrieved_relevant_count": 0
+        },
+        "lexical": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "reciprocal_rank": 0.0,
+          "relevant_count": 3,
+          "results": [
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 36.41824090199502,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            },
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 30.03322463995693,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 2.7931510600905027,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 2.759751430673508,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 2.743349372490596,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            }
+          ],
+          "retrieved_relevant_count": 0
+        },
+        "vector": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.6666666666666666,
+          "reciprocal_rank": 0.25,
+          "relevant_count": 3,
+          "results": [
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.1776676121629579,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.1753186910497979,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.14916613819941604,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/retry-handling",
+              "document_type": "runbook",
+              "id": "b32a025b-00dd-589e-9097-7019b327803b",
+              "score": 0.13397121945905202,
+              "section": "Safe response",
+              "service": "checkout",
+              "snippet": "Check retry policy, backoff, and dependency health before changing limits. Preserve request and trace identifiers. Avoid a retry increase while a downstream dependency is already slow or failing.",
+              "source": "runbooks/retry-handling.md"
+            },
+            {
+              "document_id": "incidents/retry-amplification",
+              "document_type": "prior_incident",
+              "id": "c56c0955-c590-5300-b3fe-990ce7fc103a",
+              "score": 0.1245272395549998,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "Slow checkout traces contained sequential attempts for the same inventory operation, including repeated failures. The team checked retry backoff and inventory health. Parallel calls without explicit attempt indices were excluded from the retry diagnosis.",
+              "source": "incidents/retry-amplification.md"
+            }
+          ],
+          "retrieved_relevant_count": 2
+        }
+      },
+      "query": "checkout POST /reserve completed in 198.000 ms (HTTP 503) POST /reserve completed in 200.000 ms (HTTP 503) POST /reserve completed in 198.000 ms (HTTP 503) POST /reserve completed in 200.000 ms (HTTP 503) POST /reserve completed in 198.000 ms (HTTP 200) POST /reserve completed in 200.000 ms (HTTP 200) POST /checkout completed in 900.000 ms (HTTP 502) POST /reserve completed in 198.000 ms (HTTP 503) POST /reserve completed in 200.000 ms (HTTP 503) POST /reserve completed in 198.000 ms (HTTP 503) POST /reserve completed in 200.000 ms (HTTP 503) POST /reserve completed in 198.000 ms (HTTP 200) POST /reserve completed in 200.000 ms (HTTP 200) POST /checkout completed in 900.000 ms (HTTP 502)"
+    },
+    {
+      "case_id": "iq-021",
+      "methods": {
+        "hybrid": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "reciprocal_rank": 0.0,
+          "relevant_count": 3,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.031544957774465976,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.03125763125763126,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 0.030886196246139225,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.030834914611005692,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.030798389007344232,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            }
+          ],
+          "retrieved_relevant_count": 0
+        },
+        "lexical": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "reciprocal_rank": 0.0,
+          "relevant_count": 3,
+          "results": [
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 39.019543823566096,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            },
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 37.39385680677098,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 14.384020556640465,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/pool-pressure",
+              "document_type": "prior_incident",
+              "id": "69c46cf3-d609-55f2-9b8e-a1576fb23eb2",
+              "score": 6.919933143102193,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "Checkout requests slowed while waiting acquisitions and utilization gauges from the same named database pool rose together. The team inspected query latency and connection ownership. Unrelated pools and cumulative counters did not support the diagnosis.",
+              "source": "incidents/pool-pressure.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 5.694941835716984,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            }
+          ],
+          "retrieved_relevant_count": 0
+        },
+        "vector": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.3333333333333333,
+          "reciprocal_rank": 0.25,
+          "relevant_count": 3,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.17737280555978935,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.1670299221068729,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.15523873468019317,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/retry-handling",
+              "document_type": "runbook",
+              "id": "b32a025b-00dd-589e-9097-7019b327803b",
+              "score": 0.14213316420259103,
+              "section": "Safe response",
+              "service": "checkout",
+              "snippet": "Check retry policy, backoff, and dependency health before changing limits. Preserve request and trace identifiers. Avoid a retry increase while a downstream dependency is already slow or failing.",
+              "source": "runbooks/retry-handling.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.1385208509988228,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            }
+          ],
+          "retrieved_relevant_count": 1
+        }
+      },
+      "query": "checkout incidentiq.db.pool.waiting instantaneous gauge snapshot incidentiq.db.pool.utilization instantaneous gauge snapshot POST /reserve completed in 198.000 ms (HTTP 503) POST /reserve completed in 200.000 ms (HTTP 503) POST /reserve completed in 198.000 ms (HTTP 503) POST /reserve completed in 200.000 ms (HTTP 503) POST /reserve completed in 198.000 ms (HTTP 503) POST /reserve completed in 200.000 ms (HTTP 503) POST /checkout completed in 900.000 ms (HTTP 502) POST /checkout completed in 1500.000 ms (HTTP 500) POST /reserve completed in 198.000 ms (HTTP 503) POST /reserve completed in 200.000 ms (HTTP 503) POST /reserve completed in 198.000 ms (HTTP 503) POST /reserve completed in 200.000 ms (HTTP 503) POST /reserve completed in 198.000 ms (HTTP 503) POST /reserve completed in 200.000 ms (HTTP 503) POST /checkout completed in 900.000 ms (HTTP 502)"
+    },
+    {
+      "case_id": "iq-022",
+      "methods": {
+        "hybrid": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "reciprocal_rank": 0.0,
+          "relevant_count": 3,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.032266458495966696,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.0315136476426799,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.03149801587301587,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.030776515151515152,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 0.03047794966520434,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            }
+          ],
+          "retrieved_relevant_count": 0
+        },
+        "lexical": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "reciprocal_rank": 0.0,
+          "relevant_count": 3,
+          "results": [
+            {
+              "document_id": "runbooks/deployment",
+              "document_type": "runbook",
+              "id": "d9779279-f4f7-525a-9967-22592c0f9966",
+              "score": 5.2026058431421465,
+              "section": "Rollback verification",
+              "service": "checkout",
+              "snippet": "Do not treat a rollback acknowledgement as proof of recovery. Compare post-rollback request status and dependency spans with the baseline window.",
+              "source": "runbooks/deployment.md"
+            },
+            {
+              "document_id": "runbooks/database",
+              "document_type": "runbook",
+              "id": "66fda4ae-56b8-518d-9157-d1698ac6bb9f",
+              "score": 4.2904606628509905,
+              "section": "Pool saturation",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisition and utilization gauges for the same named pool and service. Correlate them with slow or erroring requests in the same time window. Check connection leaks, query latency, and database health before increasing pool size.",
+              "source": "runbooks/database.md"
+            },
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 2.7931510600905027,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 2.759751430673508,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 2.743349372490596,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            }
+          ],
+          "retrieved_relevant_count": 0
+        },
+        "vector": {
+          "recall_at_1": 0.0,
+          "recall_at_3": 0.0,
+          "recall_at_5": 0.0,
+          "reciprocal_rank": 0.0,
+          "relevant_count": 3,
+          "results": [
+            {
+              "document_id": "incidents/checkout-revision",
+              "document_type": "prior_incident",
+              "id": "2f43baca-ca08-5f20-bba2-ce154ad21a43",
+              "score": 0.2519346629191094,
+              "section": "Symptoms and resolution",
+              "service": "checkout",
+              "snippet": "After a checkout revision changed response formatting, checkout returned server errors while inventory calls continued to succeed. Failing requests carried the new revision. Rolling back restored successful checkout responses. The event and matching revision were required to connect the regression to deployment.",
+              "source": "incidents/checkout-revision.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "00b90753-e8c8-59b2-bf10-8b0d3360aa2f",
+              "score": 0.2504061477997258,
+              "section": "Slow dependency requests",
+              "service": "checkout",
+              "snippet": "When checkout latency rises while inventory calls remain successful, compare checkout server spans with their contained inventory client spans. Check inventory latency and saturation before changing checkout timeouts. A single dependency call that accounts for most of the parent request duration points toward downstream latency.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "incidents/slow-inventory",
+              "document_type": "prior_incident",
+              "id": "72c9df64-185b-5854-92f5-47c5677d2503",
+              "score": 0.22607282338587958,
+              "section": "Symptoms and resolution",
+              "service": "inventory",
+              "snippet": "Checkout requests slowed while inventory remained available. Correlated traces showed one successful inventory call consuming most of each slow checkout request. The team inspected inventory latency and saturation, then restored the dependency. The evidence supported slow dependency latency, not a checkout database pool failure.",
+              "source": "incidents/slow-inventory.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "144ca830-1430-5c11-be66-207ad64a9532",
+              "score": 0.20818563928446318,
+              "section": "Checkout database pool",
+              "service": "checkout",
+              "snippet": "Inspect waiting acquisitions and pool utilization from the same checkout database pool. Correlate gauge timestamps with slow or failing checkout requests. Cumulative query totals do not establish pool exhaustion.",
+              "source": "runbooks/checkout.md"
+            },
+            {
+              "document_id": "runbooks/checkout",
+              "document_type": "runbook",
+              "id": "707479f9-4941-579a-b352-cc042d0735f6",
+              "score": 0.15579736344163883,
+              "section": "Failed checkout after deployment",
+              "service": "checkout",
+              "snippet": "Compare failing checkout spans with the active revision and deployment event. Confirm that contained inventory calls still succeed. Roll back only through the normal deployment control and verify recovery with new requests.",
+              "source": "runbooks/checkout.md"
+            }
+          ],
+          "retrieved_relevant_count": 0
+        }
+      },
+      "query": "checkout POST /checkout completed in 800.000 ms (HTTP 503) POST /checkout completed in 800.000 ms (HTTP 503)"
+    }
+  ],
+  "split": "dev"
+}

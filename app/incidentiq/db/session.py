@@ -3,7 +3,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from incidentiq.core.config import Settings
 
-SCHEMA_REVISION = "0002_persist_evidence"
+SCHEMA_REVISION = "0003_knowledge_chunks"
 
 
 def build_engine(settings: Settings) -> Engine:

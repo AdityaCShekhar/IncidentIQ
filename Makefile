@@ -6,7 +6,7 @@ EVIDENCE_ARGS ?=
 SCENARIO_FILE = $(subst _,-,$(NAME))
 EVIDENCE ?= docs/demos/slow-dependency-evidence.json
 
-.PHONY: up down migrate logs ps sync dev test test-integration lint simulator-up scenario telemetry-config evidence dataset diagnose
+.PHONY: up down migrate logs ps sync dev test test-integration lint simulator-up scenario telemetry-config evidence dataset diagnose benchmark knowledge-reindex retrieval-eval
 
 up:
 	$(COMPOSE) up --build --detach --wait --wait-timeout 120
@@ -58,3 +58,12 @@ dataset:
 
 diagnose:
 	@$(UV) run python scripts/diagnose.py --evidence "$(EVIDENCE)"
+
+benchmark:
+	$(UV) run python scripts/run_benchmark.py $(BENCHMARK_ARGS)
+
+knowledge-reindex:
+	$(UV) run python scripts/evaluate_retrieval.py --backend postgres --reindex --split dev
+
+retrieval-eval:
+	$(UV) run python scripts/evaluate_retrieval.py $(RETRIEVAL_ARGS)

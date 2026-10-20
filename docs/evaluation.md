@@ -1,6 +1,6 @@
 # Evaluation dataset and deterministic baseline
 
-The current slice provides frozen synthetic inputs and the S0 rules strategy. The benchmark runner, exact aggregate metrics, and JSON/Markdown benchmark reports are the next milestone. S1–S3, model comparisons, and diagnosis quality measurements have not been implemented or reported.
+The current slice provides frozen synthetic inputs, the S0 rules strategy, and a deterministic benchmark runner. S1–S3 and model comparisons have not been implemented.
 
 ## Dataset v1
 
@@ -83,10 +83,97 @@ uv run python scripts/diagnose.py \
 
 Output records strategy/version, incident UUID, `model: null`, and the typed report. Exit zero means the computation succeeded, including an abstention; inspect `report.disposition`. Invalid evidence, references, scope, or file operations fail with a safe error and nonzero status. The CLI rejects an output path that would overwrite its input. The diagnosis is not persisted as an investigation yet; investigation API/storage comes later.
 
+## Run the benchmark
+
+Run the development split with the S0 rules baseline:
+
+```sh
+make benchmark
+```
+
+This writes `benchmark.json`, `benchmark.md`, and per-case `raw-results.jsonl` under
+`evals/reports/dev-rules/`. Choose another output directory with
+`make benchmark BENCHMARK_ARGS='--output-dir /tmp/incidentiq-benchmark'`. The command validates
+the frozen dataset first and passes only each evidence bundle to the strategy; labels are read
+after a report is returned. Reports retain dataset and strategy versions, the split, generation
+time, every raw typed report, and aggregate metrics.
+
+The headline accuracy is exact top-hypothesis cause accuracy, counting a correct abstention on
+an expected-incomplete case as correct. `macro_f1` averages one-vs-rest F1 across the four gold
+causes; abstentions count as missed predictions. `coverage` is the fraction with a non-abstaining
+diagnosis, `selective_accuracy` is accuracy among those diagnoses, and `abstention_recall` is the
+fraction of expected-incomplete cases that abstain. Citation precision/recall/F1 compare the top
+hypothesis support IDs with relevant evidence IDs, pooled across cases; this measures annotation
+overlap, not semantic claim support. The confusion matrix includes an `abstain` prediction column.
+
+The held-out split is reserved and the runner rejects it unless explicitly enabled:
+
+```sh
+uv run python scripts/run_benchmark.py --split held_out --final-report \
+  --output-dir evals/reports/final-rules
+```
+
+Use this only for a final report after strategy choices are fixed. Any inspection followed by
+tuning makes those cases development data; create a new holdout before claiming a final result.
+
 ## Checks and limitations
 
-36 new checks cover all 16 development contracts, input-order stability, freeze tampering and path escape, recipe reproducibility, abstention, invalid citations, same-pool matching, retry/fan-out distinction, revision requirements, competing causes, scope, and the CLI. Two of these checks use real simulator SDK output rather than authored fixture inputs. The project now has 148 passing offline tests using cached dependencies on Python 3.11.
+36 checks cover the dataset and rules contracts. The benchmark emits exact aggregate metrics, metadata, raw outputs, and Markdown/JSON summaries. Two existing strategy checks use real simulator SDK output rather than authored fixture inputs. The project had 148 passing offline tests before the benchmark harness was added.
 
-The held-out fixtures are parsed for integrity but are not diagnosed by the tests. Future benchmark commands should default to `dev` and require an explicit final-report choice for `held_out`. Do not tune prompts after inspecting held-out outcomes without treating that set as development data and creating another holdout.
+The held-out fixtures are parsed for integrity but are not diagnosed by tests. The benchmark command defaults to `dev` and requires an explicit final-report choice for `held_out`. Do not tune prompts after inspecting held-out outcomes without treating that set as development data and creating another holdout.
 
 This small dataset is deliberately simple and balanced by fault family. It shares authored templates, has only one cause per case, has no healthy/no-incident cases, and its held-out split currently has no incomplete cases. Development checks do not demonstrate generalization, calibrated confidence, or production usefulness. A later dataset should add independently reviewed live captures, healthy controls, stronger confounders, and held-out incomplete cases under a new version. Cross-strategy reports must retain this version and disclose these gaps. No aggregate accuracy, latency, cost, retrieval, or agent-improvement results are claimed here.
+
+## Knowledge retrieval
+
+The curated corpus in `knowledge/` contains service runbooks and four prior incident summaries.
+`scripts/evaluate_retrieval.py` splits documents on Markdown headings and assigns each section a
+stable UUID from its corpus version, source, heading, and text. Chunks retain document, section,
+source, type, service, and cause tags. It compares BM25-style lexical ranking, cosine ranking over
+local hashed word and character-ngram feature vectors, and reciprocal-rank fusion (RRF, constant
+60), with at most three returned chunks per document.
+
+Run the offline hashed-feature comparison on the development split:
+
+```sh
+make retrieval-eval
+```
+
+This writes per-query IDs, snippets, and scores plus JSON/Markdown Recall@1, Recall@3, Recall@5,
+and MRR reports under `evals/reports/retrieval-dev/`. Query text comes from service names and
+evidence summaries only; labels are used after retrieval to score cause-tagged relevant chunks.
+The corpus relevance mapping is authored and synthetic, so the measurements compare these
+fixtures and documents only.
+
+For local semantic embeddings, install the optional extra and select the quantized BGE model:
+
+```sh
+uv sync --extra retrieval
+make retrieval-eval RETRIEVAL_ARGS='--embedding-model BAAI/bge-small-en-v1.5'
+```
+
+FastEmbed runs model inference locally with ONNX Runtime. Its first use downloads the model into
+the local cache; later runs use the cached weights. The benchmark report records the selected
+model and embedding library. The 384-dimensional BGE model is also supported by the pgvector
+schema. Reindex after changing embedding models.
+
+PostgreSQL full-text and pgvector indexing are available after applying migration 0003. The local
+Compose database uses the pgvector PostgreSQL 17 image. Run `make knowledge-reindex` to replace
+the knowledge index, then use `make retrieval-eval RETRIEVAL_ARGS='--backend postgres'` to measure
+the PostgreSQL backend. To index and measure semantic vectors, pass `--embedding-model
+BAAI/bge-small-en-v1.5` to both commands. Reindexing replaces all rows in `knowledge_chunks`;
+changing models requires a full reindex.
+
+The default vectors are deterministic hashed lexical features (`hash-ngram-v1`) for a reproducible
+offline control. The generated [hash-feature report](../evals/reports/retrieval-dev/retrieval.md)
+measured the checksummed development fixtures as follows:
+
+| Method | Recall@1 | Recall@3 | Recall@5 | MRR |
+| --- | ---: | ---: | ---: | ---: |
+| Lexical | 0.0938 | 0.2188 | 0.5313 | 0.4969 |
+| Vector, hashed features | 0.0781 | 0.2969 | 0.5104 | 0.5417 |
+| Hybrid, RRF | 0.1094 | 0.3594 | 0.4688 | 0.5677 |
+
+These values describe 16 authored development fixtures and 13 curated chunks. They do not
+establish semantic-model quality or generalization. The BGE model path and PostgreSQL backend have
+not been run in this environment. Both vectorizers execute locally at inference time.

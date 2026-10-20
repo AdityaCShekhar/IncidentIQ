@@ -79,7 +79,23 @@ make dataset
 make diagnose EVIDENCE=evals/fixtures/iq-001.json
 ```
 
-S0 returns a typed report with evidence references and abstains when no supported pattern matches. The dataset has 16 development and eight held-out cases; the latter are reserved for final reporting. All fixture numbers are authored synthetic inputs. Pool-exhaustion and retry-storm live simulators are still pending. See [evaluation design and limitations](docs/evaluation.md) for the label boundary, freeze checks, rule thresholds, and commands for actual simulator bundles. The aggregate benchmark runner and measured comparison report are the next milestone.
+S0 returns a typed report with evidence references and abstains when no supported pattern matches. The dataset has 16 development and eight held-out cases; the latter are reserved for final reporting. All fixture numbers are authored synthetic inputs. Pool-exhaustion and retry-storm live simulators are still pending. See [evaluation design and limitations](docs/evaluation.md) for the label boundary, freeze checks, rule thresholds, and commands for actual simulator bundles.
+
+Run the rules benchmark on the development split with `make benchmark`. It writes per-case raw
+reports plus aggregate JSON and Markdown under `evals/reports/dev-rules/`. Held-out scoring
+requires the explicit `--split held_out --final-report` flags. Metrics and their interpretation
+are documented in [evaluation design](docs/evaluation.md).
+
+## Knowledge retrieval
+
+The curated `knowledge/` corpus is split by Markdown section and assigned stable chunk IDs. Run
+the development lexical, vector, and hybrid retrieval comparison with `make retrieval-eval`;
+reports go to `evals/reports/retrieval-dev/`. For PostgreSQL full-text and pgvector, start the
+stack, apply migrations, run `make knowledge-reindex`, then run
+`make retrieval-eval RETRIEVAL_ARGS='--backend postgres'`. For semantic vectors, install the
+optional retrieval dependency with `uv sync --extra retrieval`, then pass
+`--embedding-model BAAI/bge-small-en-v1.5` to both commands. Model inference runs locally after its
+first-use download. See [retrieval evaluation details](docs/evaluation.md).
 
 ## Application development
 
@@ -134,7 +150,7 @@ Compose waits for database health and successful migration completion before sta
 
 ## Validation status
 
-148 offline tests pass, covering API health/errors, both fault scenarios through the real ASGI service chain, telemetry exporters and evidence collection, stable IDs and limits, and persistent incident/evidence HTTP behavior using SQLite ORM tests. Dataset and baseline checks cover 16 development contracts, frozen inputs, reproducible fixtures, citation validation, abstention, competing causes, and actual simulator SDK evidence. Held-out cases are validated for integrity without running a diagnosis strategy. Ruff lint/format checks pass; Compose parsing and offline migration SQL generation passed in preceding slices.
+148 offline tests passed before the benchmark and retrieval harnesses were added, covering API health/errors, both fault scenarios through the real ASGI service chain, telemetry exporters and evidence collection, stable IDs and limits, and persistent incident/evidence HTTP behavior using SQLite ORM tests. Dataset and baseline checks cover 16 development contracts, frozen inputs, reproducible fixtures, citation validation, abstention, competing causes, and actual simulator SDK evidence. Held-out cases are validated for integrity without running a diagnosis strategy. Ruff lint/format checks pass; Compose parsing and offline migration SQL generation passed in preceding slices. The benchmark command has not executed because required dependencies are unavailable. The in-memory hashed-feature retrieval metrics are saved under `evals/reports/retrieval-dev/`; BGE model inference and PostgreSQL retrieval remain unverified.
 
 Tests used cached packages on Python 3.11 because package downloads were unavailable. PostgreSQL is the application backend; SQLite is used only for offline ORM checks. The expanded PostgreSQL integration test is skipped without an explicit disposable test database. Container build/start, live PostgreSQL migration and row locking, telemetry-volume ownership, backend configuration and delivery, and saved Docker demo artifacts remain pending. This execution sandbox denies Docker daemon access and PostgreSQL socket creation. See [TASKS.md](TASKS.md) for the remaining acceptance checks.
 

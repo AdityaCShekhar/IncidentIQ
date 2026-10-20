@@ -43,7 +43,7 @@ services:
           create_host_path: false
 
   db:
-    image: postgres:17-bookworm
+    image: pgvector/pgvector:0.8.7-pg17-bookworm
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-incidentiq}
       POSTGRES_USER: ${POSTGRES_USER:-incidentiq}
