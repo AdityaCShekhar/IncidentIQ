@@ -11,7 +11,7 @@ The project includes four comparable strategies: deterministic rules (S0), Ollam
 | Cases | 24; six per fault family |
 | Fault families | Slow dependency, database-pool exhaustion, deployment regression, retry storm |
 | Development split | 16 cases, including four incomplete cases that should abstain |
-| Held-out split | Eight cases, reserved for final reporting; strategy outputs not inspected |
+| Held-out split | Eight cases; a final rules-v1 report has been generated, while model strategies remain unscored on this split |
 | Files | `evals/cases.jsonl`, `evals/expected_evidence.jsonl`, `evals/fixtures/*.json` |
 | Freeze | SHA-256 checksums in `evals/manifest.json` |
 
@@ -159,7 +159,7 @@ are local model measurements; there is no hosted-model cost field. The official 
 
 The dataset and rules checks cover fixture integrity, causal contracts, ordering, abstention, scope, and citations. The benchmark emits aggregate metrics, metadata, raw outputs, and Markdown/JSON summaries. Some rules checks use real simulator SDK output rather than authored fixtures. The historical offline suite had 148 passing tests before the benchmark harness and later workflow additions; see [TASKS.md](../TASKS.md) for the recorded scope and runtime verification status. Those historical results do not validate every later change.
 
-The held-out fixtures are parsed for integrity but are not diagnosed by tests. The benchmark command defaults to `dev` and requires an explicit final-report choice for `held_out`. Do not tune prompts after inspecting held-out outcomes without treating that set as development data and creating another holdout.
+The held-out fixtures are parsed for integrity but are not diagnosed by tests. A separate final benchmark report scored frozen rules-v1 on all eight held-out cases; this does not change test coverage. The benchmark command defaults to `dev` and requires an explicit final-report choice for `held_out`. Do not tune rules or prompts after inspecting held-out outcomes without treating that set as development data and creating another holdout.
 
 This small dataset is deliberately simple and balanced by fault family. It shares authored templates, has only one cause per case, has no healthy/no-incident cases, and its held-out split currently has no incomplete cases. Development checks do not demonstrate generalization, calibrated confidence, or production usefulness. A later dataset should add independently reviewed live captures, healthy controls, stronger confounders, and held-out incomplete cases under a new version. Cross-strategy reports must retain this version and disclose these gaps.
 
@@ -173,6 +173,12 @@ records mean case latencies of 0.136 ms (rules), 50.98 s (summary), 37.93 s (RAG
 (agent). Prompt/completion token counts were unavailable for the failed calls. This is a measured
 model compatibility failure on the authored dev fixtures, not evidence of production accuracy or
 an improvement over rules.
+
+The separate [final rules-v1 report](../evals/reports/final-rules/benchmark.md) scored all eight
+held-out cases correctly (accuracy and macro-F1 1.00, zero failures). Citation precision was 1.00,
+recall 0.6563, and F1 0.7925. Mean per-case latency was 0.104 ms on this run. These eight authored
+fixtures contain no expected-abstention cases, and their labels have not received independent
+human review; this result does not establish generalization to real incidents.
 
 The simulator exposes four bounded repeatable fault commands: `slow_dependency`,
 `deployment_regression`, `pool_exhaustion`, and `retry_storm`. For investigation safety, evidence and

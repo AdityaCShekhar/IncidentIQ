@@ -229,7 +229,7 @@ See the [threat model](docs/threat-model.md) for trust boundaries, current contr
 
 ## Validation status
 
-The recorded offline suite had 148 passing tests before later benchmark, retrieval, investigation, and fault-scenario additions. PostgreSQL migration/persistence and row-lock behavior, Collector volume access, the deployment regression, pool exhaustion, retry storm, and investigation failure persistence have since been verified in Docker; the current status and evidence links are in [TASKS.md](TASKS.md). Do not treat the historical offline test count as validation of every later addition. The model-backed development comparison records failures for the tested small model, so model diagnosis quality remains unverified.
+The recorded offline suite had 148 passing tests before later benchmark, retrieval, investigation, and fault-scenario additions. PostgreSQL migration/persistence and row-lock behavior, Collector volume access, the deployment regression, pool exhaustion, retry storm, and investigation failure persistence have since been verified in Docker; the current status and evidence links are in [TASKS.md](TASKS.md). The rules baseline scored 8/8 on the authored synthetic held-out fixtures ([report](evals/reports/final-rules/benchmark.md)); the set has no expected-abstention cases and labels are unaudited. Do not treat the historical offline test count or synthetic scores as validation of every later addition or production usefulness. Model-backed diagnosis quality remains unverified.
 
 ## Scope and next session
 

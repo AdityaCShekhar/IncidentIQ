@@ -1,0 +1,402 @@
+{
+  "dataset_version": "fixture-v1",
+  "generated_at": "2026-10-20T12:41:40.808855+00:00",
+  "metrics": {
+    "abstention_rate": 0.0,
+    "abstention_recall": null,
+    "accuracy": 1.0,
+    "case_count": 8,
+    "citation_counts": {
+      "false_negative": 22,
+      "false_positive": 0,
+      "true_positive": 42
+    },
+    "citation_f1": 0.7924528301886793,
+    "citation_precision": 1.0,
+    "citation_recall": 0.65625,
+    "completion_tokens": null,
+    "confusion_matrix": {
+      "database_pool_exhaustion": {
+        "database_pool_exhaustion": 2
+      },
+      "deployment_regression": {
+        "deployment_regression": 2
+      },
+      "retry_storm": {
+        "retry_storm": 2
+      },
+      "slow_dependency": {
+        "slow_dependency": 2
+      }
+    },
+    "correct_cases": 8,
+    "coverage": 1.0,
+    "failed_cases": 0,
+    "failure_rate": 0.0,
+    "macro_f1": 1.0,
+    "max_case_latency_ms": 0.177,
+    "mean_case_latency_ms": 0.104,
+    "p50_case_latency_ms": 0.092,
+    "prompt_tokens": null,
+    "selective_accuracy": 1.0
+  },
+  "results": [
+    {
+      "acceptable_aliases": [
+        "slow_dependency",
+        "slow downstream dependency",
+        "downstream latency"
+      ],
+      "case_id": "iq-005",
+      "citation_false_negative": 2,
+      "citation_false_positive": 0,
+      "citation_true_positive": 4,
+      "correct": true,
+      "disposition": "likely_cause_found",
+      "error_code": null,
+      "expected_abstention": false,
+      "gold_cause": "slow_dependency",
+      "predicted_cause": "slow_dependency",
+      "raw_output": null,
+      "report": {
+        "disposition": "likely_cause_found",
+        "hypotheses": [
+          {
+            "cause": "slow_dependency",
+            "confidence": 0.7,
+            "contradicting_evidence_ids": [],
+            "explanation": "In at least two traces, one successful dependency call occupies most of a slow service request. This pattern is consistent with a slow downstream dependency.",
+            "supporting_evidence_ids": [
+              "39a5eb36-d68f-5bbc-87df-f5a4611b047b",
+              "db6f1d63-0791-5f81-966b-881f93d60cc7",
+              "db6f3c8c-2a68-5bcf-8b5a-c9e65aa84f02",
+              "fc1d7b4e-7490-5c02-9b70-72ff9a96f3fa"
+            ]
+          }
+        ],
+        "incident_summary": "Evidence review for service checkout in the requested UTC window.",
+        "missing_evidence": [],
+        "recommended_next_steps": [
+          "Inspect correlated dependency latency and saturation in the same window."
+        ]
+      },
+      "status": "completed",
+      "strategy_metadata": null,
+      "wall_time_ms": 0.177
+    },
+    {
+      "acceptable_aliases": [
+        "slow_dependency",
+        "slow downstream dependency",
+        "downstream latency"
+      ],
+      "case_id": "iq-006",
+      "citation_false_negative": 2,
+      "citation_false_positive": 0,
+      "citation_true_positive": 4,
+      "correct": true,
+      "disposition": "likely_cause_found",
+      "error_code": null,
+      "expected_abstention": false,
+      "gold_cause": "slow_dependency",
+      "predicted_cause": "slow_dependency",
+      "raw_output": null,
+      "report": {
+        "disposition": "likely_cause_found",
+        "hypotheses": [
+          {
+            "cause": "slow_dependency",
+            "confidence": 0.7,
+            "contradicting_evidence_ids": [],
+            "explanation": "In at least two traces, one successful dependency call occupies most of a slow service request. This pattern is consistent with a slow downstream dependency.",
+            "supporting_evidence_ids": [
+              "2d874acf-ae10-5e60-a7b4-fd4c636ef574",
+              "35cc2ad8-17eb-52e1-ab35-be55e1f1c320",
+              "ac61fa8a-a738-5b33-8a49-22522f3af812",
+              "bf86e345-e81e-5777-a0c2-f9b59f016c45"
+            ]
+          }
+        ],
+        "incident_summary": "Evidence review for service checkout-canary in the requested UTC window.",
+        "missing_evidence": [],
+        "recommended_next_steps": [
+          "Inspect correlated dependency latency and saturation in the same window."
+        ]
+      },
+      "status": "completed",
+      "strategy_metadata": null,
+      "wall_time_ms": 0.085
+    },
+    {
+      "acceptable_aliases": [
+        "database_pool_exhaustion",
+        "database connection-pool exhaustion",
+        "database pool saturation"
+      ],
+      "case_id": "iq-011",
+      "citation_false_negative": 0,
+      "citation_false_positive": 0,
+      "citation_true_positive": 4,
+      "correct": true,
+      "disposition": "likely_cause_found",
+      "error_code": null,
+      "expected_abstention": false,
+      "gold_cause": "database_pool_exhaustion",
+      "predicted_cause": "database_pool_exhaustion",
+      "raw_output": null,
+      "report": {
+        "disposition": "likely_cause_found",
+        "hypotheses": [
+          {
+            "cause": "database_pool_exhaustion",
+            "confidence": 0.7,
+            "contradicting_evidence_ids": [],
+            "explanation": "The same pool has waiting acquisitions and near-full utilization alongside slow or failing service requests. This pattern is consistent with connection-pool exhaustion.",
+            "supporting_evidence_ids": [
+              "0d3f7a29-3f83-5d78-ad16-4793c775e668",
+              "516fa7ba-22e9-5863-92ba-4a9972835c2d",
+              "941abe53-dbc2-595d-a608-194687af5ef6",
+              "d61d0a64-2f5b-526a-a635-58531e0f67d8"
+            ]
+          }
+        ],
+        "incident_summary": "Evidence review for service checkout in the requested UTC window.",
+        "missing_evidence": [],
+        "recommended_next_steps": [
+          "Inspect pool acquisition waits and long-running database operations."
+        ]
+      },
+      "status": "completed",
+      "strategy_metadata": null,
+      "wall_time_ms": 0.098
+    },
+    {
+      "acceptable_aliases": [
+        "database_pool_exhaustion",
+        "database connection-pool exhaustion",
+        "database pool saturation"
+      ],
+      "case_id": "iq-012",
+      "citation_false_negative": 0,
+      "citation_false_positive": 0,
+      "citation_true_positive": 4,
+      "correct": true,
+      "disposition": "likely_cause_found",
+      "error_code": null,
+      "expected_abstention": false,
+      "gold_cause": "database_pool_exhaustion",
+      "predicted_cause": "database_pool_exhaustion",
+      "raw_output": null,
+      "report": {
+        "disposition": "likely_cause_found",
+        "hypotheses": [
+          {
+            "cause": "database_pool_exhaustion",
+            "confidence": 0.7,
+            "contradicting_evidence_ids": [],
+            "explanation": "The same pool has waiting acquisitions and near-full utilization alongside slow or failing service requests. This pattern is consistent with connection-pool exhaustion.",
+            "supporting_evidence_ids": [
+              "0de697d6-9209-5aa1-9605-49c615f87911",
+              "5841ae36-c8ca-5806-88cd-523ad7d3c0ed",
+              "7790775c-66de-5448-95c1-19cf4a312c2c",
+              "8810a610-a569-58f2-92b0-2a50c702652b"
+            ]
+          }
+        ],
+        "incident_summary": "Evidence review for service checkout-canary in the requested UTC window.",
+        "missing_evidence": [],
+        "recommended_next_steps": [
+          "Inspect pool acquisition waits and long-running database operations."
+        ]
+      },
+      "status": "completed",
+      "strategy_metadata": null,
+      "wall_time_ms": 0.083
+    },
+    {
+      "acceptable_aliases": [
+        "deployment_regression",
+        "checkout deployment regression",
+        "response contract regression"
+      ],
+      "case_id": "iq-017",
+      "citation_false_negative": 3,
+      "citation_false_positive": 0,
+      "citation_true_positive": 5,
+      "correct": true,
+      "disposition": "likely_cause_found",
+      "error_code": null,
+      "expected_abstention": false,
+      "gold_cause": "deployment_regression",
+      "predicted_cause": "deployment_regression",
+      "raw_output": null,
+      "report": {
+        "disposition": "likely_cause_found",
+        "hypotheses": [
+          {
+            "cause": "deployment_regression",
+            "confidence": 0.7,
+            "contradicting_evidence_ids": [],
+            "explanation": "A deployment precedes at least two failing requests on the matching revision while their dependency calls succeed. A deployment regression is a candidate; temporal association does not prove causation.",
+            "supporting_evidence_ids": [
+              "09ecbfce-eeb1-597a-af4e-fa6f2ddfdcf6",
+              "100fb2f7-b6f4-5a79-9e3c-da4ad71d8735",
+              "1f723b47-d679-5865-982d-d786e42e2898",
+              "df999ba2-de17-5b44-83ab-ca4c7c01eaf4",
+              "f379ea2d-bb8c-5fa0-b468-ccec91f25ed2"
+            ]
+          }
+        ],
+        "incident_summary": "Evidence review for service checkout in the requested UTC window.",
+        "missing_evidence": [],
+        "recommended_next_steps": [
+          "Compare the deployed code and response contract with the previous revision."
+        ]
+      },
+      "status": "completed",
+      "strategy_metadata": null,
+      "wall_time_ms": 0.086
+    },
+    {
+      "acceptable_aliases": [
+        "deployment_regression",
+        "checkout deployment regression",
+        "response contract regression"
+      ],
+      "case_id": "iq-018",
+      "citation_false_negative": 3,
+      "citation_false_positive": 0,
+      "citation_true_positive": 5,
+      "correct": true,
+      "disposition": "likely_cause_found",
+      "error_code": null,
+      "expected_abstention": false,
+      "gold_cause": "deployment_regression",
+      "predicted_cause": "deployment_regression",
+      "raw_output": null,
+      "report": {
+        "disposition": "likely_cause_found",
+        "hypotheses": [
+          {
+            "cause": "deployment_regression",
+            "confidence": 0.7,
+            "contradicting_evidence_ids": [],
+            "explanation": "A deployment precedes at least two failing requests on the matching revision while their dependency calls succeed. A deployment regression is a candidate; temporal association does not prove causation.",
+            "supporting_evidence_ids": [
+              "3653251f-5a4d-5cc0-8d92-30cabfc5a1c8",
+              "431cce10-513e-5f8f-afc4-f0611b4b2b82",
+              "7065cbee-800f-5ec3-a8a5-3bb357ebe64d",
+              "7751ccb4-6a7b-59ea-bfdc-8d232aae58c2",
+              "786d063a-5637-5d63-ace8-ab2186bc7c85"
+            ]
+          }
+        ],
+        "incident_summary": "Evidence review for service checkout-canary in the requested UTC window.",
+        "missing_evidence": [],
+        "recommended_next_steps": [
+          "Compare the deployed code and response contract with the previous revision."
+        ]
+      },
+      "status": "completed",
+      "strategy_metadata": null,
+      "wall_time_ms": 0.076
+    },
+    {
+      "acceptable_aliases": [
+        "retry_storm",
+        "retry amplification",
+        "downstream retry storm"
+      ],
+      "case_id": "iq-023",
+      "citation_false_negative": 6,
+      "citation_false_positive": 0,
+      "citation_true_positive": 8,
+      "correct": true,
+      "disposition": "likely_cause_found",
+      "error_code": null,
+      "expected_abstention": false,
+      "gold_cause": "retry_storm",
+      "predicted_cause": "retry_storm",
+      "raw_output": null,
+      "report": {
+        "disposition": "likely_cause_found",
+        "hypotheses": [
+          {
+            "cause": "retry_storm",
+            "confidence": 0.7,
+            "contradicting_evidence_ids": [],
+            "explanation": "At least two slow requests contain three or more explicit attempts on the same dependency operation, including repeated failures. This indicates retry amplification within those requests.",
+            "supporting_evidence_ids": [
+              "2e306ce9-fc7c-5cc9-ad51-356335adf262",
+              "41e6bbb4-1bee-5c4f-b66e-cd1160308713",
+              "4d6152ac-97c2-5c8d-830c-5562442de19e",
+              "9649aead-b2d0-5c53-82db-9d91a101aefb",
+              "d132c5b5-5826-5a34-a123-77ad3c626f07",
+              "db3b72bb-557a-5f2a-9a5c-9e8b8c2022a6",
+              "f1418d52-b8bf-5535-b6c6-87ce6e9b79e7",
+              "f78006bc-645f-58ea-b4a1-1f8e5cedb2f6"
+            ]
+          }
+        ],
+        "incident_summary": "Evidence review for service checkout in the requested UTC window.",
+        "missing_evidence": [],
+        "recommended_next_steps": [
+          "Inspect retry limits, backoff, and attempts per upstream request."
+        ]
+      },
+      "status": "completed",
+      "strategy_metadata": null,
+      "wall_time_ms": 0.124
+    },
+    {
+      "acceptable_aliases": [
+        "retry_storm",
+        "retry amplification",
+        "downstream retry storm"
+      ],
+      "case_id": "iq-024",
+      "citation_false_negative": 6,
+      "citation_false_positive": 0,
+      "citation_true_positive": 8,
+      "correct": true,
+      "disposition": "likely_cause_found",
+      "error_code": null,
+      "expected_abstention": false,
+      "gold_cause": "retry_storm",
+      "predicted_cause": "retry_storm",
+      "raw_output": null,
+      "report": {
+        "disposition": "likely_cause_found",
+        "hypotheses": [
+          {
+            "cause": "retry_storm",
+            "confidence": 0.7,
+            "contradicting_evidence_ids": [],
+            "explanation": "At least two slow requests contain three or more explicit attempts on the same dependency operation, including repeated failures. This indicates retry amplification within those requests.",
+            "supporting_evidence_ids": [
+              "45014fc7-c8be-58d9-b02d-44617657835a",
+              "4bb4d984-c8ad-5072-a7b9-1b1411a87084",
+              "4cbb7697-603b-5384-b3aa-dfcbb47abc90",
+              "5699f5f6-4c20-56dd-a398-83942cdb9fa6",
+              "6d877a34-0e41-5a2b-9b95-2272f2d8663a",
+              "986aa48b-f94c-55bb-bfb3-3c6580cb8fca",
+              "cbe049db-3228-54e0-8b95-825a4a99d539",
+              "cd5839cd-1ce5-5220-8792-ae13204400d4"
+            ]
+          }
+        ],
+        "incident_summary": "Evidence review for service checkout-canary in the requested UTC window.",
+        "missing_evidence": [],
+        "recommended_next_steps": [
+          "Inspect retry limits, backoff, and attempts per upstream request."
+        ]
+      },
+      "status": "completed",
+      "strategy_metadata": null,
+      "wall_time_ms": 0.105
+    }
+  ],
+  "split": "held_out",
+  "strategy": "rules",
+  "strategy_version": "rules-v1"
+}

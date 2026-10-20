@@ -10,6 +10,16 @@ Give the reviewer only the normalized evidence bundles in `evals/fixtures/iq-001
 
 Each bundle includes the incident window and observations, but not the expected cause or relevance annotations. The input is synthetic and intentionally small. Ask the reviewer to treat each bundle as a standalone incident and avoid inferring answers from file order or prior cases.
 
+To make a packet that does not include the answer-key files, copy only the bundles and this protocol to a separate directory, then share that directory without repository access:
+
+```sh
+mkdir -p /tmp/incidentiq-label-review/fixtures
+cp evals/fixtures/*.json /tmp/incidentiq-label-review/fixtures/
+cp docs/evaluation-label-review.md /tmp/incidentiq-label-review/README.md
+```
+
+The copied protocol contains the blank review form. Keep the completed reviewer's copy separate from the answer-key files until the reviewer signs and dates it.
+
 ## Review procedure
 
 For each case, the reviewer should record:
