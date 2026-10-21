@@ -1,6 +1,8 @@
 # Evaluation dataset and deterministic baseline
 
-The project includes four comparable strategies: deterministic rules (S0), Ollama-backed summary (S1), retrieval-augmented diagnosis (S2), and bounded read-only tool investigation (S3). Their code paths and benchmark reports exist, but the tested low-resource model did not produce a valid model-backed diagnosis; AI diagnostic quality therefore remains unverified. The rules results are measured on authored synthetic fixtures only.
+The project includes four comparable strategies: deterministic rules (S0), Ollama-backed summary (S1), retrieval-augmented diagnosis (S2), and bounded read-only tool investigation (S3). The 0.5B run produced no valid model-backed reports; the native Qwen3 4B follow-up produced valid reports but all abstained. Neither configuration demonstrated a root-cause diagnosis improvement over rules. The rules results are measured on authored synthetic fixtures only.
+
+The [W6B final comparison](comparative-evaluation.md) records the negative result, median/p95 latency, concrete failures, and resource-measurement limits. The native 4B follow-up is complete; see that comparison and the [native Ollama guide](native-ollama.md).
 
 ## Dataset v1
 
@@ -108,9 +110,9 @@ This runs rules, LLM summary, RAG, and agent strategies; writes each strategy's 
 and raw case results to `evals/reports/dev-comparison/{strategy}/`; and writes
 `comparison.json`/`comparison.md` at the comparison root. Individual case failures are recorded and
 counted instead of aborting the comparison. Reports include per-case wall latency, aggregate
-latency percentiles, available Ollama token counts, failure rates, accuracy, abstention, and
+median and nearest-rank p95 latency, available Ollama token counts, failure categories, accuracy, abstention, and
 evidence citation metrics. The comparison is an offline authored-fixture result, not production
-telemetry or a claim that an agent strategy is better.
+telemetry or a claim that an agent strategy is better. New reports also record benchmark-process CPU time and lifetime peak RSS with platform metadata. These exclude a separate model server; peak RSS accumulates across cases and strategies. Unknown token usage is null rather than a partial total when any case lacks usage metadata.
 
 The headline accuracy is exact top-hypothesis cause accuracy, counting a correct abstention on
 an expected-incomplete case as correct. `macro_f1` averages one-vs-rest F1 across the four gold
@@ -188,8 +190,7 @@ ceiling. Docker verification exercised rejection of a disallowed tool plan, inva
 retrieval failure, model timeout, malformed output, unavailable telemetry, and persistence of failed
 runs and audits; see [W6A artifacts](../evals/reports/w6a/). Resistance to prompt injection and the
 quality of valid model diagnoses remain unverified. The 2026-10-20 comparison reports latency and
-token counts when available, but did not measure system resource consumption. Higher-resource
-model evaluation is deferred on the current low-end system.
+token counts when available, but did not measure system resource consumption. A later native 4B run on the M4 Pro is recorded in the [final comparison](comparative-evaluation.md), with a separate loaded-model GPU-memory observation. The earlier low-end-system description does not describe the current hardware.
 
 ## Knowledge retrieval
 

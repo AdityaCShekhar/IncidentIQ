@@ -147,7 +147,7 @@ requires the explicit `--split held_out --final-report` flags. Metrics and their
 are documented in [evaluation design](docs/evaluation.md).
 
 The S1 local LLM summary strategy uses Ollama without retrieval or diagnostic tools. After
-installing and starting Ollama with a local model, run
+installing and starting native Ollama with a local model (see the [Apple Silicon setup](docs/native-ollama.md)), run
 `make benchmark BENCHMARK_ARGS='--strategy llm_summary --model MODEL_TAG'`, replacing
 `MODEL_TAG` with the installed tag. Its raw outputs, model metadata, token counts, and latency are
 saved under `evals/reports/dev-llm_summary/`.
@@ -229,8 +229,8 @@ See the [threat model](docs/threat-model.md) for trust boundaries, current contr
 
 ## Validation status
 
-The recorded offline suite had 148 passing tests before later benchmark, retrieval, investigation, and fault-scenario additions. PostgreSQL migration/persistence and row-lock behavior, Collector volume access, the deployment regression, pool exhaustion, retry storm, and investigation failure persistence have since been verified in Docker; the current status and evidence links are in [TASKS.md](TASKS.md). The rules baseline scored 8/8 on the authored synthetic held-out fixtures ([report](evals/reports/final-rules/benchmark.md)); the set has no expected-abstention cases and labels are unaudited. Do not treat the historical offline test count or synthetic scores as validation of every later addition or production usefulness. Model-backed diagnosis quality remains unverified.
+The current offline suite passes 160 tests on Python 3.12.14, including benchmark accounting and simulator downstream-status checks. PostgreSQL migration/persistence and row-lock behavior, Collector volume access, the deployment regression, pool exhaustion, retry storm, and investigation failure persistence were previously verified in Docker; the current status and evidence links are in [TASKS.md](TASKS.md). The rules baseline scored 8/8 on the authored synthetic held-out fixtures ([report](evals/reports/final-rules/benchmark.md)); the set has no expected-abstention cases and labels are unaudited. The offline suite and synthetic scores do not establish production usefulness. The native 4B follow-up produced valid reports but no accepted root-cause diagnoses; see the [final evaluation](docs/comparative-evaluation.md).
 
 ## Scope and next session
 
-The comparative benchmark supports rules, LLM summary, RAG, and agent strategies on the same frozen cases and writes per-strategy plus comparison reports. The [measured 16-case dev comparison](evals/reports/dev-comparison-qwen05-bounded/comparison.md) records rules accuracy of 1.00 and 100% model-backed case failures with `qwen2.5:0.5b` (invalid structured output; three agent timeouts). This verifies report generation and failure accounting, but it does not establish model diagnostic quality. A higher-resource model run remains pending; see [evaluation limitations](docs/evaluation.md).
+The comparative benchmark supports rules, LLM summary, RAG, and agent strategies on the same frozen cases and writes per-strategy plus comparison reports. The [measured 16-case dev comparison](evals/reports/dev-comparison-qwen05-bounded/comparison.md) records rules accuracy of 1.00 and 100% model-backed case failures with `qwen2.5:0.5b` (invalid structured output; three agent timeouts). This verifies report generation and failure accounting, but it does not establish model diagnostic quality. W6B is complete with a documented negative result; see the [final comparison](docs/comparative-evaluation.md) for latency, failure examples, resource observations, and follow-up limits. The [native Qwen3 4B run](evals/reports/dev-comparison-qwen3-4b-native/comparison.md) scored summary 4/16, RAG 1/16, and agent 1/16; every valid model report abstained. Native setup and reproduction commands are in the [Ollama guide](docs/native-ollama.md).

@@ -1,0 +1,235 @@
+{
+  "dataset_version": "fixture-v1",
+  "generated_at": "2026-10-21T20:47:42.284413+00:00",
+  "resource_measurements": {
+    "agent": {
+      "cpu": "process CPU time consumed during case evaluation",
+      "machine": "arm64",
+      "memory": "process lifetime peak RSS; not a per-case allocation or isolated strategy peak",
+      "platform": "Darwin",
+      "python_version": "3.12.14",
+      "scope": "benchmark_process_only; excludes model server and child processes"
+    },
+    "llm_summary": {
+      "cpu": "process CPU time consumed during case evaluation",
+      "machine": "arm64",
+      "memory": "process lifetime peak RSS; not a per-case allocation or isolated strategy peak",
+      "platform": "Darwin",
+      "python_version": "3.12.14",
+      "scope": "benchmark_process_only; excludes model server and child processes"
+    },
+    "rag": {
+      "cpu": "process CPU time consumed during case evaluation",
+      "machine": "arm64",
+      "memory": "process lifetime peak RSS; not a per-case allocation or isolated strategy peak",
+      "platform": "Darwin",
+      "python_version": "3.12.14",
+      "scope": "benchmark_process_only; excludes model server and child processes"
+    },
+    "rules": {
+      "cpu": "process CPU time consumed during case evaluation",
+      "machine": "arm64",
+      "memory": "process lifetime peak RSS; not a per-case allocation or isolated strategy peak",
+      "platform": "Darwin",
+      "python_version": "3.12.14",
+      "scope": "benchmark_process_only; excludes model server and child processes"
+    }
+  },
+  "split": "dev",
+  "strategies": {
+    "agent": {
+      "abstention_rate": 0.4375,
+      "abstention_recall": 0.25,
+      "accuracy": 0.0625,
+      "case_count": 16,
+      "citation_counts": {
+        "false_negative": 77,
+        "false_positive": 4,
+        "true_positive": 26
+      },
+      "citation_f1": 0.39097744360902253,
+      "citation_precision": 0.8666666666666667,
+      "citation_recall": 0.2524271844660194,
+      "completion_tokens": 22322,
+      "confusion_matrix": {
+        "database_pool_exhaustion": {
+          "abstain": 3,
+          "failed": 1
+        },
+        "deployment_regression": {
+          "failed": 4
+        },
+        "retry_storm": {
+          "abstain": 3,
+          "failed": 1
+        },
+        "slow_dependency": {
+          "abstain": 1,
+          "failed": 3
+        }
+      },
+      "correct_cases": 1,
+      "coverage": 0.0,
+      "failed_cases": 9,
+      "failure_counts": {
+        "invalid_model_output": 9
+      },
+      "failure_rate": 0.5625,
+      "macro_f1": 0.0,
+      "max_case_latency_ms": 76360.96,
+      "mean_case_latency_ms": 37753.754,
+      "p50_case_latency_ms": 33069.212,
+      "p95_case_latency_ms": 76360.96,
+      "process_cpu_time_ms": 494.877,
+      "process_peak_rss_bytes": 47529984,
+      "prompt_tokens": 118506,
+      "selective_accuracy": 0.0,
+      "strategy_version": "agent-v2"
+    },
+    "llm_summary": {
+      "abstention_rate": 0.75,
+      "abstention_recall": 1.0,
+      "accuracy": 0.25,
+      "case_count": 16,
+      "citation_counts": {
+        "false_negative": 73,
+        "false_positive": 3,
+        "true_positive": 30
+      },
+      "citation_f1": 0.4411764705882353,
+      "citation_precision": 0.9090909090909091,
+      "citation_recall": 0.2912621359223301,
+      "completion_tokens": 15446,
+      "confusion_matrix": {
+        "database_pool_exhaustion": {
+          "abstain": 4
+        },
+        "deployment_regression": {
+          "abstain": 2,
+          "failed": 2
+        },
+        "retry_storm": {
+          "abstain": 3,
+          "failed": 1
+        },
+        "slow_dependency": {
+          "abstain": 3,
+          "failed": 1
+        }
+      },
+      "correct_cases": 4,
+      "coverage": 0.0,
+      "failed_cases": 4,
+      "failure_counts": {
+        "invalid_model_output": 4
+      },
+      "failure_rate": 0.25,
+      "macro_f1": 0.0,
+      "max_case_latency_ms": 46705.206,
+      "mean_case_latency_ms": 20929.623,
+      "p50_case_latency_ms": 16331.27,
+      "p95_case_latency_ms": 46705.206,
+      "process_cpu_time_ms": 225.555,
+      "process_peak_rss_bytes": 47529984,
+      "prompt_tokens": 58947,
+      "selective_accuracy": 0.0,
+      "strategy_version": "summary-v2"
+    },
+    "rag": {
+      "abstention_rate": 0.125,
+      "abstention_recall": 0.25,
+      "accuracy": 0.0625,
+      "case_count": 16,
+      "citation_counts": {
+        "false_negative": 100,
+        "false_positive": 1,
+        "true_positive": 3
+      },
+      "citation_f1": 0.056074766355140186,
+      "citation_precision": 0.75,
+      "citation_recall": 0.02912621359223301,
+      "completion_tokens": 24167,
+      "confusion_matrix": {
+        "database_pool_exhaustion": {
+          "abstain": 1,
+          "failed": 3
+        },
+        "deployment_regression": {
+          "abstain": 1,
+          "failed": 3
+        },
+        "retry_storm": {
+          "failed": 4
+        },
+        "slow_dependency": {
+          "failed": 4
+        }
+      },
+      "correct_cases": 1,
+      "coverage": 0.0,
+      "failed_cases": 14,
+      "failure_counts": {
+        "invalid_model_output": 14
+      },
+      "failure_rate": 0.875,
+      "macro_f1": 0.0,
+      "max_case_latency_ms": 73496.435,
+      "mean_case_latency_ms": 33630.324,
+      "p50_case_latency_ms": 28718.566,
+      "p95_case_latency_ms": 73496.435,
+      "process_cpu_time_ms": 343.806,
+      "process_peak_rss_bytes": 47529984,
+      "prompt_tokens": 97322,
+      "selective_accuracy": 0.0,
+      "strategy_version": "rag-v2"
+    },
+    "rules": {
+      "abstention_rate": 0.25,
+      "abstention_recall": 1.0,
+      "accuracy": 1.0,
+      "case_count": 16,
+      "citation_counts": {
+        "false_negative": 40,
+        "false_positive": 0,
+        "true_positive": 63
+      },
+      "citation_f1": 0.7590361445783133,
+      "citation_precision": 1.0,
+      "citation_recall": 0.6116504854368932,
+      "completion_tokens": null,
+      "confusion_matrix": {
+        "database_pool_exhaustion": {
+          "abstain": 1,
+          "database_pool_exhaustion": 3
+        },
+        "deployment_regression": {
+          "abstain": 1,
+          "deployment_regression": 3
+        },
+        "retry_storm": {
+          "abstain": 1,
+          "retry_storm": 3
+        },
+        "slow_dependency": {
+          "abstain": 1,
+          "slow_dependency": 3
+        }
+      },
+      "correct_cases": 16,
+      "coverage": 0.75,
+      "failed_cases": 0,
+      "failure_counts": {},
+      "failure_rate": 0.0,
+      "macro_f1": 0.8571428571428571,
+      "max_case_latency_ms": 0.095,
+      "mean_case_latency_ms": 0.045,
+      "p50_case_latency_ms": 0.046,
+      "p95_case_latency_ms": 0.095,
+      "process_cpu_time_ms": 0.728,
+      "process_peak_rss_bytes": 42418176,
+      "prompt_tokens": null,
+      "selective_accuracy": 1.0,
+      "strategy_version": "rules-v1"
+    }
+  }
+}

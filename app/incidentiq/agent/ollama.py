@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-import json
 import ipaddress
+import json
 import time
 from dataclasses import dataclass
 from urllib.parse import urlsplit
@@ -32,6 +32,16 @@ class ModelCallMetadata:
     prompt_tokens: int | None
     completion_tokens: int | None
     duration_ms: float
+    done_reason: str | None = None
+
+
+class ModelOutputError(RuntimeError):
+    """Keep bounded rejected output available to the offline benchmark."""
+
+    def __init__(self, code: str, *, raw_output: str, metadata: dict):
+        super().__init__(code)
+        self.raw_output = raw_output
+        self.metadata = metadata
 
 
 @dataclass(frozen=True)
@@ -91,6 +101,7 @@ class OllamaAdapter:
         temperature: float = 0,
         seed: int = 17,
         num_ctx: int = 8192,
+        max_completion_tokens: int = MAX_COMPLETION_TOKENS,
     ):
         if not model.strip() or len(model) > 200:
             raise ValueError("A bounded Ollama model name is required")
@@ -98,6 +109,12 @@ class OllamaAdapter:
             raise ValueError("Model timeout must be between 0 and 120 seconds")
         if not 0 <= temperature <= 2 or not 1 <= num_ctx <= 32768:
             raise ValueError("Invalid local model generation settings")
+        if (
+            isinstance(max_completion_tokens, bool)
+            or not isinstance(max_completion_tokens, int)
+            or not 64 <= max_completion_tokens <= 4096
+        ):
+            raise ValueError("Completion token limit must be between 64 and 4096")
         if isinstance(seed, bool) or not isinstance(seed, int) or not 0 <= seed <= 2**31 - 1:
             raise ValueError("Invalid local model generation settings")
         self.model = model.strip()
@@ -107,7 +124,7 @@ class OllamaAdapter:
             "temperature": temperature,
             "seed": seed,
             "num_ctx": num_ctx,
-            "num_predict": MAX_COMPLETION_TOKENS,
+            "num_predict": max_completion_tokens,
         }
 
     def generate_structured(
@@ -167,6 +184,9 @@ class OllamaAdapter:
             prompt_tokens=prompt_tokens,
             completion_tokens=completion_tokens,
             duration_ms=elapsed_ms,
+            done_reason=body.get("done_reason")
+            if isinstance(body.get("done_reason"), str)
+            else None,
         )
 
     def diagnose(
@@ -194,7 +214,8 @@ class OllamaAdapter:
             if remaining <= 0:
                 raise RuntimeError("model_timeout") from validation_error
             raw_output, metadata = self.generate_structured(
-                messages, InvestigationReport,
+                messages,
+                InvestigationReport,
                 timeout_seconds=min(self.timeout_seconds, remaining),
             )
             calls.append(metadata)
@@ -224,4 +245,16 @@ class OllamaAdapter:
                             },
                         ]
                     )
-        raise RuntimeError("invalid_model_output") from validation_error
+        raise ModelOutputError(
+            "invalid_model_output",
+            raw_output=raw_output,
+            metadata={
+                "provider": "ollama",
+                "requested_model": self.model,
+                "prompt_template_version": prompt_template_version,
+                "generation_settings": self.options.copy(),
+                "prompt_tokens": _sum_tokens(call.prompt_tokens for call in calls),
+                "completion_tokens": _sum_tokens(call.completion_tokens for call in calls),
+                "calls": [call.__dict__ for call in calls],
+            },
+        ) from validation_error

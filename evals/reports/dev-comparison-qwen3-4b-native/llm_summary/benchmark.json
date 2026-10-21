@@ -1,0 +1,1465 @@
+{
+  "base_url": "http://127.0.0.1:11434",
+  "dataset_version": "fixture-v1",
+  "generated_at": "2026-10-21T20:27:37.761749+00:00",
+  "max_completion_tokens": 1536,
+  "metrics": {
+    "abstention_rate": 0.75,
+    "abstention_recall": 1.0,
+    "accuracy": 0.25,
+    "case_count": 16,
+    "citation_counts": {
+      "false_negative": 73,
+      "false_positive": 3,
+      "true_positive": 30
+    },
+    "citation_f1": 0.4411764705882353,
+    "citation_precision": 0.9090909090909091,
+    "citation_recall": 0.2912621359223301,
+    "completion_tokens": 15446,
+    "confusion_matrix": {
+      "database_pool_exhaustion": {
+        "abstain": 4
+      },
+      "deployment_regression": {
+        "abstain": 2,
+        "failed": 2
+      },
+      "retry_storm": {
+        "abstain": 3,
+        "failed": 1
+      },
+      "slow_dependency": {
+        "abstain": 3,
+        "failed": 1
+      }
+    },
+    "correct_cases": 4,
+    "coverage": 0.0,
+    "failed_cases": 4,
+    "failure_counts": {
+      "invalid_model_output": 4
+    },
+    "failure_rate": 0.25,
+    "macro_f1": 0.0,
+    "max_case_latency_ms": 46705.206,
+    "mean_case_latency_ms": 20929.623,
+    "p50_case_latency_ms": 16331.27,
+    "p95_case_latency_ms": 46705.206,
+    "process_cpu_time_ms": 225.555,
+    "process_peak_rss_bytes": 47529984,
+    "prompt_tokens": 58947,
+    "selective_accuracy": 0.0
+  },
+  "model": "qwen3:4b-instruct",
+  "resource_measurement": {
+    "cpu": "process CPU time consumed during case evaluation",
+    "machine": "arm64",
+    "memory": "process lifetime peak RSS; not a per-case allocation or isolated strategy peak",
+    "platform": "Darwin",
+    "python_version": "3.12.14",
+    "scope": "benchmark_process_only; excludes model server and child processes"
+  },
+  "results": [
+    {
+      "acceptable_aliases": [
+        "slow_dependency",
+        "slow downstream dependency",
+        "downstream latency"
+      ],
+      "case_id": "iq-001",
+      "citation_false_negative": 6,
+      "citation_false_positive": 0,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "failed",
+      "error_code": "invalid_model_output",
+      "expected_abstention": false,
+      "gold_cause": "slow_dependency",
+      "predicted_cause": null,
+      "process_cpu_time_ms": 24.866,
+      "process_peak_rss_bytes": 46120960,
+      "raw_output": "{\n  \"disposition\": \"insufficient_evidence\",\n  \"hypotheses\": [\n    {\n      \"cause\": \"No incident detected; all operations succeeded\",\n      \"confidence\": 0.7,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"All traces show HTTP 200 responses with consistent durations. No errors or anomalies in service operations.\",\n      \"supporting_evidence_ids\": [\n        \"56959ac5-6719-57dc-ae4b-a0637e1679d9\",\n        \"76267507-17f7-545d-91f7-a81e8d98b1f9\",\n        \"99201754-486d-5cae-890b-32a65b971f98\",\n        \"bb4d7492-a1cd-5ab6-a87c-477f76b4b6a4\",\n        \"39425cdb-5f21-595c-ab45-abf27cf496f6\",\n        \"97116985-6b82-514f-ab3e-8efc4b9af64a\"\n      ]\n    },\n    {\n      \"cause\": \"Inventory service latency due to high load\",\n      \"confidence\": 0.2,\n      \"contradicting_evidence_ids\": [\n        \"56959ac5-6719-57dc-ae4b-a0637e1679d9\",\n        \"bb4d7492-a1cd-5ab6-a87c-477f76b4b6a4\"\n      ],\n      \"explanation\": \"Inventory spans show 698ms duration, but no deviation from baseline. No evidence of increased load or error.\",\n      \"supporting_evidence_ids\": []\n    },\n    {\n      \"cause\": \"Checkout service delay due to missing inventory data\",\n      \"confidence\": 0.1,\n      \"contradicting_evidence_ids\": [\n        \"99201754-486d-5cae-890b-32a65b971f98\",\n        \"97116985-6b82-514f-ab3e-8efc4b9af64a\"\n      ],\n      \"explanation\": \"Checkout spans show 800ms duration, but no evidence of data missing or inventory sync failure.\",\n      \"supporting_evidence_ids\": []\n    }\n  ],\n  \"incident_summary\": \"All operations completed successfully with HTTP 200 responses and within expected duration. No errors or anomalies detected in traces.\",\n  \"missing_evidence\": [\n    \"Inventory sync logs\",\n    \"Error logs\",\n    \"External dependency traces\"\n  ],\n  \"recommended_next_steps\": [\n    \"Review inventory service logs for sync events\",\n    \"Validate trace correlation between inventory and checkout\",\n    \"Check audit logs for user activity during window\"\n  ]\n}",
+      "report": null,
+      "status": "failed",
+      "strategy_metadata": {
+        "calls": [
+          {
+            "completion_tokens": 744,
+            "created_at": "2026-10-21T20:22:13.854978Z",
+            "done_reason": "stop",
+            "duration_ms": 10966.443125000296,
+            "prompt_tokens": 1988,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          },
+          {
+            "completion_tokens": 700,
+            "created_at": "2026-10-21T20:22:25.700798Z",
+            "done_reason": "stop",
+            "duration_ms": 11845.80700000015,
+            "prompt_tokens": 2755,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          }
+        ],
+        "completion_tokens": 1444,
+        "generation_settings": {
+          "num_ctx": 8192,
+          "num_predict": 1536,
+          "seed": 17,
+          "temperature": 0
+        },
+        "prompt_template_version": "summary-v2",
+        "prompt_tokens": 4743,
+        "provider": "ollama",
+        "requested_model": "qwen3:4b-instruct"
+      },
+      "wall_time_ms": 22815.002
+    },
+    {
+      "acceptable_aliases": [
+        "slow_dependency",
+        "slow downstream dependency",
+        "downstream latency"
+      ],
+      "case_id": "iq-002",
+      "citation_false_negative": 4,
+      "citation_false_positive": 0,
+      "citation_true_positive": 2,
+      "correct": false,
+      "disposition": "insufficient_evidence",
+      "error_code": null,
+      "expected_abstention": false,
+      "gold_cause": "slow_dependency",
+      "predicted_cause": null,
+      "process_cpu_time_ms": 11.211,
+      "process_peak_rss_bytes": 46759936,
+      "raw_output": "{\n  \"disposition\": \"insufficient_evidence\",\n  \"hypotheses\": [\n    {\n      \"cause\": \"Service-level latency in checkout during peak load\",\n      \"confidence\": 0.3,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"Checkout spans show 280ms duration, but no error or anomaly; no load data or error logs to confirm peak load.\",\n      \"supporting_evidence_ids\": [\"eb188937-c689-5fab-95ad-dcf2498e313f\", \"fe30564d-9d33-5a7a-b38f-90d7065aa4a4\"]\n    },\n    {\n      \"cause\": \"Inventory service latency due to resource contention\",\n      \"confidence\": 0.2,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"Inventory spans show 238\u2013240ms, consistent with normal; no error or spike in metrics.\",\n      \"supporting_evidence_ids\": [\"299b818e-aeee-5798-81d8-0eac3336a524\", \"d02c1730-aeff-5a85-bb47-9a9de3ccf7dd\"]\n    },\n    {\n      \"cause\": \"Missing error or failure in trace data\",\n      \"confidence\": 0.1,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"All responses are 200 with no errors; no error logs or failed spans in the trace.\",\n      \"supporting_evidence_ids\": [\"299b818e-aeee-5798-81d8-0eac3336a524\", \"c286adf4-c566-516e-a98a-d81244a1b696\", \"eb188937-c689-5fab-95ad-dcf2498e313f\"]\n    }\n  ],\n  \"incident_summary\": \"All HTTP responses are 200 with no errors; spans show consistent durations across services. No anomalies or failures detected in trace data.\",\n  \"missing_evidence\": [\n    \"Error logs or failure events\",\n    \"Service-level metrics (CPU, memory, latency spikes)\",\n    \"Load or traffic volume data\",\n    \"Audit logs for user actions or transactions\"\n  ],\n  \"recommended_next_steps\": [\n    \"Query audit logs for user activity during the window\",\n    \"Retrieve service-level metrics (e.g., CPU, memory) for inventory and checkout\",\n    \"Check for error logs or failed spans in the trace data\"\n  ]\n}",
+      "report": {
+        "disposition": "insufficient_evidence",
+        "hypotheses": [
+          {
+            "cause": "Service-level latency in checkout during peak load",
+            "confidence": 0.3,
+            "contradicting_evidence_ids": [],
+            "explanation": "Checkout spans show 280ms duration, but no error or anomaly; no load data or error logs to confirm peak load.",
+            "supporting_evidence_ids": [
+              "eb188937-c689-5fab-95ad-dcf2498e313f",
+              "fe30564d-9d33-5a7a-b38f-90d7065aa4a4"
+            ]
+          },
+          {
+            "cause": "Inventory service latency due to resource contention",
+            "confidence": 0.2,
+            "contradicting_evidence_ids": [],
+            "explanation": "Inventory spans show 238\u2013240ms, consistent with normal; no error or spike in metrics.",
+            "supporting_evidence_ids": [
+              "299b818e-aeee-5798-81d8-0eac3336a524",
+              "d02c1730-aeff-5a85-bb47-9a9de3ccf7dd"
+            ]
+          },
+          {
+            "cause": "Missing error or failure in trace data",
+            "confidence": 0.1,
+            "contradicting_evidence_ids": [],
+            "explanation": "All responses are 200 with no errors; no error logs or failed spans in the trace.",
+            "supporting_evidence_ids": [
+              "299b818e-aeee-5798-81d8-0eac3336a524",
+              "c286adf4-c566-516e-a98a-d81244a1b696",
+              "eb188937-c689-5fab-95ad-dcf2498e313f"
+            ]
+          }
+        ],
+        "incident_summary": "All HTTP responses are 200 with no errors; spans show consistent durations across services. No anomalies or failures detected in trace data.",
+        "missing_evidence": [
+          "Error logs or failure events",
+          "Service-level metrics (CPU, memory, latency spikes)",
+          "Load or traffic volume data",
+          "Audit logs for user actions or transactions"
+        ],
+        "recommended_next_steps": [
+          "Query audit logs for user activity during the window",
+          "Retrieve service-level metrics (e.g., CPU, memory) for inventory and checkout",
+          "Check for error logs or failed spans in the trace data"
+        ]
+      },
+      "status": "abstained",
+      "strategy_metadata": {
+        "calls": [
+          {
+            "completion_tokens": 631,
+            "created_at": "2026-10-21T20:22:37.540693Z",
+            "done_reason": "stop",
+            "duration_ms": 11836.542917000315,
+            "prompt_tokens": 1985,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          }
+        ],
+        "completion_tokens": 631,
+        "generation_settings": {
+          "num_ctx": 8192,
+          "num_predict": 1536,
+          "seed": 17,
+          "temperature": 0
+        },
+        "latency_ms": 11836.543,
+        "prompt_template_version": "summary-v2",
+        "prompt_tokens": 1985,
+        "provider": "ollama",
+        "requested_model": "qwen3:4b-instruct",
+        "returned_models": [
+          "qwen3:4b-instruct"
+        ]
+      },
+      "wall_time_ms": 11838.668
+    },
+    {
+      "acceptable_aliases": [
+        "slow_dependency",
+        "slow downstream dependency",
+        "downstream latency"
+      ],
+      "case_id": "iq-003",
+      "citation_false_negative": 6,
+      "citation_false_positive": 2,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "insufficient_evidence",
+      "error_code": null,
+      "expected_abstention": false,
+      "gold_cause": "slow_dependency",
+      "predicted_cause": null,
+      "process_cpu_time_ms": 9.858,
+      "process_peak_rss_bytes": 47513600,
+      "raw_output": "{\n  \"disposition\": \"insufficient_evidence\",\n  \"hypotheses\": [\n    {\n      \"cause\": \"Database pool exhaustion causing high wait and utilization\",\n      \"confidence\": 0.3,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"Gauge shows 99% waiting and 100% utilization on db pool, suggesting saturation. However, no actual database logs or errors are present.\",\n      \"supporting_evidence_ids\": [\n        \"2523f414-358c-5473-b08c-b69823a42ac5\",\n        \"3fdbb3cc-8104-5896-a972-cbe1696c390f\"\n      ]\n    },\n    {\n      \"cause\": \"Checkout endpoint failure due to missing inventory reservation\",\n      \"confidence\": 0.4,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"A 500 error occurs during POST /checkout with 1500ms duration, but no prior error in inventory reservation or service dependency.\",\n      \"supporting_evidence_ids\": [\n        \"7c50d344-389e-5af9-af3a-e0d20143e972\"\n      ]\n    },\n    {\n      \"cause\": \"Service-level latency due to inter-service coordination delay\",\n      \"confidence\": 0.2,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"Reserve and checkout spans show consistent 698\u2013800ms durations, suggesting no performance degradation in individual services.\",\n      \"supporting_evidence_ids\": [\n        \"ea044d54-ee99-5989-ba6b-69e64a1ad8be\",\n        \"35e0798e-5b64-5c5a-b906-f6c140200c10\",\n        \"69b38979-477d-5922-83f6-4e61c8176404\",\n        \"10fa517c-c55b-5e6e-8b50-f87b4d6e5d59\",\n        \"a46d1699-9dd1-5d02-a3ac-78dfc38e1045\",\n        \"3c6e239d-3e16-5b5a-ab21-cb1b84672686\"\n      ]\n    }\n  ],\n  \"incident_summary\": \"High database pool utilization and a 500 error during checkout suggest potential resource exhaustion or coordination failure, but no direct evidence of root cause.\",\n  \"missing_evidence\": [\n    \"Database error logs\",\n    \"Inventory service logs\",\n    \"Trace correlation between reserve and checkout\",\n    \"Pool configuration or capacity metrics\"\n  ],\n  \"recommended_next_steps\": [\n    \"Retrieve database error logs from audit service for the same timestamp window\",\n    \"Correlate trace IDs across inventory and checkout services to validate service dependency chain\"\n  ]\n}",
+      "report": {
+        "disposition": "insufficient_evidence",
+        "hypotheses": [
+          {
+            "cause": "Database pool exhaustion causing high wait and utilization",
+            "confidence": 0.3,
+            "contradicting_evidence_ids": [],
+            "explanation": "Gauge shows 99% waiting and 100% utilization on db pool, suggesting saturation. However, no actual database logs or errors are present.",
+            "supporting_evidence_ids": [
+              "2523f414-358c-5473-b08c-b69823a42ac5",
+              "3fdbb3cc-8104-5896-a972-cbe1696c390f"
+            ]
+          },
+          {
+            "cause": "Checkout endpoint failure due to missing inventory reservation",
+            "confidence": 0.4,
+            "contradicting_evidence_ids": [],
+            "explanation": "A 500 error occurs during POST /checkout with 1500ms duration, but no prior error in inventory reservation or service dependency.",
+            "supporting_evidence_ids": [
+              "7c50d344-389e-5af9-af3a-e0d20143e972"
+            ]
+          },
+          {
+            "cause": "Service-level latency due to inter-service coordination delay",
+            "confidence": 0.2,
+            "contradicting_evidence_ids": [],
+            "explanation": "Reserve and checkout spans show consistent 698\u2013800ms durations, suggesting no performance degradation in individual services.",
+            "supporting_evidence_ids": [
+              "ea044d54-ee99-5989-ba6b-69e64a1ad8be",
+              "35e0798e-5b64-5c5a-b906-f6c140200c10",
+              "69b38979-477d-5922-83f6-4e61c8176404",
+              "10fa517c-c55b-5e6e-8b50-f87b4d6e5d59",
+              "a46d1699-9dd1-5d02-a3ac-78dfc38e1045",
+              "3c6e239d-3e16-5b5a-ab21-cb1b84672686"
+            ]
+          }
+        ],
+        "incident_summary": "High database pool utilization and a 500 error during checkout suggest potential resource exhaustion or coordination failure, but no direct evidence of root cause.",
+        "missing_evidence": [
+          "Database error logs",
+          "Inventory service logs",
+          "Trace correlation between reserve and checkout",
+          "Pool configuration or capacity metrics"
+        ],
+        "recommended_next_steps": [
+          "Retrieve database error logs from audit service for the same timestamp window",
+          "Correlate trace IDs across inventory and checkout services to validate service dependency chain"
+        ]
+      },
+      "status": "abstained",
+      "strategy_metadata": {
+        "calls": [
+          {
+            "completion_tokens": 732,
+            "created_at": "2026-10-21T20:22:52.71611Z",
+            "done_reason": "stop",
+            "duration_ms": 15172.483167000337,
+            "prompt_tokens": 2647,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          }
+        ],
+        "completion_tokens": 732,
+        "generation_settings": {
+          "num_ctx": 8192,
+          "num_predict": 1536,
+          "seed": 17,
+          "temperature": 0
+        },
+        "latency_ms": 15172.483,
+        "prompt_template_version": "summary-v2",
+        "prompt_tokens": 2647,
+        "provider": "ollama",
+        "requested_model": "qwen3:4b-instruct",
+        "returned_models": [
+          "qwen3:4b-instruct"
+        ]
+      },
+      "wall_time_ms": 15174.722
+    },
+    {
+      "acceptable_aliases": [
+        "slow_dependency",
+        "slow downstream dependency",
+        "downstream latency"
+      ],
+      "case_id": "iq-004",
+      "citation_false_negative": 0,
+      "citation_false_positive": 0,
+      "citation_true_positive": 2,
+      "correct": true,
+      "disposition": "insufficient_evidence",
+      "error_code": null,
+      "expected_abstention": true,
+      "gold_cause": "slow_dependency",
+      "predicted_cause": null,
+      "process_cpu_time_ms": 9.234,
+      "process_peak_rss_bytes": 47529984,
+      "raw_output": "{\n  \"disposition\": \"insufficient_evidence\",\n  \"hypotheses\": [\n    {\n      \"cause\": \"Checkout service failure due to backend service unavailability\",\n      \"confidence\": 0.6,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"Two 503 errors in sequence indicate service unavailability; no logs or metrics show root cause.\",\n      \"supporting_evidence_ids\": [\n        \"c86c5d6e-0e8c-515a-ad55-f0329b47e1d2\",\n        \"379a0ad3-7f4d-513b-8023-d7c1c5c29e02\"\n      ]\n    },\n    {\n      \"cause\": \"Database timeout during checkout processing\",\n      \"confidence\": 0.3,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"503 errors may stem from database timeout, but no database logs or metrics are present.\",\n      \"supporting_evidence_ids\": [\n        \"c86c5d6e-0e8c-515a-ad55-f0329b47e1d2\",\n        \"379a0ad3-7f4d-513b-8023-d7c1c5c29e02\"\n      ]\n    },\n    {\n      \"cause\": \"External dependency failure (e.g., payment gateway)\",\n      \"confidence\": 0.2,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"503 errors could stem from external service failure, but no dependency traces or error logs exist.\",\n      \"supporting_evidence_ids\": [\n        \"c86c5d6e-0e8c-515a-ad55-f0329b47e1d2\",\n        \"379a0ad3-7f4d-513b-8023-d7c1c5c29e02\"\n      ]\n    }\n  ],\n  \"incident_summary\": \"Two consecutive 503 errors in checkout service during a 1-minute window indicate service failure, but no logs, metrics, or dependencies are available for root cause analysis.\",\n  \"missing_evidence\": [\n    \"database logs\",\n    \"dependency traces\",\n    \"metric data (bytes, lines, files)\",\n    \"audit logs for related services\"\n  ],\n  \"recommended_next_steps\": [\n    \"Retrieve database logs for checkout operations during the incident window.\",\n    \"Query audit logs for related services (inventory, payment) to identify external dependencies.\"\n  ]\n}",
+      "report": {
+        "disposition": "insufficient_evidence",
+        "hypotheses": [
+          {
+            "cause": "Checkout service failure due to backend service unavailability",
+            "confidence": 0.6,
+            "contradicting_evidence_ids": [],
+            "explanation": "Two 503 errors in sequence indicate service unavailability; no logs or metrics show root cause.",
+            "supporting_evidence_ids": [
+              "c86c5d6e-0e8c-515a-ad55-f0329b47e1d2",
+              "379a0ad3-7f4d-513b-8023-d7c1c5c29e02"
+            ]
+          },
+          {
+            "cause": "Database timeout during checkout processing",
+            "confidence": 0.3,
+            "contradicting_evidence_ids": [],
+            "explanation": "503 errors may stem from database timeout, but no database logs or metrics are present.",
+            "supporting_evidence_ids": [
+              "c86c5d6e-0e8c-515a-ad55-f0329b47e1d2",
+              "379a0ad3-7f4d-513b-8023-d7c1c5c29e02"
+            ]
+          },
+          {
+            "cause": "External dependency failure (e.g., payment gateway)",
+            "confidence": 0.2,
+            "contradicting_evidence_ids": [],
+            "explanation": "503 errors could stem from external service failure, but no dependency traces or error logs exist.",
+            "supporting_evidence_ids": [
+              "c86c5d6e-0e8c-515a-ad55-f0329b47e1d2",
+              "379a0ad3-7f4d-513b-8023-d7c1c5c29e02"
+            ]
+          }
+        ],
+        "incident_summary": "Two consecutive 503 errors in checkout service during a 1-minute window indicate service failure, but no logs, metrics, or dependencies are available for root cause analysis.",
+        "missing_evidence": [
+          "database logs",
+          "dependency traces",
+          "metric data (bytes, lines, files)",
+          "audit logs for related services"
+        ],
+        "recommended_next_steps": [
+          "Retrieve database logs for checkout operations during the incident window.",
+          "Query audit logs for related services (inventory, payment) to identify external dependencies."
+        ]
+      },
+      "status": "abstained",
+      "strategy_metadata": {
+        "calls": [
+          {
+            "completion_tokens": 601,
+            "created_at": "2026-10-21T20:23:02.621575Z",
+            "done_reason": "stop",
+            "duration_ms": 9903.755666000052,
+            "prompt_tokens": 944,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          }
+        ],
+        "completion_tokens": 601,
+        "generation_settings": {
+          "num_ctx": 8192,
+          "num_predict": 1536,
+          "seed": 17,
+          "temperature": 0
+        },
+        "latency_ms": 9903.756,
+        "prompt_template_version": "summary-v2",
+        "prompt_tokens": 944,
+        "provider": "ollama",
+        "requested_model": "qwen3:4b-instruct",
+        "returned_models": [
+          "qwen3:4b-instruct"
+        ]
+      },
+      "wall_time_ms": 9906.017
+    },
+    {
+      "acceptable_aliases": [
+        "database_pool_exhaustion",
+        "database connection-pool exhaustion",
+        "database pool saturation"
+      ],
+      "case_id": "iq-007",
+      "citation_false_negative": 2,
+      "citation_false_positive": 0,
+      "citation_true_positive": 2,
+      "correct": false,
+      "disposition": "insufficient_evidence",
+      "error_code": null,
+      "expected_abstention": false,
+      "gold_cause": "database_pool_exhaustion",
+      "predicted_cause": null,
+      "process_cpu_time_ms": 8.906,
+      "process_peak_rss_bytes": 47529984,
+      "raw_output": "{\n  \"disposition\": \"insufficient_evidence\",\n  \"hypotheses\": [\n    {\n      \"cause\": \"Database pool exhaustion causing 504 errors in checkout\",\n      \"confidence\": 0.6,\n      \"contradicting_evidence_ids\": [\n        \"5af4de2b-264a-50e1-9765-5807e7b2d00a\",\n        \"b92a56ca-8730-5b45-889d-bf9dca77080f\"\n      ],\n      \"explanation\": \"High DB pool utilization (0.97) suggests saturation, but no direct correlation to 504 errors in checkout traces. Other metrics show no anomalies in pool behavior or service performance.\",\n      \"supporting_evidence_ids\": [\n        \"6bfb8c17-9f69-5889-96de-8979b2cb1f69\",\n        \"2e19d2d1-4701-5421-bb12-4c4ce92b02cf\"\n      ]\n    },\n    {\n      \"cause\": \"Checkout service timeout due to inventory service latency\",\n      \"confidence\": 0.4,\n      \"contradicting_evidence_ids\": [\n        \"6d7f2875-1e0c-56b7-8ccb-ee5a0934c6e0\",\n        \"18b37f24-a354-5ffc-b99b-17ba15cc13f8\"\n      ],\n      \"explanation\": \"Inventory /reserve calls complete quickly, suggesting no latency. Checkout 504 errors occur after successful reserve, implying downstream failure, not upstream delay.\",\n      \"supporting_evidence_ids\": [\n        \"b071ef5f-2cbe-57cf-accf-93547f3fc446\",\n        \"94a8966e-43a2-530c-8671-a579ae7e17e7\"\n      ]\n    },\n    {\n      \"cause\": \"Network or infrastructure timeout in checkout service\",\n      \"confidence\": 0.3,\n      \"contradicting_evidence_ids\": [\n        \"5af4de2b-264a-50e1-9765-5807e7b2d00a\",\n        \"b92a56ca-8730-5b45-889d-bf9dca77080f\"\n      ],\n      \"explanation\": \"No network-level metrics or logs. DB pool utilization is high, but no evidence of network issues or service degradation in other components.\",\n      \"supporting_evidence_ids\": [\n        \"6bfb8c17-9f69-5889-96de-8979b2cb1f69\",\n        \"2e19d2d1-4701-5421-bb12-4c4ce92b02cf\"\n      ]\n    }\n  ],\n  \"incident_summary\": \"Checkout service returns 504 errors during a 1-minute window, with successful inventory /reserve calls and high DB pool utilization. No direct evidence links errors to specific service or infrastructure failure.\",\n  \"missing_evidence\": [\n    \"Network latency metrics\",\n    \"Inventory service performance logs\",\n    \"DB connection timeout logs\",\n    \"Service health or error rate metrics\"\n  ],\n  \"recommended_next_steps\": [\n    \"Query inventory service logs for /reserve latency or errors\",\n    \"Retrieve DB connection timeout logs from the database layer\"\n  ]\n}",
+      "report": {
+        "disposition": "insufficient_evidence",
+        "hypotheses": [
+          {
+            "cause": "Database pool exhaustion causing 504 errors in checkout",
+            "confidence": 0.6,
+            "contradicting_evidence_ids": [
+              "5af4de2b-264a-50e1-9765-5807e7b2d00a",
+              "b92a56ca-8730-5b45-889d-bf9dca77080f"
+            ],
+            "explanation": "High DB pool utilization (0.97) suggests saturation, but no direct correlation to 504 errors in checkout traces. Other metrics show no anomalies in pool behavior or service performance.",
+            "supporting_evidence_ids": [
+              "6bfb8c17-9f69-5889-96de-8979b2cb1f69",
+              "2e19d2d1-4701-5421-bb12-4c4ce92b02cf"
+            ]
+          },
+          {
+            "cause": "Checkout service timeout due to inventory service latency",
+            "confidence": 0.4,
+            "contradicting_evidence_ids": [
+              "6d7f2875-1e0c-56b7-8ccb-ee5a0934c6e0",
+              "18b37f24-a354-5ffc-b99b-17ba15cc13f8"
+            ],
+            "explanation": "Inventory /reserve calls complete quickly, suggesting no latency. Checkout 504 errors occur after successful reserve, implying downstream failure, not upstream delay.",
+            "supporting_evidence_ids": [
+              "b071ef5f-2cbe-57cf-accf-93547f3fc446",
+              "94a8966e-43a2-530c-8671-a579ae7e17e7"
+            ]
+          },
+          {
+            "cause": "Network or infrastructure timeout in checkout service",
+            "confidence": 0.3,
+            "contradicting_evidence_ids": [
+              "5af4de2b-264a-50e1-9765-5807e7b2d00a",
+              "b92a56ca-8730-5b45-889d-bf9dca77080f"
+            ],
+            "explanation": "No network-level metrics or logs. DB pool utilization is high, but no evidence of network issues or service degradation in other components.",
+            "supporting_evidence_ids": [
+              "6bfb8c17-9f69-5889-96de-8979b2cb1f69",
+              "2e19d2d1-4701-5421-bb12-4c4ce92b02cf"
+            ]
+          }
+        ],
+        "incident_summary": "Checkout service returns 504 errors during a 1-minute window, with successful inventory /reserve calls and high DB pool utilization. No direct evidence links errors to specific service or infrastructure failure.",
+        "missing_evidence": [
+          "Network latency metrics",
+          "Inventory service performance logs",
+          "DB connection timeout logs",
+          "Service health or error rate metrics"
+        ],
+        "recommended_next_steps": [
+          "Query inventory service logs for /reserve latency or errors",
+          "Retrieve DB connection timeout logs from the database layer"
+        ]
+      },
+      "status": "abstained",
+      "strategy_metadata": {
+        "calls": [
+          {
+            "completion_tokens": 853,
+            "created_at": "2026-10-21T20:23:19.026394Z",
+            "done_reason": "stop",
+            "duration_ms": 16402.89124999981,
+            "prompt_tokens": 2374,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          }
+        ],
+        "completion_tokens": 853,
+        "generation_settings": {
+          "num_ctx": 8192,
+          "num_predict": 1536,
+          "seed": 17,
+          "temperature": 0
+        },
+        "latency_ms": 16402.891,
+        "prompt_template_version": "summary-v2",
+        "prompt_tokens": 2374,
+        "provider": "ollama",
+        "requested_model": "qwen3:4b-instruct",
+        "returned_models": [
+          "qwen3:4b-instruct"
+        ]
+      },
+      "wall_time_ms": 16404.216
+    },
+    {
+      "acceptable_aliases": [
+        "database_pool_exhaustion",
+        "database connection-pool exhaustion",
+        "database pool saturation"
+      ],
+      "case_id": "iq-008",
+      "citation_false_negative": 1,
+      "citation_false_positive": 0,
+      "citation_true_positive": 3,
+      "correct": false,
+      "disposition": "insufficient_evidence",
+      "error_code": null,
+      "expected_abstention": false,
+      "gold_cause": "database_pool_exhaustion",
+      "predicted_cause": null,
+      "process_cpu_time_ms": 6.243,
+      "process_peak_rss_bytes": 47529984,
+      "raw_output": "{\n  \"disposition\": \"insufficient_evidence\",\n  \"hypotheses\": [\n    {\n      \"cause\": \"Database pool exhaustion due to high utilization and long checkout latency\",\n      \"confidence\": 0.4,\n      \"contradicting_evidence_ids\": [\n        \"b8dee198-f4ae-5f8d-ac12-d1e1c700bc6a\",\n        \"5d8ca8fb-7231-5fd3-a8ec-b5b5d002cb08\"\n      ],\n      \"explanation\": \"High DB pool utilization (0.97) and long checkout duration (800ms) suggest bottleneck, but short reserve spans contradict sustained load.\",\n      \"supporting_evidence_ids\": [\n        \"da10708f-c384-5900-9d74-d9c72ad08054\",\n        \"5c35a930-c35d-5eec-9c86-a8505faa228f\",\n        \"df2e45dc-b33a-5369-ba1a-1910c64bd7c3\"\n      ]\n    },\n    {\n      \"cause\": \"Checkout service latency due to inter-service coordination delays\",\n      \"confidence\": 0.3,\n      \"contradicting_evidence_ids\": [\n        \"5c35a930-c35d-5eec-9c86-a8505faa228f\"\n      ],\n      \"explanation\": \"Checkout spans are long, but inventory reserve spans are short and successful, indicating coordination may not be the root cause.\",\n      \"supporting_evidence_ids\": [\n        \"5d8ca8fb-7231-5fd3-a8ec-b5b5d002cb08\",\n        \"3dc92bfa-4140-5a2b-b0b4-a767ac60eedd\"\n      ]\n    },\n    {\n      \"cause\": \"Data collection or instrumentation gap in trace metrics\",\n      \"confidence\": 0.2,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"Log and metric coverage is zero; no data from files, lines, or records suggests missing instrumentation or collection.\",\n      \"supporting_evidence_ids\": [\n        \"5d1b0c42-86d4-5709-bb02-b4b7ce29f8a8\",\n        \"da10708f-c384-5900-9d74-d9c72ad08054\"\n      ]\n    }\n  ],\n  \"incident_summary\": \"High DB pool utilization and long checkout spans observed, but trace data shows short inventory reserve times and no errors. No logs or file scans collected; coverage is zero.\",\n  \"missing_evidence\": [\n    \"Log file scans\",\n    \"Error or exception records\",\n    \"Service-level metrics beyond DB pool\",\n    \"Latency distribution across spans\"\n  ],\n  \"recommended_next_steps\": [\n    \"Verify trace data for missing spans in the checkout-inventory chain\",\n    \"Check instrumentation configuration for missing logs or metrics\"\n  ]\n}",
+      "report": {
+        "disposition": "insufficient_evidence",
+        "hypotheses": [
+          {
+            "cause": "Database pool exhaustion due to high utilization and long checkout latency",
+            "confidence": 0.4,
+            "contradicting_evidence_ids": [
+              "b8dee198-f4ae-5f8d-ac12-d1e1c700bc6a",
+              "5d8ca8fb-7231-5fd3-a8ec-b5b5d002cb08"
+            ],
+            "explanation": "High DB pool utilization (0.97) and long checkout duration (800ms) suggest bottleneck, but short reserve spans contradict sustained load.",
+            "supporting_evidence_ids": [
+              "da10708f-c384-5900-9d74-d9c72ad08054",
+              "5c35a930-c35d-5eec-9c86-a8505faa228f",
+              "df2e45dc-b33a-5369-ba1a-1910c64bd7c3"
+            ]
+          },
+          {
+            "cause": "Checkout service latency due to inter-service coordination delays",
+            "confidence": 0.3,
+            "contradicting_evidence_ids": [
+              "5c35a930-c35d-5eec-9c86-a8505faa228f"
+            ],
+            "explanation": "Checkout spans are long, but inventory reserve spans are short and successful, indicating coordination may not be the root cause.",
+            "supporting_evidence_ids": [
+              "5d8ca8fb-7231-5fd3-a8ec-b5b5d002cb08",
+              "3dc92bfa-4140-5a2b-b0b4-a767ac60eedd"
+            ]
+          },
+          {
+            "cause": "Data collection or instrumentation gap in trace metrics",
+            "confidence": 0.2,
+            "contradicting_evidence_ids": [],
+            "explanation": "Log and metric coverage is zero; no data from files, lines, or records suggests missing instrumentation or collection.",
+            "supporting_evidence_ids": [
+              "5d1b0c42-86d4-5709-bb02-b4b7ce29f8a8",
+              "da10708f-c384-5900-9d74-d9c72ad08054"
+            ]
+          }
+        ],
+        "incident_summary": "High DB pool utilization and long checkout spans observed, but trace data shows short inventory reserve times and no errors. No logs or file scans collected; coverage is zero.",
+        "missing_evidence": [
+          "Log file scans",
+          "Error or exception records",
+          "Service-level metrics beyond DB pool",
+          "Latency distribution across spans"
+        ],
+        "recommended_next_steps": [
+          "Verify trace data for missing spans in the checkout-inventory chain",
+          "Check instrumentation configuration for missing logs or metrics"
+        ]
+      },
+      "status": "abstained",
+      "strategy_metadata": {
+        "calls": [
+          {
+            "completion_tokens": 736,
+            "created_at": "2026-10-21T20:23:33.763032Z",
+            "done_reason": "stop",
+            "duration_ms": 14736.011708000206,
+            "prompt_tokens": 2355,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          }
+        ],
+        "completion_tokens": 736,
+        "generation_settings": {
+          "num_ctx": 8192,
+          "num_predict": 1536,
+          "seed": 17,
+          "temperature": 0
+        },
+        "latency_ms": 14736.012,
+        "prompt_template_version": "summary-v2",
+        "prompt_tokens": 2355,
+        "provider": "ollama",
+        "requested_model": "qwen3:4b-instruct",
+        "returned_models": [
+          "qwen3:4b-instruct"
+        ]
+      },
+      "wall_time_ms": 14736.933
+    },
+    {
+      "acceptable_aliases": [
+        "database_pool_exhaustion",
+        "database connection-pool exhaustion",
+        "database pool saturation"
+      ],
+      "case_id": "iq-009",
+      "citation_false_negative": 3,
+      "citation_false_positive": 1,
+      "citation_true_positive": 1,
+      "correct": false,
+      "disposition": "insufficient_evidence",
+      "error_code": null,
+      "expected_abstention": false,
+      "gold_cause": "database_pool_exhaustion",
+      "predicted_cause": null,
+      "process_cpu_time_ms": 8.967,
+      "process_peak_rss_bytes": 47529984,
+      "raw_output": "{\n  \"disposition\": \"insufficient_evidence\",\n  \"hypotheses\": [\n    {\n      \"cause\": \"Database pool exhaustion during checkout requests\",\n      \"confidence\": 0.3,\n      \"contradicting_evidence_ids\": [\n        \"9fbd0c35-16fb-57ee-82ae-2f34c3d426d6\",\n        \"e7f79d89-a582-5865-b36d-859333dc03ec\"\n      ],\n      \"explanation\": \"High wait time (99.0) in audit service suggests pool congestion, but utilization is near 1.0, indicating possible saturation. However, utilization metrics from checkout show 0.97, suggesting inconsistent load distribution.\",\n      \"supporting_evidence_ids\": [\n        \"4125bcd0-f623-58a7-80e8-57482b8ac3c1\",\n        \"64e13acd-76ce-56c3-8862-7b449d8e7302\"\n      ]\n    },\n    {\n      \"cause\": \"Checkout service timeout due to inventory dependency failure\",\n      \"confidence\": 0.4,\n      \"contradicting_evidence_ids\": [\n        \"f6294176-3a04-5fc8-859e-db681f3764da\",\n        \"f14c73b5-99a4-5d8b-ba4c-916db4886edf\"\n      ],\n      \"explanation\": \"Multiple 504 errors in checkout trace with 800ms duration, but inventory /reserve calls succeed. Suggests downstream timeout, not database pool issue.\",\n      \"supporting_evidence_ids\": [\n        \"185302fb-7eab-5dcc-8efc-aab1df8a215c\",\n        \"f721d0a5-562c-561e-a822-cbc2c7ae2b84\"\n      ]\n    },\n    {\n      \"cause\": \"Audit service misreporting database pool metrics\",\n      \"confidence\": 0.2,\n      \"contradicting_evidence_ids\": [\n        \"6cf5dccc-d65a-564d-9b7b-f078a3a15b5e\",\n        \"f6294176-3a04-5fc8-859e-db681f3764da\"\n      ],\n      \"explanation\": \"Audit and checkout services report different pool utilization values. Discrepancy may indicate data inconsistency or misconfiguration.\",\n      \"supporting_evidence_ids\": [\n        \"9fbd0c35-16fb-57ee-82ae-2f34c3d426d6\",\n        \"e7f79d89-a582-5865-b36d-859333dc03ec\"\n      ]\n    }\n  ],\n  \"incident_summary\": \"Multiple 504 errors in checkout service during a 1-minute window, with successful /reserve calls from inventory. Database pool wait times are high in audit service, but utilization is near 1.0 in both services.\",\n  \"missing_evidence\": [\n    \"Database connection logs\",\n    \"Inventory service health metrics\",\n    \"Checkout service error stack traces\",\n    \"Pool configuration details\"\n  ],\n  \"recommended_next_steps\": [\n    \"Verify inventory service response time and health during the incident window\",\n    \"Cross-check database pool metrics across services for consistency\",\n    \"Retrieve full error logs for checkout service 504 errors\"\n  ]\n}",
+      "report": {
+        "disposition": "insufficient_evidence",
+        "hypotheses": [
+          {
+            "cause": "Database pool exhaustion during checkout requests",
+            "confidence": 0.3,
+            "contradicting_evidence_ids": [
+              "9fbd0c35-16fb-57ee-82ae-2f34c3d426d6",
+              "e7f79d89-a582-5865-b36d-859333dc03ec"
+            ],
+            "explanation": "High wait time (99.0) in audit service suggests pool congestion, but utilization is near 1.0, indicating possible saturation. However, utilization metrics from checkout show 0.97, suggesting inconsistent load distribution.",
+            "supporting_evidence_ids": [
+              "4125bcd0-f623-58a7-80e8-57482b8ac3c1",
+              "64e13acd-76ce-56c3-8862-7b449d8e7302"
+            ]
+          },
+          {
+            "cause": "Checkout service timeout due to inventory dependency failure",
+            "confidence": 0.4,
+            "contradicting_evidence_ids": [
+              "f6294176-3a04-5fc8-859e-db681f3764da",
+              "f14c73b5-99a4-5d8b-ba4c-916db4886edf"
+            ],
+            "explanation": "Multiple 504 errors in checkout trace with 800ms duration, but inventory /reserve calls succeed. Suggests downstream timeout, not database pool issue.",
+            "supporting_evidence_ids": [
+              "185302fb-7eab-5dcc-8efc-aab1df8a215c",
+              "f721d0a5-562c-561e-a822-cbc2c7ae2b84"
+            ]
+          },
+          {
+            "cause": "Audit service misreporting database pool metrics",
+            "confidence": 0.2,
+            "contradicting_evidence_ids": [
+              "6cf5dccc-d65a-564d-9b7b-f078a3a15b5e",
+              "f6294176-3a04-5fc8-859e-db681f3764da"
+            ],
+            "explanation": "Audit and checkout services report different pool utilization values. Discrepancy may indicate data inconsistency or misconfiguration.",
+            "supporting_evidence_ids": [
+              "9fbd0c35-16fb-57ee-82ae-2f34c3d426d6",
+              "e7f79d89-a582-5865-b36d-859333dc03ec"
+            ]
+          }
+        ],
+        "incident_summary": "Multiple 504 errors in checkout service during a 1-minute window, with successful /reserve calls from inventory. Database pool wait times are high in audit service, but utilization is near 1.0 in both services.",
+        "missing_evidence": [
+          "Database connection logs",
+          "Inventory service health metrics",
+          "Checkout service error stack traces",
+          "Pool configuration details"
+        ],
+        "recommended_next_steps": [
+          "Verify inventory service response time and health during the incident window",
+          "Cross-check database pool metrics across services for consistency",
+          "Retrieve full error logs for checkout service 504 errors"
+        ]
+      },
+      "status": "abstained",
+      "strategy_metadata": {
+        "calls": [
+          {
+            "completion_tokens": 867,
+            "created_at": "2026-10-21T20:23:51.639663Z",
+            "done_reason": "stop",
+            "duration_ms": 17875.311124999826,
+            "prompt_tokens": 3007,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          }
+        ],
+        "completion_tokens": 867,
+        "generation_settings": {
+          "num_ctx": 8192,
+          "num_predict": 1536,
+          "seed": 17,
+          "temperature": 0
+        },
+        "latency_ms": 17875.311,
+        "prompt_template_version": "summary-v2",
+        "prompt_tokens": 3007,
+        "provider": "ollama",
+        "requested_model": "qwen3:4b-instruct",
+        "returned_models": [
+          "qwen3:4b-instruct"
+        ]
+      },
+      "wall_time_ms": 17876.883
+    },
+    {
+      "acceptable_aliases": [
+        "database_pool_exhaustion",
+        "database connection-pool exhaustion",
+        "database pool saturation"
+      ],
+      "case_id": "iq-010",
+      "citation_false_negative": 0,
+      "citation_false_positive": 0,
+      "citation_true_positive": 2,
+      "correct": true,
+      "disposition": "insufficient_evidence",
+      "error_code": null,
+      "expected_abstention": true,
+      "gold_cause": "database_pool_exhaustion",
+      "predicted_cause": null,
+      "process_cpu_time_ms": 18.449,
+      "process_peak_rss_bytes": 47529984,
+      "raw_output": "{\n  \"disposition\": \"insufficient_evidence\",\n  \"hypotheses\": [\n    {\n      \"cause\": \"Checkout service failure due to backend service unavailability\",\n      \"confidence\": 0.6,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"Two 503 errors in sequence indicate service unavailability; no logs or metrics show root cause.\",\n      \"supporting_evidence_ids\": [\n        \"ee3b1533-4b72-51af-8e1f-44728af888ab\",\n        \"7841e5ff-c8e2-51fe-84ff-d4ba5925124e\"\n      ]\n    }\n  ],\n  \"incident_summary\": \"Two consecutive 503 errors in checkout service during a 1-minute window; no supporting logs or metrics.\",\n  \"missing_evidence\": [\n    \"log.bytes_scanned\",\n    \"metric.bytes_scanned\",\n    \"trace.records_collected\",\n    \"audit.log.entries\",\n    \"inventory.service.status\",\n    \"checkout.service.config\"\n  ],\n  \"recommended_next_steps\": [\n    \"Retrieve service logs for checkout during the incident window\",\n    \"Query inventory service status and logs for correlation\"\n  ]\n}",
+      "report": {
+        "disposition": "insufficient_evidence",
+        "hypotheses": [
+          {
+            "cause": "Checkout service failure due to backend service unavailability",
+            "confidence": 0.6,
+            "contradicting_evidence_ids": [],
+            "explanation": "Two 503 errors in sequence indicate service unavailability; no logs or metrics show root cause.",
+            "supporting_evidence_ids": [
+              "ee3b1533-4b72-51af-8e1f-44728af888ab",
+              "7841e5ff-c8e2-51fe-84ff-d4ba5925124e"
+            ]
+          }
+        ],
+        "incident_summary": "Two consecutive 503 errors in checkout service during a 1-minute window; no supporting logs or metrics.",
+        "missing_evidence": [
+          "log.bytes_scanned",
+          "metric.bytes_scanned",
+          "trace.records_collected",
+          "audit.log.entries",
+          "inventory.service.status",
+          "checkout.service.config"
+        ],
+        "recommended_next_steps": [
+          "Retrieve service logs for checkout during the incident window",
+          "Query inventory service status and logs for correlation"
+        ]
+      },
+      "status": "abstained",
+      "strategy_metadata": {
+        "calls": [
+          {
+            "completion_tokens": 439,
+            "created_at": "2026-10-21T20:23:59.779519Z",
+            "done_reason": "stop",
+            "duration_ms": 8136.88029099967,
+            "prompt_tokens": 932,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          },
+          {
+            "completion_tokens": 277,
+            "created_at": "2026-10-21T20:24:04.730317Z",
+            "done_reason": "stop",
+            "duration_ms": 4949.389459000031,
+            "prompt_tokens": 1394,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          }
+        ],
+        "completion_tokens": 716,
+        "generation_settings": {
+          "num_ctx": 8192,
+          "num_predict": 1536,
+          "seed": 17,
+          "temperature": 0
+        },
+        "latency_ms": 13086.27,
+        "prompt_template_version": "summary-v2",
+        "prompt_tokens": 2326,
+        "provider": "ollama",
+        "requested_model": "qwen3:4b-instruct",
+        "returned_models": [
+          "qwen3:4b-instruct"
+        ]
+      },
+      "wall_time_ms": 13091.018
+    },
+    {
+      "acceptable_aliases": [
+        "deployment_regression",
+        "checkout deployment regression",
+        "response contract regression"
+      ],
+      "case_id": "iq-013",
+      "citation_false_negative": 5,
+      "citation_false_positive": 0,
+      "citation_true_positive": 3,
+      "correct": false,
+      "disposition": "insufficient_evidence",
+      "error_code": null,
+      "expected_abstention": false,
+      "gold_cause": "deployment_regression",
+      "predicted_cause": null,
+      "process_cpu_time_ms": 8.775,
+      "process_peak_rss_bytes": 47529984,
+      "raw_output": "{\n  \"disposition\": \"insufficient_evidence\",\n  \"hypotheses\": [\n    {\n      \"cause\": \"Checkout service failure due to version mismatch in v2\",\n      \"confidence\": 0.3,\n      \"contradicting_evidence_ids\": [\n        \"c5aa95d3-15cb-5f93-bdd5-5b5ed7f883cd\"\n      ],\n      \"explanation\": \"Initial checkout-v1 request succeeded, but checkout-v2 deployment triggered errors. No direct evidence of version-specific failure in logs or inventory interaction.\",\n      \"supporting_evidence_ids\": [\n        \"054d6547-9ee9-5518-9aef-76e9decf9e9b\",\n        \"1bd8fef6-a356-540d-8811-b8ff5f07e71f\",\n        \"cc7a4b45-118b-5a4c-aef9-84017a488b8a\"\n      ]\n    },\n    {\n      \"cause\": \"Inventory service failure causing checkout error\",\n      \"confidence\": 0.2,\n      \"contradicting_evidence_ids\": [\n        \"04ef6f4a-9862-5146-bb97-b96677947484\",\n        \"ffedfb91-00bd-585d-b9f5-88d6fef55a08\"\n      ],\n      \"explanation\": \"Inventory /reserve calls succeed, but checkout errors occur. No evidence of inventory failure or timeout.\",\n      \"supporting_evidence_ids\": [\n        \"9b84b876-b9a9-567c-ae76-a79b6ff58676\"\n      ]\n    },\n    {\n      \"cause\": \"Race condition or timing issue in checkout-v2 initialization\",\n      \"confidence\": 0.1,\n      \"contradicting_evidence_ids\": [\n        \"c5aa95d3-15cb-5f93-bdd5-5b5ed7f883cd\"\n      ],\n      \"explanation\": \"Multiple checkout-v2 errors occur shortly after deployment, but no correlation with inventory or timing events.\",\n      \"supporting_evidence_ids\": [\n        \"1bd8fef6-a356-540d-8811-b8ff5f07e71f\",\n        \"cc7a4b45-118b-5a4c-aef9-84017a488b8a\"\n      ]\n    }\n  ],\n  \"incident_summary\": \"Checkout service fails with HTTP 500 after deployment to checkout-v2, despite successful inventory /reserve calls and prior checkout-v1 success.\",\n  \"missing_evidence\": [\n    \"Inventory service logs during /reserve calls\",\n    \"Checkout-v2 code changes or configuration\",\n    \"Error details in response_contract_error\",\n    \"Latency or error correlation between services\"\n  ],\n  \"recommended_next_steps\": [\n    \"Query inventory service logs for /reserve calls during the same time window\",\n    \"Retrieve checkout-v2 deployment configuration and code changes\"\n  ]\n}",
+      "report": {
+        "disposition": "insufficient_evidence",
+        "hypotheses": [
+          {
+            "cause": "Checkout service failure due to version mismatch in v2",
+            "confidence": 0.3,
+            "contradicting_evidence_ids": [
+              "c5aa95d3-15cb-5f93-bdd5-5b5ed7f883cd"
+            ],
+            "explanation": "Initial checkout-v1 request succeeded, but checkout-v2 deployment triggered errors. No direct evidence of version-specific failure in logs or inventory interaction.",
+            "supporting_evidence_ids": [
+              "054d6547-9ee9-5518-9aef-76e9decf9e9b",
+              "1bd8fef6-a356-540d-8811-b8ff5f07e71f",
+              "cc7a4b45-118b-5a4c-aef9-84017a488b8a"
+            ]
+          },
+          {
+            "cause": "Inventory service failure causing checkout error",
+            "confidence": 0.2,
+            "contradicting_evidence_ids": [
+              "04ef6f4a-9862-5146-bb97-b96677947484",
+              "ffedfb91-00bd-585d-b9f5-88d6fef55a08"
+            ],
+            "explanation": "Inventory /reserve calls succeed, but checkout errors occur. No evidence of inventory failure or timeout.",
+            "supporting_evidence_ids": [
+              "9b84b876-b9a9-567c-ae76-a79b6ff58676"
+            ]
+          },
+          {
+            "cause": "Race condition or timing issue in checkout-v2 initialization",
+            "confidence": 0.1,
+            "contradicting_evidence_ids": [
+              "c5aa95d3-15cb-5f93-bdd5-5b5ed7f883cd"
+            ],
+            "explanation": "Multiple checkout-v2 errors occur shortly after deployment, but no correlation with inventory or timing events.",
+            "supporting_evidence_ids": [
+              "1bd8fef6-a356-540d-8811-b8ff5f07e71f",
+              "cc7a4b45-118b-5a4c-aef9-84017a488b8a"
+            ]
+          }
+        ],
+        "incident_summary": "Checkout service fails with HTTP 500 after deployment to checkout-v2, despite successful inventory /reserve calls and prior checkout-v1 success.",
+        "missing_evidence": [
+          "Inventory service logs during /reserve calls",
+          "Checkout-v2 code changes or configuration",
+          "Error details in response_contract_error",
+          "Latency or error correlation between services"
+        ],
+        "recommended_next_steps": [
+          "Query inventory service logs for /reserve calls during the same time window",
+          "Retrieve checkout-v2 deployment configuration and code changes"
+        ]
+      },
+      "status": "abstained",
+      "strategy_metadata": {
+        "calls": [
+          {
+            "completion_tokens": 740,
+            "created_at": "2026-10-21T20:24:20.989033Z",
+            "done_reason": "stop",
+            "duration_ms": 16256.789791000301,
+            "prompt_tokens": 2516,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          }
+        ],
+        "completion_tokens": 740,
+        "generation_settings": {
+          "num_ctx": 8192,
+          "num_predict": 1536,
+          "seed": 17,
+          "temperature": 0
+        },
+        "latency_ms": 16256.79,
+        "prompt_template_version": "summary-v2",
+        "prompt_tokens": 2516,
+        "provider": "ollama",
+        "requested_model": "qwen3:4b-instruct",
+        "returned_models": [
+          "qwen3:4b-instruct"
+        ]
+      },
+      "wall_time_ms": 16258.324
+    },
+    {
+      "acceptable_aliases": [
+        "deployment_regression",
+        "checkout deployment regression",
+        "response contract regression"
+      ],
+      "case_id": "iq-014",
+      "citation_false_negative": 7,
+      "citation_false_positive": 0,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "failed",
+      "error_code": "invalid_model_output",
+      "expected_abstention": false,
+      "gold_cause": "deployment_regression",
+      "predicted_cause": null,
+      "process_cpu_time_ms": 20.797,
+      "process_peak_rss_bytes": 47529984,
+      "raw_output": "{\n  \"disposition\": \"insufficient_evidence\",\n  \"hypotheses\": [\n    {\n      \"cause\": \"Checkout-v2 deployment introduced a bug in the POST /checkout endpoint causing 500 errors.\",\n      \"confidence\": 0.7,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"Deployment changed from checkout-v1 to checkout-v2, followed by 500 errors in POST /checkout traces with response_contract_error.\",\n      \"supporting_evidence_ids\": [\n        \"a4594dd1-1b58-5f33-ae84-e84220ff68c9\",\n        \"7f3f85d2-d6de-5b99-933e-46a7ab011274\",\n        \"40f0eae1-0e58-5bee-bdb8-89add196878f\"\n      ]\n    },\n    {\n      \"cause\": \"Inventory service failure caused checkout to fail due to missing reservation.\",\n      \"confidence\": 0.3,\n      \"contradicting_evidence_ids\": [\n        \"d4e18288-8ccf-5d14-ba44-3214df71f20e\",\n        \"e91afbb1-ab60-59c3-b549-2a10e2b57a71\"\n      ],\n      \"explanation\": \"Inventory /reserve calls succeed, indicating no service failure.\",\n      \"supporting_evidence_ids\": [\n        \"d4e18288-8ccf-5d14-ba44-3214df71f20e\",\n        \"e91afbb1-ab60-59c3-b549-2a10e2b57a71\"\n      ]\n    },\n    {\n      \"cause\": \"Client-side timeout or misconfiguration caused 500 errors in checkout.\",\n      \"confidence\": 0.2,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"No client-side logs or error context; all traces show successful /reserve calls.\",\n      \"supporting_evidence_ids\": [\n        \"7f3f85d2-d6de-5b99-933e-46a7ab011274\",\n        \"40f0eae1-0e58-5bee-bdb8-89add196878f\"\n      ]\n    }\n  ],\n  \"incident_summary\": \"Deployment to checkout-v2 triggered 500 errors in POST /checkout with response_contract_error, while /reserve calls succeeded.\",\n  \"missing_evidence\": [\n    \"Error details in response_contract_error\",\n    \"Inventory service logs for /reserve failures\",\n    \"Client-side request logs\",\n    \"Checkout-v2 code changes\"\n  ],\n  \"recommended_next_steps\": [\n    \"Retrieve full error payload from response_contract_error\",\n    \"Verify inventory /reserve success in trace context\",\n    \"Compare checkout-v2 code with checkout-v1\"\n  ]\n}",
+      "report": null,
+      "status": "failed",
+      "strategy_metadata": {
+        "calls": [
+          {
+            "completion_tokens": 710,
+            "created_at": "2026-10-21T20:24:36.848536Z",
+            "done_reason": "stop",
+            "duration_ms": 15858.32208299962,
+            "prompt_tokens": 2257,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          },
+          {
+            "completion_tokens": 694,
+            "created_at": "2026-10-21T20:24:50.975902Z",
+            "done_reason": "stop",
+            "duration_ms": 14123.758624999937,
+            "prompt_tokens": 2990,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          }
+        ],
+        "completion_tokens": 1404,
+        "generation_settings": {
+          "num_ctx": 8192,
+          "num_predict": 1536,
+          "seed": 17,
+          "temperature": 0
+        },
+        "prompt_template_version": "summary-v2",
+        "prompt_tokens": 5247,
+        "provider": "ollama",
+        "requested_model": "qwen3:4b-instruct"
+      },
+      "wall_time_ms": 29986.694
+    },
+    {
+      "acceptable_aliases": [
+        "deployment_regression",
+        "checkout deployment regression",
+        "response contract regression"
+      ],
+      "case_id": "iq-015",
+      "citation_false_negative": 8,
+      "citation_false_positive": 0,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "failed",
+      "error_code": "invalid_model_output",
+      "expected_abstention": false,
+      "gold_cause": "deployment_regression",
+      "predicted_cause": null,
+      "process_cpu_time_ms": 20.165,
+      "process_peak_rss_bytes": 47529984,
+      "raw_output": "{\n  \"disposition\": \"insufficient_evidence\",\n  \"hypotheses\": [\n    {\n      \"cause\": \"Checkout service failure due to deployment rollback or configuration drift\",\n      \"confidence\": 0.3,\n      \"contradicting_evidence_ids\": [\n        \"e398ce08-ed94-5b7c-b77b-7bb739060b6e\",\n        \"dcc9be98-a3a3-557a-8e91-ddf8da12502a\",\n        \"d005ed67-d37b-50c9-9294-e386dcf71e7b\"\n      ],\n      \"explanation\": \"Initial checkout request succeeded (200), and inventory reserve calls succeeded. No evidence of configuration drift or rollback; error occurs only after deployment change, but no rollback observed in logs. No direct correlation between deployment and error timing or state.\",\n      \"supporting_evidence_ids\": [\n        \"d8687756-74e8-5aa8-90f4-9ac822308124\"\n      ]\n    },\n    {\n      \"cause\": \"Database pool exhaustion causing timeout in checkout service\",\n      \"confidence\": 0.4,\n      \"contradicting_evidence_ids\": [\n        \"497beeac-3d41-5481-9138-7e3427fb1df1\",\n        \"cbf389a6-6fa9-5e19-b096-8af009012caf\"\n      ],\n      \"explanation\": \"DB pool utilization is 1.0 (100%), but pool waiting is 99.0 \u2014 suggests high load. However, no evidence of connection pool exhaustion or error in inventory or checkout spans. Timeout occurs in checkout, not inventory.\",\n      \"supporting_evidence_ids\": [\n        \"497beeac-3d41-5481-9138-7e3427fb1df1\",\n        \"cbf389a6-6fa9-5e19-b096-8af009012caf\"\n      ]\n    },\n    {\n      \"cause\": \"Service contract violation in checkout-v2 causing 500 errors\",\n      \"confidence\": 0.5,\n      \"contradicting_evidence_ids\": [\n        \"e398ce08-ed94-5b7c-b77b-7bb739060b6e\",\n        \"dcc9be98-a3a3-557a-8e91-ddf8da12502a\"\n      ],\n      \"explanation\": \"Error type 'response_contract_error' appears in checkout-v2 traces. Deployment changed to checkout-v2, and errors occur immediately after. No evidence of upstream failure or timeout in inventory. Suggests contract mismatch in new version.\",\n      \"supporting_evidence_ids\": [\n        \"90ec8e60-5488-59a4-a4f1-2efc3ca9b5bc\",\n        \"39c9e05e-5afa-5dd8-a41a-3145201571c3\"\n      ]\n    }\n  ],\n  \"incident_summary\": \"Checkout service returns 500 errors after deployment to checkout-v2, with error type 'response_contract_error'. Initial request succeeded, and inventory reserve calls succeed. No evidence of database pool exhaustion or rollback.\",\n  \"missing_evidence\": [\n    \"Database connection logs\",\n    \"Checkout-v2 service configuration\",\n    \"Inventory service response contract definition\",\n    \"Error stack traces or internal service logs\"\n  ],\n  \"recommended_next_steps\": [\n    \"Verify checkout-v2 service configuration and response contract\",\n    \"Check for database connection pool errors or timeouts in inventory service\"\n  ]\n}",
+      "report": null,
+      "status": "failed",
+      "strategy_metadata": {
+        "calls": [
+          {
+            "completion_tokens": 893,
+            "created_at": "2026-10-21T20:25:13.838736Z",
+            "done_reason": "stop",
+            "duration_ms": 22861.59600000019,
+            "prompt_tokens": 3135,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          },
+          {
+            "completion_tokens": 877,
+            "created_at": "2026-10-21T20:25:33.796771Z",
+            "done_reason": "stop",
+            "duration_ms": 19957.379875000242,
+            "prompt_tokens": 4051,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          }
+        ],
+        "completion_tokens": 1770,
+        "generation_settings": {
+          "num_ctx": 8192,
+          "num_predict": 1536,
+          "seed": 17,
+          "temperature": 0
+        },
+        "prompt_template_version": "summary-v2",
+        "prompt_tokens": 7186,
+        "provider": "ollama",
+        "requested_model": "qwen3:4b-instruct"
+      },
+      "wall_time_ms": 42821.438
+    },
+    {
+      "acceptable_aliases": [
+        "deployment_regression",
+        "checkout deployment regression",
+        "response contract regression"
+      ],
+      "case_id": "iq-016",
+      "citation_false_negative": 0,
+      "citation_false_positive": 0,
+      "citation_true_positive": 2,
+      "correct": true,
+      "disposition": "insufficient_evidence",
+      "error_code": null,
+      "expected_abstention": true,
+      "gold_cause": "deployment_regression",
+      "predicted_cause": null,
+      "process_cpu_time_ms": 19.874,
+      "process_peak_rss_bytes": 47529984,
+      "raw_output": "{\n  \"disposition\": \"insufficient_evidence\",\n  \"hypotheses\": [\n    {\n      \"cause\": \"Checkout service failure due to backend service unavailability\",\n      \"confidence\": 0.6,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"Two 503 errors in sequence indicate service unavailability; no logs or metrics collected.\",\n      \"supporting_evidence_ids\": [\"aee8f0f4-50f3-50a3-b2e3-f45b7eceda2d\", \"6c50e944-a520-539b-9da6-442c94a7a917\"]\n    }\n  ],\n  \"incident_summary\": \"Two consecutive 503 errors in checkout service during a 1-minute window; no supporting logs or metrics collected.\",\n  \"missing_evidence\": [\n    \"Service health metrics\",\n    \"Backend service status\",\n    \"Load or performance data\",\n    \"Configuration logs\",\n    \"Audit logs for related services\"\n  ],\n  \"recommended_next_steps\": [\n    \"Retrieve backend service health metrics for the incident window\",\n    \"Inspect audit logs for related service events\"\n  ]\n}",
+      "report": {
+        "disposition": "insufficient_evidence",
+        "hypotheses": [
+          {
+            "cause": "Checkout service failure due to backend service unavailability",
+            "confidence": 0.6,
+            "contradicting_evidence_ids": [],
+            "explanation": "Two 503 errors in sequence indicate service unavailability; no logs or metrics collected.",
+            "supporting_evidence_ids": [
+              "aee8f0f4-50f3-50a3-b2e3-f45b7eceda2d",
+              "6c50e944-a520-539b-9da6-442c94a7a917"
+            ]
+          }
+        ],
+        "incident_summary": "Two consecutive 503 errors in checkout service during a 1-minute window; no supporting logs or metrics collected.",
+        "missing_evidence": [
+          "Service health metrics",
+          "Backend service status",
+          "Load or performance data",
+          "Configuration logs",
+          "Audit logs for related services"
+        ],
+        "recommended_next_steps": [
+          "Retrieve backend service health metrics for the incident window",
+          "Inspect audit logs for related service events"
+        ]
+      },
+      "status": "abstained",
+      "strategy_metadata": {
+        "calls": [
+          {
+            "completion_tokens": 494,
+            "created_at": "2026-10-21T20:25:43.957145Z",
+            "done_reason": "stop",
+            "duration_ms": 10158.902625000337,
+            "prompt_tokens": 935,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          },
+          {
+            "completion_tokens": 265,
+            "created_at": "2026-10-21T20:25:49.62155Z",
+            "done_reason": "stop",
+            "duration_ms": 5661.263790999783,
+            "prompt_tokens": 1452,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          }
+        ],
+        "completion_tokens": 759,
+        "generation_settings": {
+          "num_ctx": 8192,
+          "num_predict": 1536,
+          "seed": 17,
+          "temperature": 0
+        },
+        "latency_ms": 15820.166,
+        "prompt_template_version": "summary-v2",
+        "prompt_tokens": 2387,
+        "provider": "ollama",
+        "requested_model": "qwen3:4b-instruct",
+        "returned_models": [
+          "qwen3:4b-instruct"
+        ]
+      },
+      "wall_time_ms": 15824.434
+    },
+    {
+      "acceptable_aliases": [
+        "retry_storm",
+        "retry amplification",
+        "downstream retry storm"
+      ],
+      "case_id": "iq-019",
+      "citation_false_negative": 8,
+      "citation_false_positive": 0,
+      "citation_true_positive": 6,
+      "correct": false,
+      "disposition": "insufficient_evidence",
+      "error_code": null,
+      "expected_abstention": false,
+      "gold_cause": "retry_storm",
+      "predicted_cause": null,
+      "process_cpu_time_ms": 9.534,
+      "process_peak_rss_bytes": 47529984,
+      "raw_output": "{\n  \"disposition\": \"insufficient_evidence\",\n  \"hypotheses\": [\n    {\n      \"cause\": \"Inventory service failure causing 503 errors in reserve endpoint\",\n      \"confidence\": 0.6,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"Multiple 503 errors from inventory service during POST /reserve calls; consistent timestamps and trace IDs suggest service-level failure.\",\n      \"supporting_evidence_ids\": [\n        \"db2a821d-de4a-53ad-80b7-385eeb7aeec3\",\n        \"1e899f23-d31b-5d48-b06d-e0fe16ea883b\",\n        \"b070616d-9f00-571c-b2f2-1e85ca273bd1\",\n        \"ef479a9f-e6e6-5c69-8db6-5b42d5a50117\",\n        \"b110d843-039d-50ed-a545-449f1974a316\",\n        \"6e3209ae-cf80-517e-acae-36c4b44180a8\"\n      ]\n    },\n    {\n      \"cause\": \"Checkout service retry mechanism failing due to inventory unavailability\",\n      \"confidence\": 0.4,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"Checkout service retries (retry_attempt) occur but still return 503; suggests retry logic is not resolving inventory issues.\",\n      \"supporting_evidence_ids\": [\n        \"a3dbbd4c-af3d-53c1-a4e9-f33aed5b0d9b\",\n        \"6a1fbea0-845c-5d79-ad33-2138db8b5bbc\",\n        \"cd14aa91-405d-5371-9dc4-3fd4522b26d6\",\n        \"cfec3e9b-0138-5fef-9213-8df5c8a427d1\",\n        \"78c632a6-3f36-5766-a562-19399eed9f2e\"\n      ]\n    },\n    {\n      \"cause\": \"Checkout service directly failing with 502 due to upstream dependency failure\",\n      \"confidence\": 0.3,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"A separate POST /checkout call returns 502 after 900ms, indicating potential direct failure in checkout service, possibly due to dependency cascade.\",\n      \"supporting_evidence_ids\": [\n        \"0be4461b-14dd-5b04-afc9-86451b3fd8e9\",\n        \"c6ecf0d5-9cb3-5ec9-8236-fc6338bebd8f\"\n      ]\n    }\n  ],\n  \"incident_summary\": \"Multiple 503 errors in POST /reserve endpoints across inventory and checkout services, with retry attempts failing and a 502 error in checkout service.\",\n  \"missing_evidence\": [\n    \"Service health metrics for inventory and checkout\",\n    \"Root cause logs from inventory service\",\n    \"Configuration or error logs for retry logic\",\n    \"Network latency or timeout data\"\n  ],\n  \"recommended_next_steps\": [\n    \"Query inventory service logs for 503 error details during the incident window\",\n    \"Verify retry logic configuration and behavior in checkout service\",\n    \"Check for upstream dependencies or external service outages\"\n  ]\n}",
+      "report": {
+        "disposition": "insufficient_evidence",
+        "hypotheses": [
+          {
+            "cause": "Inventory service failure causing 503 errors in reserve endpoint",
+            "confidence": 0.6,
+            "contradicting_evidence_ids": [],
+            "explanation": "Multiple 503 errors from inventory service during POST /reserve calls; consistent timestamps and trace IDs suggest service-level failure.",
+            "supporting_evidence_ids": [
+              "db2a821d-de4a-53ad-80b7-385eeb7aeec3",
+              "1e899f23-d31b-5d48-b06d-e0fe16ea883b",
+              "b070616d-9f00-571c-b2f2-1e85ca273bd1",
+              "ef479a9f-e6e6-5c69-8db6-5b42d5a50117",
+              "b110d843-039d-50ed-a545-449f1974a316",
+              "6e3209ae-cf80-517e-acae-36c4b44180a8"
+            ]
+          },
+          {
+            "cause": "Checkout service retry mechanism failing due to inventory unavailability",
+            "confidence": 0.4,
+            "contradicting_evidence_ids": [],
+            "explanation": "Checkout service retries (retry_attempt) occur but still return 503; suggests retry logic is not resolving inventory issues.",
+            "supporting_evidence_ids": [
+              "a3dbbd4c-af3d-53c1-a4e9-f33aed5b0d9b",
+              "6a1fbea0-845c-5d79-ad33-2138db8b5bbc",
+              "cd14aa91-405d-5371-9dc4-3fd4522b26d6",
+              "cfec3e9b-0138-5fef-9213-8df5c8a427d1",
+              "78c632a6-3f36-5766-a562-19399eed9f2e"
+            ]
+          },
+          {
+            "cause": "Checkout service directly failing with 502 due to upstream dependency failure",
+            "confidence": 0.3,
+            "contradicting_evidence_ids": [],
+            "explanation": "A separate POST /checkout call returns 502 after 900ms, indicating potential direct failure in checkout service, possibly due to dependency cascade.",
+            "supporting_evidence_ids": [
+              "0be4461b-14dd-5b04-afc9-86451b3fd8e9",
+              "c6ecf0d5-9cb3-5ec9-8236-fc6338bebd8f"
+            ]
+          }
+        ],
+        "incident_summary": "Multiple 503 errors in POST /reserve endpoints across inventory and checkout services, with retry attempts failing and a 502 error in checkout service.",
+        "missing_evidence": [
+          "Service health metrics for inventory and checkout",
+          "Root cause logs from inventory service",
+          "Configuration or error logs for retry logic",
+          "Network latency or timeout data"
+        ],
+        "recommended_next_steps": [
+          "Query inventory service logs for 503 error details during the incident window",
+          "Verify retry logic configuration and behavior in checkout service",
+          "Check for upstream dependencies or external service outages"
+        ]
+      },
+      "status": "abstained",
+      "strategy_metadata": {
+        "calls": [
+          {
+            "completion_tokens": 878,
+            "created_at": "2026-10-21T20:26:14.510453Z",
+            "done_reason": "stop",
+            "duration_ms": 24887.31254100003,
+            "prompt_tokens": 4169,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          }
+        ],
+        "completion_tokens": 878,
+        "generation_settings": {
+          "num_ctx": 8192,
+          "num_predict": 1536,
+          "seed": 17,
+          "temperature": 0
+        },
+        "latency_ms": 24887.313,
+        "prompt_template_version": "summary-v2",
+        "prompt_tokens": 4169,
+        "provider": "ollama",
+        "requested_model": "qwen3:4b-instruct",
+        "returned_models": [
+          "qwen3:4b-instruct"
+        ]
+      },
+      "wall_time_ms": 24888.943
+    },
+    {
+      "acceptable_aliases": [
+        "retry_storm",
+        "retry amplification",
+        "downstream retry storm"
+      ],
+      "case_id": "iq-020",
+      "citation_false_negative": 9,
+      "citation_false_positive": 0,
+      "citation_true_positive": 5,
+      "correct": false,
+      "disposition": "insufficient_evidence",
+      "error_code": null,
+      "expected_abstention": false,
+      "gold_cause": "retry_storm",
+      "predicted_cause": null,
+      "process_cpu_time_ms": 8.642,
+      "process_peak_rss_bytes": 47529984,
+      "raw_output": "{\n  \"disposition\": \"insufficient_evidence\",\n  \"hypotheses\": [\n    {\n      \"cause\": \"Inventory service failure causing 503 responses in reserve endpoint\",\n      \"confidence\": 0.7,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"Multiple 503 errors from inventory service during POST /reserve calls; consistent timestamps and trace IDs suggest service-level failure.\",\n      \"supporting_evidence_ids\": [\n        \"498415cb-7197-5530-886d-27bfee1b5d98\",\n        \"7a3aa7db-377d-57b1-a48d-2946563485f4\",\n        \"346b6310-d541-59db-b7fc-d6fd30c565fc\",\n        \"244a378f-e69c-56ca-8dc1-12b259bb0da5\",\n        \"032f5221-48e2-5b71-9ad4-391fc02aec11\"\n      ]\n    },\n    {\n      \"cause\": \"Checkout service retry logic fails due to inventory unavailability\",\n      \"confidence\": 0.6,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"Checkout service retries on /reserve with 503s, then succeeds after retry; indicates retry mechanism but not root cause.\",\n      \"supporting_evidence_ids\": [\n        \"d2005276-a97d-5688-bb84-7c55d9a3b942\",\n        \"2c574fb2-9d3d-577e-bd2b-f5b0de1e3c77\",\n        \"9f8dd08e-7db8-5885-85ea-22664fc6f752\"\n      ]\n    },\n    {\n      \"cause\": \"Checkout service /checkout endpoint returns 502 due to upstream failure\",\n      \"confidence\": 0.4,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"A 502 error in /checkout with 900ms duration occurs after /reserve failures; may be downstream of inventory issues.\",\n      \"supporting_evidence_ids\": [\n        \"54cc6344-9a62-50bf-9f43-58a83213834e\",\n        \"94a1dae0-a524-5094-bd93-5c6de6a57b70\"\n      ]\n    }\n  ],\n  \"incident_summary\": \"Multiple 503 errors in POST /reserve endpoint across inventory and checkout services, with retry attempts and eventual success. A 502 error in /checkout suggests downstream failure.\",\n  \"missing_evidence\": [\n    \"Service health metrics for inventory and checkout\",\n    \"Error logs from inventory service\",\n    \"Root cause of 502 in /checkout endpoint\",\n    \"Network latency or timeout thresholds\"\n  ],\n  \"recommended_next_steps\": [\n    \"Query inventory service logs for 503 errors during the incident window\",\n    \"Verify if /checkout /checkout endpoint failure is correlated with inventory status\"\n  ]\n}",
+      "report": {
+        "disposition": "insufficient_evidence",
+        "hypotheses": [
+          {
+            "cause": "Inventory service failure causing 503 responses in reserve endpoint",
+            "confidence": 0.7,
+            "contradicting_evidence_ids": [],
+            "explanation": "Multiple 503 errors from inventory service during POST /reserve calls; consistent timestamps and trace IDs suggest service-level failure.",
+            "supporting_evidence_ids": [
+              "498415cb-7197-5530-886d-27bfee1b5d98",
+              "7a3aa7db-377d-57b1-a48d-2946563485f4",
+              "346b6310-d541-59db-b7fc-d6fd30c565fc",
+              "244a378f-e69c-56ca-8dc1-12b259bb0da5",
+              "032f5221-48e2-5b71-9ad4-391fc02aec11"
+            ]
+          },
+          {
+            "cause": "Checkout service retry logic fails due to inventory unavailability",
+            "confidence": 0.6,
+            "contradicting_evidence_ids": [],
+            "explanation": "Checkout service retries on /reserve with 503s, then succeeds after retry; indicates retry mechanism but not root cause.",
+            "supporting_evidence_ids": [
+              "d2005276-a97d-5688-bb84-7c55d9a3b942",
+              "2c574fb2-9d3d-577e-bd2b-f5b0de1e3c77",
+              "9f8dd08e-7db8-5885-85ea-22664fc6f752"
+            ]
+          },
+          {
+            "cause": "Checkout service /checkout endpoint returns 502 due to upstream failure",
+            "confidence": 0.4,
+            "contradicting_evidence_ids": [],
+            "explanation": "A 502 error in /checkout with 900ms duration occurs after /reserve failures; may be downstream of inventory issues.",
+            "supporting_evidence_ids": [
+              "54cc6344-9a62-50bf-9f43-58a83213834e",
+              "94a1dae0-a524-5094-bd93-5c6de6a57b70"
+            ]
+          }
+        ],
+        "incident_summary": "Multiple 503 errors in POST /reserve endpoint across inventory and checkout services, with retry attempts and eventual success. A 502 error in /checkout suggests downstream failure.",
+        "missing_evidence": [
+          "Service health metrics for inventory and checkout",
+          "Error logs from inventory service",
+          "Root cause of 502 in /checkout endpoint",
+          "Network latency or timeout thresholds"
+        ],
+        "recommended_next_steps": [
+          "Query inventory service logs for 503 errors during the incident window",
+          "Verify if /checkout /checkout endpoint failure is correlated with inventory status"
+        ]
+      },
+      "status": "abstained",
+      "strategy_metadata": {
+        "calls": [
+          {
+            "completion_tokens": 781,
+            "created_at": "2026-10-21T20:26:36.619506Z",
+            "done_reason": "stop",
+            "duration_ms": 22107.725625000057,
+            "prompt_tokens": 4155,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          }
+        ],
+        "completion_tokens": 781,
+        "generation_settings": {
+          "num_ctx": 8192,
+          "num_predict": 1536,
+          "seed": 17,
+          "temperature": 0
+        },
+        "latency_ms": 22107.726,
+        "prompt_template_version": "summary-v2",
+        "prompt_tokens": 4155,
+        "provider": "ollama",
+        "requested_model": "qwen3:4b-instruct",
+        "returned_models": [
+          "qwen3:4b-instruct"
+        ]
+      },
+      "wall_time_ms": 22109.083
+    },
+    {
+      "acceptable_aliases": [
+        "retry_storm",
+        "retry amplification",
+        "downstream retry storm"
+      ],
+      "case_id": "iq-021",
+      "citation_false_negative": 14,
+      "citation_false_positive": 0,
+      "citation_true_positive": 0,
+      "correct": false,
+      "disposition": "failed",
+      "error_code": "invalid_model_output",
+      "expected_abstention": false,
+      "gold_cause": "retry_storm",
+      "predicted_cause": null,
+      "process_cpu_time_ms": 21.109,
+      "process_peak_rss_bytes": 47529984,
+      "raw_output": "{\n  \"disposition\": \"insufficient_evidence\",\n  \"hypotheses\": [\n    {\n      \"cause\": \"Database pool exhaustion causing 503 errors in inventory service\",\n      \"confidence\": 0.3,\n      \"contradicting_evidence_ids\": [\n        \"d0b15701-7235-5157-835b-80cedaa4a1e5\",\n        \"dd364650-813e-59f7-bbaa-1066a5129662\"\n      ],\n      \"explanation\": \"High DB pool wait (99.0) and utilization (1.0) suggest saturation, but no direct correlation to 503 errors in trace logs; metrics are from same timestamp but lack causal link to service errors.\",\n      \"supporting_evidence_ids\": [\n        \"d45bfd40-5bcb-572d-9129-74e119e616eb\",\n        \"782ee8f4-3d60-5475-866e-b5965a9b5617\"\n      ]\n    },\n    {\n      \"cause\": \"Inventory service failure due to unhandled exceptions in POST /reserve endpoint\",\n      \"confidence\": 0.4,\n      \"contradicting_evidence_ids\": [\n        \"d45bfd40-5bcb-572d-9129-74e119e616eb\",\n        \"ce408f3e-094a-5f2f-b0f8-91e3a561f163\"\n      ],\n      \"explanation\": \"Multiple 503 errors in inventory service during POST /reserve, with retry attempts, suggesting endpoint-level failure, but no logs or stack traces to confirm root cause.\",\n      \"supporting_evidence_ids\": [\n        \"782ee8f4-3d60-5475-866e-b5965a9b5617\",\n        \"3580f5a8-7ae0-5ca7-a053-71ac39431289\"\n      ]\n    },\n    {\n      \"cause\": \"Checkout service cascading failure due to inventory unavailability\",\n      \"confidence\": 0.2,\n      \"contradicting_evidence_ids\": [\n        \"4009ade3-027c-52b7-8cfd-7b593b41163e\",\n        \"146105d4-53d6-5e2d-97d0-6a88bd19f13d\"\n      ],\n      \"explanation\": \"Checkout service returns 502 and 500 errors after inventory 503s, but no evidence of direct dependency or error propagation; timing and trace IDs suggest correlation, not causation.\",\n      \"supporting_evidence_ids\": [\n        \"4009ade3-027c-52b7-8cfd-7b593b41163e\",\n        \"146105d4-53d6-5e2d-97d0-6a88bd19f13d\"\n      ]\n    }\n  ],\n  \"incident_summary\": \"Multiple 503 and 502 errors observed in checkout and inventory services during a 1-minute window, with retry attempts and high DB pool wait metrics.\",\n  \"missing_evidence\": [\n    \"Stack traces or error logs from inventory service\",\n    \"Database connection logs or query failures\",\n    \"Service dependency graphs or circuit breaker states\",\n    \"Root cause of 503 in POST /reserve endpoint\"\n  ],\n  \"recommended_next_steps\": [\n    \"Retrieve full error logs from inventory service for POST /reserve endpoint\",\n    \"Inspect database connection logs for pool exhaustion or query timeouts\"\n  ]\n}",
+      "report": null,
+      "status": "failed",
+      "strategy_metadata": {
+        "calls": [
+          {
+            "completion_tokens": 911,
+            "created_at": "2026-10-21T20:27:02.860749Z",
+            "done_reason": "stop",
+            "duration_ms": 26239.878833000148,
+            "prompt_tokens": 4813,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          },
+          {
+            "completion_tokens": 895,
+            "created_at": "2026-10-21T20:27:23.324555Z",
+            "done_reason": "stop",
+            "duration_ms": 20460.684416000277,
+            "prompt_tokens": 5747,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          }
+        ],
+        "completion_tokens": 1806,
+        "generation_settings": {
+          "num_ctx": 8192,
+          "num_predict": 1536,
+          "seed": 17,
+          "temperature": 0
+        },
+        "prompt_template_version": "summary-v2",
+        "prompt_tokens": 10560,
+        "provider": "ollama",
+        "requested_model": "qwen3:4b-instruct"
+      },
+      "wall_time_ms": 46705.206
+    },
+    {
+      "acceptable_aliases": [
+        "retry_storm",
+        "retry amplification",
+        "downstream retry storm"
+      ],
+      "case_id": "iq-022",
+      "citation_false_negative": 0,
+      "citation_false_positive": 0,
+      "citation_true_positive": 2,
+      "correct": true,
+      "disposition": "insufficient_evidence",
+      "error_code": null,
+      "expected_abstention": true,
+      "gold_cause": "retry_storm",
+      "predicted_cause": null,
+      "process_cpu_time_ms": 18.925,
+      "process_peak_rss_bytes": 47529984,
+      "raw_output": "{\n  \"disposition\": \"insufficient_evidence\",\n  \"hypotheses\": [\n    {\n      \"cause\": \"Checkout service failure due to backend service unavailability\",\n      \"confidence\": 0.6,\n      \"contradicting_evidence_ids\": [],\n      \"explanation\": \"Two 503 errors in checkout POST endpoint indicate service unavailability.\",\n      \"supporting_evidence_ids\": [\n        \"a5751a6c-8235-5275-930a-bfd132189b9a\",\n        \"0961b464-dfd9-5b74-a44f-82507410fb90\"\n      ]\n    }\n  ],\n  \"incident_summary\": \"Two 503 errors from checkout service during a 1-minute window indicate service failure; no logs, metrics, or traces beyond HTTP status code.\",\n  \"missing_evidence\": [\n    \"backend service health metrics\",\n    \"load or performance metrics\",\n    \"configuration logs\",\n    \"audit logs for related services\",\n    \"trace data beyond HTTP status code\"\n  ],\n  \"recommended_next_steps\": [\n    \"Retrieve backend service health metrics for the incident window\",\n    \"Query audit logs for related service events\"\n  ]\n}",
+      "report": {
+        "disposition": "insufficient_evidence",
+        "hypotheses": [
+          {
+            "cause": "Checkout service failure due to backend service unavailability",
+            "confidence": 0.6,
+            "contradicting_evidence_ids": [],
+            "explanation": "Two 503 errors in checkout POST endpoint indicate service unavailability.",
+            "supporting_evidence_ids": [
+              "a5751a6c-8235-5275-930a-bfd132189b9a",
+              "0961b464-dfd9-5b74-a44f-82507410fb90"
+            ]
+          }
+        ],
+        "incident_summary": "Two 503 errors from checkout service during a 1-minute window indicate service failure; no logs, metrics, or traces beyond HTTP status code.",
+        "missing_evidence": [
+          "backend service health metrics",
+          "load or performance metrics",
+          "configuration logs",
+          "audit logs for related services",
+          "trace data beyond HTTP status code"
+        ],
+        "recommended_next_steps": [
+          "Retrieve backend service health metrics for the incident window",
+          "Query audit logs for related service events"
+        ]
+      },
+      "status": "abstained",
+      "strategy_metadata": {
+        "calls": [
+          {
+            "completion_tokens": 449,
+            "created_at": "2026-10-21T20:27:32.299733Z",
+            "done_reason": "stop",
+            "duration_ms": 8973.906250000255,
+            "prompt_tokens": 937,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          },
+          {
+            "completion_tokens": 279,
+            "created_at": "2026-10-21T20:27:37.760936Z",
+            "done_reason": "stop",
+            "duration_ms": 5460.046833999968,
+            "prompt_tokens": 1409,
+            "requested_model": "qwen3:4b-instruct",
+            "returned_model": "qwen3:4b-instruct"
+          }
+        ],
+        "completion_tokens": 728,
+        "generation_settings": {
+          "num_ctx": 8192,
+          "num_predict": 1536,
+          "seed": 17,
+          "temperature": 0
+        },
+        "latency_ms": 14433.953,
+        "prompt_template_version": "summary-v2",
+        "prompt_tokens": 2346,
+        "provider": "ollama",
+        "requested_model": "qwen3:4b-instruct",
+        "returned_models": [
+          "qwen3:4b-instruct"
+        ]
+      },
+      "wall_time_ms": 14436.388
+    }
+  ],
+  "split": "dev",
+  "strategy": "llm_summary",
+  "strategy_version": "summary-v2",
+  "timeout_seconds": 120.0
+}

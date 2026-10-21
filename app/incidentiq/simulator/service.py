@@ -254,7 +254,9 @@ def create_app(
                         )
                         span.set_attribute("http.response.status_code", response.status_code)
                         if response.status_code != 200:
-                            failure = "unavailable"
+                            failure = (
+                                "unavailable" if response.status_code == 503 else "invalid_response"
+                            )
                             span.set_status(StatusCode.ERROR)
                             span.set_attribute("error.type", failure)
                         else:

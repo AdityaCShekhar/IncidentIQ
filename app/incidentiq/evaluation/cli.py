@@ -1,7 +1,7 @@
 import argparse
 from pathlib import Path
 
-from incidentiq.agent.ollama import OllamaAdapter
+from incidentiq.agent.ollama import MAX_COMPLETION_TOKENS, OllamaAdapter
 from incidentiq.agent.prompts import SUMMARY_PROMPT_VERSION
 from incidentiq.agent.workflows import run_agent, run_rag
 from incidentiq.baselines.rules import RULES_VERSION, run_rules
@@ -15,7 +15,8 @@ def main() -> int:
     parser.add_argument("--dataset", type=Path, default=Path("evals"))
     parser.add_argument("--split", choices=("dev", "held_out"), default="dev")
     parser.add_argument(
-        "--final-report", action="store_true",
+        "--final-report",
+        action="store_true",
         help="explicitly authorize scoring the reserved held-out split",
     )
     parser.add_argument("--output-dir", type=Path)
@@ -25,11 +26,14 @@ def main() -> int:
     parser.add_argument("--model", help="required Ollama model name for model-backed strategies")
     parser.add_argument("--base-url", default="http://127.0.0.1:11434")
     parser.add_argument("--timeout", type=float, default=30)
+    parser.add_argument("--max-completion-tokens", type=int, default=MAX_COMPLETION_TOKENS)
     parser.add_argument("--knowledge-dir", type=Path, default=Path("knowledge"))
     args = parser.parse_args()
     if args.split == "held_out" and not args.final_report:
         parser.error("--split held_out requires --final-report")
-    selected = ("rules", "llm_summary", "rag", "agent") if args.strategy == "all" else (args.strategy,)
+    selected = (
+        ("rules", "llm_summary", "rag", "agent") if args.strategy == "all" else (args.strategy,)
+    )
     if any(strategy != "rules" for strategy in selected) and not args.model:
         parser.error("model-backed strategies require --model")
     try:
@@ -39,7 +43,10 @@ def main() -> int:
         retriever = None
         if model_strategies:
             adapter = OllamaAdapter(
-                args.model, base_url=args.base_url, timeout_seconds=args.timeout
+                args.model,
+                base_url=args.base_url,
+                timeout_seconds=args.timeout,
+                max_completion_tokens=args.max_completion_tokens,
             )
         if set(selected) & {"rag", "agent"}:
             retriever = Retriever(load_corpus(args.knowledge_dir))
@@ -47,11 +54,15 @@ def main() -> int:
             "rules": (run_rules, RULES_VERSION),
             "llm_summary": (adapter.diagnose if adapter else None, SUMMARY_PROMPT_VERSION),
             "rag": (
-                (lambda bundle: run_rag(bundle, adapter, retriever)) if adapter and retriever else None,
+                (lambda bundle: run_rag(bundle, adapter, retriever))
+                if adapter and retriever
+                else None,
                 "rag-v2",
             ),
             "agent": (
-                (lambda bundle: run_agent(bundle, adapter, retriever)) if adapter and retriever else None,
+                (lambda bundle: run_agent(bundle, adapter, retriever))
+                if adapter and retriever
+                else None,
                 "agent-v2",
             ),
         }
@@ -71,8 +82,10 @@ def main() -> int:
                 metadata["model"] = args.model
                 metadata["base_url"] = args.base_url
                 metadata["timeout_seconds"] = args.timeout
+                metadata["max_completion_tokens"] = args.max_completion_tokens
             output_dir = (
-                base_output / name if args.strategy == "all"
+                base_output / name
+                if args.strategy == "all"
                 else args.output_dir or Path("evals/reports") / f"{args.split}-{name}"
             )
             write_reports(output_dir, metadata, rows)

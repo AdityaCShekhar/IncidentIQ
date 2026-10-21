@@ -157,6 +157,7 @@ def test_caller_cannot_supply_downstream_url_or_unknown_arguments():
         ("connect", 503),
         ("malformed", 502),
         ("status", 502),
+        ("unavailable_status", 503),
         ("run_mismatch", 502),
     ],
 )
@@ -170,6 +171,8 @@ def test_downstream_failures_are_safe_and_observable(failure, expected_status):
             raise httpx.ConnectError(secret, request=request)
         if failure == "status":
             return httpx.Response(500, text=secret)
+        if failure == "unavailable_status":
+            return httpx.Response(503, text=secret)
         if failure == "run_mismatch":
             return httpx.Response(
                 200, json={"service": "inventory", "status": "reserved", "run_id": str(uuid4())}
